@@ -1,0 +1,11 @@
+.webtoon {
+  display: flex;
+  justify-content: center;
+  padding: 30px 100px;
+}
+.page_btn {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

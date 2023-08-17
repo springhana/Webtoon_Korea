@@ -1,0 +1,15 @@
+.Home_webtoon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.Home_today {
+  width: 1200px;
+  padding: 20px 0;
+  margin: auto;
+  font-weight: bold;
+  font-size: 25px;
+}

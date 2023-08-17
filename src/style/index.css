@@ -1,0 +1,21 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+a {
+  text-decoration: none;
+  color: black;
+}
+li {
+  list-style: none;
+}
+.App {
+  height: 100vh;
+}
+.Loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
+}

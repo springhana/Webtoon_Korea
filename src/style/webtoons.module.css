@@ -1,0 +1,55 @@
+.webtoons {
+  margin: 20px;
+  width: 1200px;
+  position: relative;
+}
+.webtoons:nth-child(1) {
+  margin-top: 0;
+}
+.webtoons_nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.webtoons_nav p a {
+  color: #a5a5a5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.2s all;
+}
+.webtoons_nav p a:hover {
+  color: black;
+}
+.title {
+  padding: 10px;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.webtoons_inner {
+  overflow: hidden;
+}
+.webtoons_container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  /* background-color: beige; */
+  transition: 0.5s all;
+}
+.webtoon {
+  padding: 5px;
+}
+
+.webtoon h3 {
+  width: 200px;
+  height: 30px;
+  font-size: 16px;
+  padding: 3px;
+}
+.webtoon h4 {
+  width: 200px;
+  height: 20px;
+  font-size: 14px;
+  padding: 3px;
+}

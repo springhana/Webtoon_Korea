@@ -1,0 +1,20 @@
+.Category {
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #4db9ff;
+}
+.Category ul {
+  display: flex;
+  width: 1200px;
+  list-style: none;
+  margin-top: 10px;
+}
+.Category ul li {
+  width: 80px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

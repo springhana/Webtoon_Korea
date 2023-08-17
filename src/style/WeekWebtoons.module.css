@@ -1,0 +1,10 @@
+.WeekWebtoon {
+  width: 1200px;
+  padding: 30px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}

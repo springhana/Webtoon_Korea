@@ -1,0 +1,26 @@
+.search {
+  margin-top: 10px;
+}
+.search_cotainer {
+  padding: 30px;
+  display: flex;
+  transition: 0.3s all;
+  border-radius: 10px;
+}
+
+.info ul li {
+  width: 800px;
+  padding: 10px;
+  font-weight: bold;
+}
+.search_cotainer:hover {
+  background-color: #d2fdff;
+}
+
+.title {
+  font-size: 24px;
+}
+.author,
+.service {
+  font-size: 20px;
+}

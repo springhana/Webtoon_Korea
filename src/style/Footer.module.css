@@ -1,0 +1,56 @@
+.footer {
+  width: 1200px;
+  margin: auto;
+  position: relative;
+}
+.footer_container {
+  display: flex;
+  justify-content: center;
+}
+.div {
+  margin: 50px auto;
+  width: 1200px;
+  border: 1px solid #4db9ff;
+}
+.info_inner {
+  position: absolute;
+  left: 0;
+  display: flex;
+}
+.info,
+.Email {
+  margin-top: 30px;
+  padding: 30px;
+  text-align: center;
+}
+.info p,
+.Email p {
+  margin-bottom: 20px;
+  font-weight: bold;
+  font-size: 20px;
+}
+.info ul li {
+  padding: 10px;
+  text-align: left;
+}
+.info ul li span {
+  margin-left: 10px;
+}
+.Email {
+  position: absolute;
+  right: 0;
+}
+.Email ul {
+  gap: 20px;
+  display: flex;
+}
+.Email ul li {
+  width: 1px;
+  height: 1px;
+  padding: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 35px;
+}

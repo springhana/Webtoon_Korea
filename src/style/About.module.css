@@ -1,0 +1,33 @@
+.about {
+  padding: 30px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.about_container {
+  background-color: #4db9ff;
+  padding: 30px;
+  width: 1200px;
+  border-radius: 10px;
+  color: white;
+}
+.about_container span {
+  font-size: 20px;
+}
+.about_container span span {
+  color: black;
+}
+.update {
+  color: wheat;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 10px;
+}
+.api {
+  font-size: 16px;
+  font-weight: bold;
+}
+.api span {
+  margin-left: 10px;
+}

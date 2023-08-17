@@ -1,0 +1,13 @@
+.WeekWebtoon_Webtoon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  margin-bottom: 80px;
+}
+.WeekWebtoon_Webtoon h3 {
+  height: 30px;
+}
+.WeekWebtoon_Webtoon h4 {
+  height: 30px;
+}
