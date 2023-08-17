@@ -100,7 +100,12 @@ function DetailPage({
         </div>
       </div>
       <div className={styles.btn}>
-        <a href={data.url} className={styles.go}>
+        <a
+          href={data.url}
+          className={styles.go}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           웹툰 보기
         </a>
         {page + 1 < length ? (
