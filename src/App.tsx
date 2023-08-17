@@ -189,7 +189,7 @@ function App() {
       ) : null}
       <Routes>
         <Route
-          path="/"
+          path="/Webtoon_Korea/"
           element={
             <Home
               load={LoadData}
