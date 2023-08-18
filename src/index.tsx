@@ -4,7 +4,7 @@ import reportWebVitals from "./reportWebVitals";
 
 import App from "./App";
 import "./style/index.css";
-import { BrowserRouter as Router } from "react-router-dom";
+import { HashRouter as Router } from "react-router-dom";
 import { Provider } from "react-redux";
 import webtoonStore from "./store/webtoonStore";
 
