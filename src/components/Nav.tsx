@@ -31,10 +31,14 @@ function Nav() {
       <div className={styles.nav_service}>
         <ul>
           <div className={styles.nav_service_category}>
-            <Link to={"/"}>
+            <Link to={"/Webtoon_Korea/"}>
               <li
                 style={{ width: "80px" }}
-                className={location.pathname === "/" ? styles.location : null}
+                className={
+                  location.pathname === "/Webtoon_Korea/"
+                    ? styles.location
+                    : null
+                }
               >
                 홈
               </li>
