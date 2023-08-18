@@ -31,7 +31,7 @@ function Nav() {
       <div className={styles.nav_service}>
         <ul>
           <div className={styles.nav_service_category}>
-            <Link to={"/Webtoon_Korea/"}>
+            <Link to={"/"}>
               <li
                 style={{ width: "80px" }}
                 className={
