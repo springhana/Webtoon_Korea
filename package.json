@@ -61,7 +61,7 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://springhana.github.io/Webtoon_Korea/",
+  "homepage": "https://springhana.github.io/Webtoon_Korea/#/Webtoon_Korea/",
   "devDependencies": {
     "@types/snapsvg": "^0.5.3"
   }
