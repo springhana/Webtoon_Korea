@@ -19,7 +19,9 @@ function Nav() {
     <div className={styles.nav}>
       <div className={styles.nav_Logo}>
         <h1>
-          <Logo />
+          <Link to={"/"}>
+            <Logo />
+          </Link>
         </h1>
         <div>
           <SearchBar />

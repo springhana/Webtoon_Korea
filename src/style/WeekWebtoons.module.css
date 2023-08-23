@@ -17,6 +17,8 @@
 
 @media screen and (max-width: 768px) {
   .WeekWebtoon {
+    width: 370px;
     margin-top: 300px;
+    text-align: center;
   }
 }

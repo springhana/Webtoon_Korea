@@ -60,7 +60,7 @@ function DayWebtoon({
 
   useEffect(() => {
     if (windowWidth <= 768) {
-      setImgSize(0.5);
+      setImgSize(0.3);
     } else if (windowWidth <= 1024) {
       setImgSize(0.6);
     } else {
@@ -82,7 +82,7 @@ function DayWebtoon({
     function handleResize() {
       setWindowWidth(window.innerWidth);
       if (window.innerWidth <= 768) {
-        setImgSize(0.5);
+        setImgSize(0.3);
       } else if (window.innerWidth <= 1024) {
         setImgSize(0.6);
       } else {
@@ -100,7 +100,7 @@ function DayWebtoon({
   return (
     <div
       className={styles.dayWebtoon}
-      style={{ width: `${Iwidth * imgSize + 5}px` }}
+      style={{ width: `${Iwidth * imgSize}px` }}
     >
       <h3>{days[index]}</h3>
       {webtoons.map((data: WebtoonsTypes, index: number) => {

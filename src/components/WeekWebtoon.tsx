@@ -53,7 +53,7 @@ function WeekWebtoon({
 
   useEffect(() => {
     if (windowWidth <= 768) {
-      setImgSize(1.2);
+      setImgSize(1.1);
     } else if (windowWidth <= 1024) {
       setImgSize(1.1);
     } else {
@@ -63,7 +63,7 @@ function WeekWebtoon({
     function handleResize() {
       setWindowWidth(window.innerWidth);
       if (window.innerWidth <= 768) {
-        setImgSize(1.2);
+        setImgSize(1.1);
       } else if (window.innerWidth <= 1024) {
         setImgSize(1.1);
       } else {

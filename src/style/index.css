@@ -58,9 +58,16 @@ li {
   box-shadow: 1px 1px 1px black, 1px 1px 1px black;
   cursor: pointer;
   transition: 0.2s all;
+  z-index: 110;
 }
 .top_move:hover {
   box-shadow: none;
+}
+
+@media screen and (max-width: 1024px) {
+  .top_move {
+    border: 2px solid black;
+  }
 }
 ::-webkit-scrollbar {
   width: 10px; /* 스크롤바의 너비 */

@@ -57,7 +57,7 @@ function Webtoon({
       <div>
         <div className={styles.webtoon}>
           {daysOfWeek.map((day: string, index: number) => (
-            <div key={day}>
+            <div key={index}>
               <DayWebtoon
                 day={day}
                 load={load}
@@ -77,16 +77,6 @@ function Webtoon({
             <Loading />
           </div>
         )}
-
-        {/* <div
-          onClick={() => {
-            setPerPage(perPage + 10);
-            setStart(true);
-          }}
-          className={styles.page_btn}
-        >
-          {perPage <= pageSize ? <Button /> : null}
-        </div> */}
       </div>
     </div>
   );
