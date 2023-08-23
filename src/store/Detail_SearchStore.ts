@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { configureStore, createSlice } from "@reduxjs/toolkit";
 
 export const Detail_Search = createSlice({
   name: "detail_Search",
@@ -10,3 +10,9 @@ export const Detail_Search = createSlice({
   },
 });
 export const { detail_Search } = Detail_Search.actions;
+
+export default configureStore({
+  reducer: {
+    detail_search: Detail_Search.reducer,
+  },
+});

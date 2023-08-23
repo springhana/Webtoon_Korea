@@ -65,8 +65,8 @@ function DetailPage({
             <span>검색 키워드</span>#{data.searchKeyword}
           </h3>
           <div className={styles.updateDay}>
-            {data.updateDays.map((day: string) => (
-              <li>
+            {data.updateDays.map((day: string, index: number) => (
+              <li key={index}>
                 {days[daysOfWeek.findIndex((days) => days === day)]
                   ? days[daysOfWeek.findIndex((days) => days === day)]
                   : day}
@@ -91,9 +91,11 @@ function DetailPage({
             </div>
             {data.additional.singularityList ? (
               <div>
-                {data.additional.singularityList.map((datas: string) => (
-                  <li>{datas}</li>
-                ))}
+                {data.additional.singularityList.map(
+                  (datas: string, index: number) => (
+                    <li key={index}>{datas}</li>
+                  )
+                )}
               </div>
             ) : null}
           </div>

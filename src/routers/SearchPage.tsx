@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { imgSize } from "../API/data/imgSize";
@@ -17,13 +17,18 @@ function SearchPage({
   removeImageLoad: () => void;
 }) {
   const { title }: any = useParams();
-  const webtoon_redux: any = useSelector((state: any) => {
-    return state.detail_search;
-  });
+
+  const [item, setItem] = useState<any>([]);
   useEffect(() => {
+    const fetch = async () => {
+      const result: any = await load(title);
+      if (result) {
+        setItem(result);
+      }
+    };
+    fetch();
     removeImageLoad();
-    load(title);
-  }, []);
+  }, [title]);
 
   function width(service: string) {
     switch (service) {
@@ -47,9 +52,9 @@ function SearchPage({
   }
   return (
     <div className={styles.search}>
-      {webtoon_redux.data !== null ? (
+      {item.length > 0 ? (
         <div className={styles.search_cotainer}>
-          {webtoon_redux.data.webtoons.map((data: WebtoonsTypes) => (
+          {item.map((data: WebtoonsTypes) => (
             <SearchWebtoon
               data={data}
               width={width as (service: string) => string}
@@ -60,7 +65,9 @@ function SearchPage({
             />
           ))}
         </div>
-      ) : null}
+      ) : (
+        <div className={styles.search_null}>원하시는 검색어가 없습니다.</div>
+      )}
     </div>
   );
 }

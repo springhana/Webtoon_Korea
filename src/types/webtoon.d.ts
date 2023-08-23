@@ -1,14 +1,13 @@
 export interface WebtoonType {
-  data: {
-    totalWebtoonCount: number;
-    naverWebtoonCount: number;
-    naverWebtoonCount: number;
-    kakaoPageWebtoonCount: number;
-    lastUpdate: string;
-    updatedWebtoonCount: number;
-    createdWebtoonCount: number;
-    webtoons: WebtoonTypes;
-  };
+  totalWebtoonCount: number;
+  naverWebtoonCount: number;
+  naverWebtoonCount: number;
+  kakaoPageWebtoonCount: number;
+  lastUpdate: string;
+  updatedWebtoonCount: number;
+  createdWebtoonCount: number;
+  webtoons: WebtoonTypes;
+  length: number;
 }
 
 export interface WebtoonsTypes {
@@ -22,6 +21,7 @@ export interface WebtoonsTypes {
   fanCount: number;
   searchKeyword: string;
   additional: AdditionalType;
+  length: number;
 }
 
 export interface AdditionalType {

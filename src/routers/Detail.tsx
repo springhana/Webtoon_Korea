@@ -1,9 +1,10 @@
 import { useEffect, useState, useMemo } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import DetailPage from "../components/DetailPage";
 import { WebtoonsTypes } from "../types/webtoon";
+import { detail_Search } from "../store/Detail_SearchStore";
 function Detail({
   load,
   AddCheck,
@@ -26,13 +27,20 @@ function Detail({
   const [page, setPage] = useState(0);
   useMemo(() => page, []);
   const { title } = useParams() as { title: string };
-  const webtoon_redux: any = useSelector((state: any) => {
-    return state.detail_search;
-  });
+  const [item, setItem] = useState<any>([]);
+  const dispatch = useDispatch();
   useEffect(() => {
+    const fetch = async () => {
+      const result: any = await load(title);
+      if (result) {
+        setItem(result);
+        dispatch(detail_Search(title));
+      }
+    };
+    fetch();
     removeImageLoad();
-    load(title);
   }, []);
+
   console.log(page);
   function PagePlus() {
     setPage(page + 1);
@@ -40,18 +48,15 @@ function Detail({
   function PageMinus() {
     setPage(page - 1);
   }
-  if (!webtoon_redux.data) {
-    return null; // 데이터가 없을 경우 렌더링하지 않음
-  }
-  console.log("page" + page);
+
   return (
     <div style={{ display: "flex", padding: "30px" }}>
-      {webtoon_redux.data.webtoons.map((data: WebtoonsTypes, index: number) => (
-        <>
+      {item.map((data: WebtoonsTypes, index: number) => (
+        <div key={index} style={{ margin: "auto" }}>
           {index === page ? (
             <DetailPage
               data={data}
-              length={webtoon_redux.data.webtoons.length}
+              length={item.length}
               page={page}
               PagePlus={PagePlus}
               PageMinus={PageMinus}
@@ -63,7 +68,7 @@ function Detail({
               TitleColor={TitleColor}
             />
           ) : null}
-        </>
+        </div>
       ))}
     </div>
   );

@@ -15,8 +15,6 @@ function Nav() {
     }
   }
 
-  console.log(location.pathname.split("/")[2]);
-
   return (
     <div className={styles.nav}>
       <div className={styles.nav_Logo}>
@@ -34,11 +32,7 @@ function Nav() {
             <Link to={"/"}>
               <li
                 style={{ width: "80px" }}
-                className={
-                  location.pathname === "/Webtoon_Korea/"
-                    ? styles.location
-                    : null
-                }
+                className={location.pathname === "/" ? styles.location : null}
               >
                 홈
               </li>

@@ -6,14 +6,14 @@ import App from "./App";
 import "./style/index.css";
 import { HashRouter as Router } from "react-router-dom";
 import { Provider } from "react-redux";
-import webtoonStore from "./store/webtoonStore";
+import Detail_SearchStore from "./store/Detail_SearchStore";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 
 root.render(
-  <Provider store={webtoonStore}>
+  <Provider store={Detail_SearchStore}>
     <Router>
       <App />
     </Router>

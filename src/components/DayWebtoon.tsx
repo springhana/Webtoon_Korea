@@ -1,12 +1,14 @@
-import { useEffect } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { days } from "../API/data/date";
+import { days, daysOfWeek } from "../API/data/date";
 import styles from "../style/DayWebtoon.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import services from "../API/data/service";
-import WebtoonImage from "./WebtoonImage";
 import Loading from "./Loading/Loading";
 import { WebtoonType, WebtoonsTypes } from "../types/webtoon";
+import useWebtoon from "../Hook/useWebtoon";
+import WebtoonContainer from "./WebtoonContainer";
+import WebtoonImage from "./WebtoonImage";
 function DayWebtoon({
   day,
   load,
@@ -28,54 +30,142 @@ function DayWebtoon({
   size: (size: WebtoonType) => void;
   handleImageLoad: () => void;
 }) {
-  const webtoon_redux: any = useSelector((state: any) => {
-    return state[day];
-  });
   const navigate = useNavigate();
+  // const [item, setItem] = useState<any>([]);
+  const [pageNumber, setPageNumber] = useState<any>(0);
+  const { webtoons, hasMore, loading, error } = useWebtoon(
+    pageNumber,
+    title,
+    daysOfWeek[index]
+  );
 
+  const observer: any = useRef();
+  const lastBookElementRef = useCallback(
+    (node: any) => {
+      if (loading) return;
+      if (observer.current) observer.current.disconnect(); // 관찰자의 현재점 끊기
+      observer.current = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting && hasMore) {
+            setPageNumber((prevPageNumber: any) => prevPageNumber + 1);
+          }
+        },
+        { threshold: 1.0 }
+      );
+      if (node) observer.current.observe(node);
+    },
+    [loading, hasMore]
+  );
+
+  console.log(webtoons, hasMore, loading, error);
   useEffect(() => {
     if (
       title === services[0] ||
       title === services[1] ||
       title === services[2]
     ) {
-      load(day, title, 300, 0);
-      size(webtoon_redux);
+      setPageNumber(0);
     } else {
       navigate("/not-found");
     }
-  }, [load, title, size, perPage]);
-  if (!webtoon_redux.data || !webtoon_redux) {
-    return null; // 데이터가 없을 경우 렌더링하지 않음
-  }
+  }, [title]);
+  // useEffect(() => {
+  //   const fetch = async () => {
+  //     const result: any = await load(day, title, 300, 0);
+  //     if (result) {
+  //       console.log(result);
+  //       setItem(result);
+  //     }
+  //   };
+
+  //   if (
+  //     title === services[0] ||
+  //     title === services[1] ||
+  //     title === services[2]
+  //   ) {
+  //     fetch();
+  //     size(item);
+  //   } else {
+  //     navigate("/not-found");
+  //   }
+  // }, [title, size, perPage]);
 
   return (
-    <div className={styles.dayWebtoon}>
+    <div className={styles.dayWebtoon} style={{ width: `${Iwidth + 5}px` }}>
       <h3>{days[index]}</h3>
-      {webtoon_redux.data.webtoons.map((data: WebtoonsTypes, index: number) => (
-        <div key={data._id} className={styles.dayWebtoon_Webtoon}>
-          {index < perPage ? (
+      {webtoons.map((data: WebtoonsTypes, index: number) => {
+        if (webtoons.length === index + 1) {
+          return (
+            // <div
+            //   key={data._id}
+            //   className={styles.dayWebtoon_Webtoon}
+            //   ref={lastBookElementRef}
+            // >
+            //   <>
+            //     <Link to={`/webtoon/detail/${data.title + data.author}`}>
+            //       <WebtoonImage
+            //         width={Iwidth}
+            //         height={Iheight}
+            //         img={data.img}
+            //         title={data.title}
+            //         adult={data.additional.adult}
+            //         additional={data.additional}
+            //         handleImageLoad={handleImageLoad}
+            //       />
+            //       <h3>
+            //         {data.title.length > 8
+            //           ? `${data.title.slice(0, 8)}...`
+            //           : data.title}
+            //       </h3>
+            //       <h3>
+            //         {data.author.length > 8
+            //           ? `${data.author.slice(0, 8)}...`
+            //           : data.author}
+            //       </h3>
+            //     </Link>
+            //   </>
+            // </div>
+            <WebtoonContainer
+              data={data}
+              Iwidth={Iwidth}
+              Iheight={Iheight}
+              handleImageLoad={handleImageLoad}
+              lastBookElementRef={lastBookElementRef}
+            />
+          );
+        } else {
+          return (
+            // <div key={data._id} className={styles.dayWebtoon_Webtoon}>
+            //   <>
+            //     <Link to={`/webtoon/detail/${data.title + data.author}`}>
+            //       <WebtoonImage
+            //         width={Iwidth}
+            //         height={Iheight}
+            //         img={data.img}
+            //         title={data.title}
+            //         adult={data.additional.adult}
+            //         additional={data.additional}
+            //         handleImageLoad={handleImageLoad}
+            //       />
+            //       <h3>
+            //         {data.author.length > 8
+            //           ? `${data.author.slice(0, 8)}...`
+            //           : data.author}
+            //       </h3>
+            //     </Link>
+            //   </>
+            // </div>
             <>
-              <Link to={`/webtoon/detail/${data.title + data.author}`}>
-                <WebtoonImage
-                  width={Iwidth}
-                  height={Iheight}
-                  img={data.img}
-                  title={data.title}
-                  adult={data.additional.adult}
-                  additional={data.additional}
-                  handleImageLoad={handleImageLoad}
-                />
-                <h3>
-                  {data.title.length > 8
-                    ? `${data.title.slice(0, 8)}...`
-                    : data.title}
-                </h3>
-              </Link>
+              <WebtoonContainer
+                data={data}
+                Iwidth={Iwidth}
+                Iheight={Iheight}
+                handleImageLoad={handleImageLoad}
+              />
             </>
-          ) : null}
-        </div>
-      ))}
+          );
+        }
+      })}
     </div>
   );
 }

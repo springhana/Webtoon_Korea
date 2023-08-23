@@ -10,12 +10,70 @@ a {
 li {
   list-style: none;
 }
-.App {
-  height: 100vh;
-}
+
 .Loading {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 500px;
+}
+
+.touch_img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 100;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.touch_img_container {
+  position: absolute;
+  background: black;
+  opacity: 0.8;
+  width: 100%;
+  height: 100%;
+}
+.top_move {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  width: 60px;
+  height: 60px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px;
+  box-shadow: 1px 1px 1px black, 1px 1px 1px black;
+  cursor: pointer;
+  transition: 0.2s all;
+}
+.top_move:hover {
+  box-shadow: none;
+}
+::-webkit-scrollbar {
+  width: 10px; /* 스크롤바의 너비 */
+}
+
+/* 스크롤바 트랙 */
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* 스크롤바 트랙 배경색 */
+}
+
+/* 스크롤바 썸네일 (스크롤바의 이동 부분) */
+::-webkit-scrollbar-thumb {
+  background-color: #888; /* 스크롤바 썸네일 배경색 */
+  border-radius: 5px; /* 썸네일 테두리 반경 */
+}
+
+/* 스크롤바 썸네일을 클릭했을 때 */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* 스크롤바 썸네일 호버 배경색 */
 }

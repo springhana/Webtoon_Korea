@@ -37,8 +37,7 @@ function WeekWebtoons({
       day === "finished"
     ) {
       removeImageLoad();
-      load(day, webtoon, 3000, 0); // 임시 숫자
-      img(webtoon, day === "finished" ? 0.7 : 1);
+      img(webtoon, day === "finished" ? 0.7 : 0.7);
     } else {
       navigate("/not-found");
     }
@@ -53,6 +52,7 @@ function WeekWebtoons({
           Iwidth={Iwidth}
           Iheight={Iheight}
           handleImageLoad={handleImageLoad}
+          load={load}
         />
       </div>
       {isImageLoaded ? null : (

@@ -6,29 +6,17 @@ import Nav from "./components/Nav";
 import Home from "./routers/Home";
 import Webtoon from "./routers/Webtoon";
 
-import { naver, kakao, kakaoPage } from "./store/webtoonStore";
 import { fetchDetail_Search, fetchWebtoon } from "./API/webtoon";
 import today from "./API/data/day";
-import services from "./API/data/service";
 import WeekWebtoons from "./routers/WeekWebtoons";
 
-import {
-  monday,
-  tuesday,
-  wednesday,
-  thursday,
-  friday,
-  saturday,
-  sunday,
-} from "./store/webtoonDayStore";
-import { daysOfWeek } from "./API/data/date";
 import { imgSize } from "./API/data/imgSize";
 import Detail from "./routers/Detail";
-import { detail_Search } from "./store/Detail_SearchStore";
 import SearchPage from "./routers/SearchPage";
 import Footer from "./components/Footer";
 import NotFoundPage from "./NotFoundPage";
 import Image from "./components/Image";
+import Top from "./components/Top";
 
 function App() {
   const dispatch = useDispatch();
@@ -52,15 +40,8 @@ function App() {
   ) {
     try {
       let response = await fetchWebtoon(now, service, perPage, page);
-      if (service === services[0]) {
-        dispatch(naver(response));
-      } else if (service === services[1]) {
-        dispatch(kakao(response));
-      } else if (service === services[2]) {
-        dispatch(kakaoPage(response));
-      }
-
       setLoading(true);
+      return response.webtoons;
     } catch (error) {
       console.log(error);
     }
@@ -74,22 +55,10 @@ function App() {
   ) {
     try {
       let response = await fetchWebtoon(day, webtoon, perPage, page);
-      if (day === daysOfWeek[0]) {
-        dispatch(sunday(response));
-      } else if (day === daysOfWeek[1]) {
-        dispatch(monday(response));
-      } else if (day === daysOfWeek[2]) {
-        dispatch(tuesday(response));
-      } else if (day === daysOfWeek[3]) {
-        dispatch(wednesday(response));
-      } else if (day === daysOfWeek[4]) {
-        dispatch(thursday(response));
-      } else if (day === daysOfWeek[5]) {
-        dispatch(friday(response));
-      } else if (day === daysOfWeek[6]) {
-        dispatch(saturday(response));
-      } else if (day === "finished") {
-        LoadData(day, webtoon, 3000, 0);
+      if (day === "finished") {
+        return LoadData(day, webtoon, 3000, 0);
+      } else {
+        return response.webtoons;
       }
     } catch (error) {
       console.log(error);
@@ -98,7 +67,7 @@ function App() {
 
   async function Detail_Search(title: string) {
     let response = await fetchDetail_Search(title);
-    dispatch(detail_Search(response));
+    return response.webtoons;
   }
 
   function img(url: string, size: number = 1) {
@@ -143,37 +112,12 @@ function App() {
     }
   }
   return (
-    <div
-      className="App"
-      style={check ? { overflow: "hidden" } : { overflow: "auto" }}
-    >
+    <div className="App">
       <Nav />
       {check ? (
-        <div
-          style={{
-            position: "absolute",
-            top: "0",
-            left: "0",
-            bottom: "0",
-            right: "0",
-            width: "100%",
-            height: "100vh",
-
-            zIndex: "100",
-            overflowY: "hidden",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
+        <div className="touch_img">
           <div
-            style={{
-              position: "absolute",
-              background: "black",
-              opacity: "0.8",
-              width: "100%",
-              height: "100%",
-            }}
+            className="touch_img_container"
             onClick={() => {
               setChecks(false);
             }}
@@ -186,7 +130,10 @@ function App() {
             height={Iheight}
           />
         </div>
-      ) : null}
+      ) : (
+        <Top />
+      )}
+
       <Routes>
         <Route
           path="/"

@@ -2,4 +2,11 @@
   width: 1200px;
   margin: auto;
 }
-
+.search_null {
+  margin: 20px auto;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}

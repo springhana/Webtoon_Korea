@@ -2,7 +2,7 @@ import styles from "../style/Logo.module.css";
 
 function Logo() {
   return (
-    <>
+    <div>
       <h1 className={styles.Logo}>
         <span>w</span>
         <span>e</span>
@@ -12,7 +12,7 @@ function Logo() {
         <span>o</span>
         <span>n</span>
       </h1>
-    </>
+    </div>
   );
 }
 export default Logo;

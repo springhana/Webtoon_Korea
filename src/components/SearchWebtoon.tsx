@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import styles from "../style/SearchWebtoon.module.css";
 import WebtoonImage from "./WebtoonImage";
 import { WebtoonsTypes } from "../types/webtoon";
+
 function SearchWebtoon({
   data,
   width,

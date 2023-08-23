@@ -42,7 +42,7 @@ function Webtoon({
   let copy_pageSize: number = 0;
   function size(size: WebtoonType) {
     if (start) {
-      copy_pageSize = Math.max(copy_pageSize, size.data.webtoons.length);
+      copy_pageSize = Math.max(copy_pageSize, size.length);
       setPageSize(copy_pageSize);
     }
   }
@@ -78,7 +78,7 @@ function Webtoon({
           </div>
         )}
 
-        <div
+        {/* <div
           onClick={() => {
             setPerPage(perPage + 10);
             setStart(true);
@@ -86,7 +86,7 @@ function Webtoon({
           className={styles.page_btn}
         >
           {perPage <= pageSize ? <Button /> : null}
-        </div>
+        </div> */}
       </div>
     </div>
   );

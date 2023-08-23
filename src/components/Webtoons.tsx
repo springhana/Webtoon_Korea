@@ -32,17 +32,18 @@ function Webtoons({
     useRef() as React.RefObject<HTMLDivElement>;
   const next: React.RefObject<HTMLDivElement> =
     useRef() as React.RefObject<HTMLDivElement>;
-  const webtoon_redux: any = useSelector((state: any) => {
-    return state[title];
-  });
 
+  const [item, setItem] = useState<any>([]);
   useEffect(() => {
-    load(today, title);
-  }, [title, load]);
-
-  if (!webtoon_redux || !webtoon_redux.data) {
-    return null; // 데이터가 없을 경우 렌더링하지 않음
-  }
+    const fetch = async () => {
+      const result: any = await load(today, title);
+      if (result) {
+        console.log(result);
+        setItem(result);
+      }
+    };
+    fetch();
+  }, [title]);
 
   function move(type: string) {
     if (imgPic.current !== null) {
@@ -72,7 +73,10 @@ function Webtoons({
   }
 
   return (
-    <div className={styles.webtoons}>
+    <div
+      className={styles.webtoons}
+      style={{ height: `${size.height * 1.5}px` }}
+    >
       <div className={styles.webtoons_nav}>
         <h2 className={styles.title} style={{ color: TitleColor(title) }}>
           {title}
@@ -93,7 +97,7 @@ function Webtoons({
       />
       <div className={styles.webtoons_inner}>
         <div className={styles.webtoons_container} ref={imgPic}>
-          {webtoon_redux.data.webtoons.map((data: WebtoonsTypes) => (
+          {item.map((data: WebtoonsTypes) => (
             <div key={data._id} className={styles.webtoon}>
               <Link to={`/webtoon/detail/${data.title + data.author}`}>
                 <WebtoonImage
