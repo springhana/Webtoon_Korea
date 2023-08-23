@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { AiFillStar } from "react-icons/ai";
 import { FiSearch } from "react-icons/fi";
 import { WebtoonsTypes } from "../types/webtoon";
+import { useState } from "react";
 function DetailPage({
   data,
   page,
@@ -29,15 +30,51 @@ function DetailPage({
   handleImageLoad: () => void;
   TitleColor: (title: string) => string;
 }) {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [imgSize, setImgSize] = useState(1);
+
   useEffect(() => {
     img(data.service);
   }, [data.service]);
+
+  useEffect(() => {
+    if (windowWidth <= 768) {
+      setImgSize(0.5);
+    } else if (windowWidth <= 1024) {
+      setImgSize(0.8);
+    } else {
+      setImgSize(1);
+    }
+  }, []);
+
+  useEffect(() => {
+    function handleResize() {
+      setWindowWidth(window.innerWidth);
+      if (window.innerWidth <= 768) {
+        setImgSize(0.5);
+      } else if (window.innerWidth <= 1024) {
+        setImgSize(0.8);
+      } else {
+        setImgSize(1);
+      }
+    }
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <div style={{ margin: "auto" }}>
       <div className={styles.detail}>
         <div
           onClick={() => AddCheck(data.img, data.title, data.service)}
-          style={{ width: `${width * 1.5}px`, height: `${height * 1.5}px` }}
+          style={{
+            width: `${width * imgSize * 1.5}px`,
+            height: `${height * imgSize * 1.5}px`,
+          }}
           className={styles.img_pic}
         >
           <img src={data.img} alt={data.title} onLoad={handleImageLoad} />

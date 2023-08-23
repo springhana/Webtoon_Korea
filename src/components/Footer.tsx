@@ -9,7 +9,8 @@ import styles from "../style/Footer.module.css";
 function Footer() {
   return (
     <div className={styles.footer}>
-      <div className={styles.div}></div>
+      
+
       <div className={styles.footer_container}>
         <div className={styles.info_inner}>
           <div className={styles.info}>
@@ -47,7 +48,6 @@ function Footer() {
               </li>
             </ul>
           </div>
-
           <div className={styles.info}>
             <p>소개</p>
             <ul>
@@ -65,49 +65,50 @@ function Footer() {
               <li>Redux - 미숙함</li>
             </ul>
           </div>
-        </div>
+          <div className={styles.info}>
+            <div className={styles.email}>
+              <p>Email</p>
 
-        <div className={styles.Email}>
-          <p>Email</p>
-
-          <ul>
-            <li>
-              <a
-                href="https://github.com/springhana"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <AiFillGithub color="black" />
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://www.instagram.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <AiFillInstagram color="red" />
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://ko-kr.facebook.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <AiFillFacebook color="blue" />
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://twitter.com/?lang=ko"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <AiFillTwitterCircle color="skyBlue" />
-              </a>
-            </li>
-          </ul>
+              <ul>
+                <li>
+                  <a
+                    href="https://github.com/springhana"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <AiFillGithub color="black" />
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.instagram.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <AiFillInstagram color="red" />
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://ko-kr.facebook.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <AiFillFacebook color="blue" />
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://twitter.com/?lang=ko"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <AiFillTwitterCircle color="skyBlue" />
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </div>

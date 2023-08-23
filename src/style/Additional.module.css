@@ -43,3 +43,17 @@
   align-items: center;
   font-weight: bold;
 }
+@media screen and (max-width: 1024px) {
+  .adult p {
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+  }
+  .additional div {
+    padding: 8px;
+    font-size: 10px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+}

@@ -22,14 +22,15 @@ function WeekWebtoon({
   handleImageLoad: () => void;
   load: any;
 }) {
-  const [item, setItem] = useState<any>([]);
-
   const [pageNumber, setPageNumber] = useState<any>(0);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [imgSize, setImgSize] = useState(1);
+
   const { webtoons, hasMore, loading, error } = useWebtoon(
     pageNumber,
     webtoon,
     day,
-    28
+    20
   );
 
   const observer: any = useRef();
@@ -51,16 +52,32 @@ function WeekWebtoon({
   );
 
   useEffect(() => {
-    // const fetch = async () => {
-    //   const result: any = await load(day, webtoon, 3000, 0);
-    //   if (result) {
-    //     setItem(result);
-    //   }
-    // };
-    // fetch();
-    // load(); // 임시 숫자
-    setItem(webtoons);
-  }, [day, webtoon]);
+    if (windowWidth <= 768) {
+      setImgSize(1.2);
+    } else if (windowWidth <= 1024) {
+      setImgSize(1.1);
+    } else {
+      setImgSize(1);
+    }
+
+    function handleResize() {
+      setWindowWidth(window.innerWidth);
+      if (window.innerWidth <= 768) {
+        setImgSize(1.2);
+      } else if (window.innerWidth <= 1024) {
+        setImgSize(1.1);
+      } else {
+        setImgSize(1);
+      }
+    }
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <>
       {webtoons.map((data: WebtoonsTypes, index: number) => {
@@ -69,12 +86,12 @@ function WeekWebtoon({
             <div
               key={data._id}
               className={styles.WeekWebtoon_Webtoon}
-              style={{ width: `${Iwidth}px`, height: `${Iheight}px` }}
+              style={{ width: `${Iwidth * imgSize}px` }}
             >
               <WebtoonContainer
                 data={data}
-                Iwidth={Iwidth}
-                Iheight={Iheight}
+                Iwidth={Iwidth * imgSize}
+                Iheight={Iheight * imgSize}
                 handleImageLoad={handleImageLoad}
                 lastBookElementRef={lastBookElementRef}
               />
@@ -82,44 +99,15 @@ function WeekWebtoon({
           );
         } else {
           return (
-            // <div
-            //   key={data._id}
-            //   className={styles.WeekWebtoon_Webtoon}
-            //   style={{ width: `${Iwidth}px`, height: `${Iheight}px` }}
-            // >
-            //   <>
-            //     <Link to={`/webtoon/detail/${data.title + data.author}`}>
-            //       <WebtoonImage
-            //         width={Iwidth}
-            //         height={Iheight}
-            //         img={data.img}
-            //         title={data.title}
-            //         adult={data.additional.adult}
-            //         additional={data.additional}
-            //         handleImageLoad={handleImageLoad}
-            //       />
-            //       <h3>
-            //         {data.title.length > 10
-            //           ? `${data.title.slice(0, 9)}...`
-            //           : data.title}
-            //       </h3>
-            //       <h4>
-            //         {data.author.length > 12
-            //           ? `${data.author.slice(0, 12)}...`
-            //           : data.author}
-            //       </h4>
-            //     </Link>
-            //   </>
-            // </div>
             <div
               key={data._id}
               className={styles.WeekWebtoon_Webtoon}
-              style={{ width: `${Iwidth}px`, height: `${Iheight}px` }}
+              style={{ width: `${Iwidth * imgSize}px` }}
             >
               <WebtoonContainer
                 data={data}
-                Iwidth={Iwidth}
-                Iheight={Iheight}
+                Iwidth={Iwidth * imgSize}
+                Iheight={Iheight * imgSize}
                 handleImageLoad={handleImageLoad}
               />
             </div>

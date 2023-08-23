@@ -19,7 +19,6 @@ import Image from "./components/Image";
 import Top from "./components/Top";
 
 function App() {
-  const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [Iwidth, setIwidth] = useState<any>(0);
   const [Iheight, setIheight] = useState<any>(0);
@@ -114,8 +113,9 @@ function App() {
   return (
     <div className="App">
       <Nav />
+
       {check ? (
-        <div className="touch_img">
+        <div className="touch_img" style={{ width: `${window.innerWidth}` }}>
           <div
             className="touch_img_container"
             onClick={() => {

@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
 import styles from "../style/webtoons.module.css";
 import { Link } from "react-router-dom";
 import { KdaysOfWeek } from "../API/data/date";
@@ -34,6 +33,9 @@ function Webtoons({
     useRef() as React.RefObject<HTMLDivElement>;
 
   const [item, setItem] = useState<any>([]);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [imgLength, setImgLength] = useState<any>(5);
+
   useEffect(() => {
     const fetch = async () => {
       const result: any = await load(today, title);
@@ -42,18 +44,53 @@ function Webtoons({
         setItem(result);
       }
     };
+
+    if (windowWidth <= 768) {
+      setImgLength(1);
+    } else if (windowWidth <= 1024) {
+      setImgLength(3);
+    } else {
+      setImgLength(5);
+    }
+
     fetch();
   }, [title]);
+
+  useEffect(() => {
+    function handleResize() {
+      setWindowWidth(window.innerWidth);
+      if (window.innerWidth <= 768) {
+        setImgLength(1);
+      } else if (window.innerWidth <= 1024) {
+        setImgLength(3);
+      } else {
+        setImgLength(5);
+      }
+    }
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   function move(type: string) {
     if (imgPic.current !== null) {
       let copy = chanal;
-      if (type === "next" && chanal < imgPic.current.childElementCount / 5) {
-        imgPic.current.style.transform += `translateX(-${WebtoonSize * 5}px)`;
+      if (
+        type === "next" &&
+        chanal < imgPic.current.childElementCount / imgLength
+      ) {
+        imgPic.current.style.transform += `translateX(-${
+          WebtoonSize * imgLength
+        }px)`;
         setCanal((prevCanal) => prevCanal + 1);
         copy += 1;
       } else if (type === "prev" && chanal > 1) {
-        imgPic.current.style.transform += `translateX(${WebtoonSize * 5}px)`;
+        imgPic.current.style.transform += `translateX(${
+          WebtoonSize * imgLength
+        }px)`;
         setCanal((prevCanal) => prevCanal - 1);
         copy -= 1;
       }
@@ -64,7 +101,7 @@ function Webtoons({
         setPrevCheck(true);
       }
 
-      if (copy >= imgPic.current.childElementCount / 5) {
+      if (copy >= imgPic.current.childElementCount / imgLength) {
         setNextCheck(false);
       } else {
         setNextCheck(true);
@@ -75,7 +112,7 @@ function Webtoons({
   return (
     <div
       className={styles.webtoons}
-      style={{ height: `${size.height * 1.5}px` }}
+      style={{ height: `${size.height * 1.8}px` }}
     >
       <div className={styles.webtoons_nav}>
         <h2 className={styles.title} style={{ color: TitleColor(title) }}>

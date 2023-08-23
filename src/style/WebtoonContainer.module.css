@@ -1,0 +1,17 @@
+.dayWebtoon_Webtoon {
+  margin-bottom: 10px;
+}
+.dayWebtoon_Webtoon h3 {
+  height: 30px;
+  font-size: 16px;
+}
+
+@media screen and (max-width: 1024px) {
+  .dayWebtoon {
+    padding: 2px;
+  }
+  .dayWebtoon_Webtoon h3 {
+    height: 30px;
+    font-size: 13px;
+  }
+}

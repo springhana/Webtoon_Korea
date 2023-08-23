@@ -115,4 +115,13 @@
   color: black;
   opacity: 0.5;
   font-weight: bolder;
-}/*# sourceMappingURL=Search.css.map */
+} /*# sourceMappingURL=Search.css.map */
+
+@media screen and (max-width: 1024px) {
+  .container {
+    scale: 0.8;
+  }
+}
+
+@media screen and (max-width: 768px) {
+}

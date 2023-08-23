@@ -5,6 +5,8 @@ import { useParams } from "react-router-dom";
 import DetailPage from "../components/DetailPage";
 import { WebtoonsTypes } from "../types/webtoon";
 import { detail_Search } from "../store/Detail_SearchStore";
+
+import styles from "../style/DetailPage.module.css";
 function Detail({
   load,
   AddCheck,
@@ -41,7 +43,6 @@ function Detail({
     removeImageLoad();
   }, []);
 
-  console.log(page);
   function PagePlus() {
     setPage(page + 1);
   }
@@ -50,9 +51,9 @@ function Detail({
   }
 
   return (
-    <div style={{ display: "flex", padding: "30px" }}>
+    <div style={{ display: "flex", flexDirection: "column", padding: "30px" }}>
       {item.map((data: WebtoonsTypes, index: number) => (
-        <div key={index} style={{ margin: "auto" }}>
+        <div key={index} className={styles.detailPage}>
           {index === page ? (
             <DetailPage
               data={data}

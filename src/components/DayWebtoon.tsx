@@ -31,8 +31,9 @@ function DayWebtoon({
   handleImageLoad: () => void;
 }) {
   const navigate = useNavigate();
-  // const [item, setItem] = useState<any>([]);
   const [pageNumber, setPageNumber] = useState<any>(0);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [imgSize, setImgSize] = useState(1);
   const { webtoons, hasMore, loading, error } = useWebtoon(
     pageNumber,
     title,
@@ -57,8 +58,15 @@ function DayWebtoon({
     [loading, hasMore]
   );
 
-  console.log(webtoons, hasMore, loading, error);
   useEffect(() => {
+    if (windowWidth <= 768) {
+      setImgSize(0.5);
+    } else if (windowWidth <= 1024) {
+      setImgSize(0.6);
+    } else {
+      setImgSize(1);
+    }
+
     if (
       title === services[0] ||
       title === services[1] ||
@@ -69,97 +77,50 @@ function DayWebtoon({
       navigate("/not-found");
     }
   }, [title]);
-  // useEffect(() => {
-  //   const fetch = async () => {
-  //     const result: any = await load(day, title, 300, 0);
-  //     if (result) {
-  //       console.log(result);
-  //       setItem(result);
-  //     }
-  //   };
 
-  //   if (
-  //     title === services[0] ||
-  //     title === services[1] ||
-  //     title === services[2]
-  //   ) {
-  //     fetch();
-  //     size(item);
-  //   } else {
-  //     navigate("/not-found");
-  //   }
-  // }, [title, size, perPage]);
+  useEffect(() => {
+    function handleResize() {
+      setWindowWidth(window.innerWidth);
+      if (window.innerWidth <= 768) {
+        setImgSize(0.5);
+      } else if (window.innerWidth <= 1024) {
+        setImgSize(0.6);
+      } else {
+        setImgSize(1);
+      }
+    }
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
-    <div className={styles.dayWebtoon} style={{ width: `${Iwidth + 5}px` }}>
+    <div
+      className={styles.dayWebtoon}
+      style={{ width: `${Iwidth * imgSize + 5}px` }}
+    >
       <h3>{days[index]}</h3>
       {webtoons.map((data: WebtoonsTypes, index: number) => {
         if (webtoons.length === index + 1) {
           return (
-            // <div
-            //   key={data._id}
-            //   className={styles.dayWebtoon_Webtoon}
-            //   ref={lastBookElementRef}
-            // >
-            //   <>
-            //     <Link to={`/webtoon/detail/${data.title + data.author}`}>
-            //       <WebtoonImage
-            //         width={Iwidth}
-            //         height={Iheight}
-            //         img={data.img}
-            //         title={data.title}
-            //         adult={data.additional.adult}
-            //         additional={data.additional}
-            //         handleImageLoad={handleImageLoad}
-            //       />
-            //       <h3>
-            //         {data.title.length > 8
-            //           ? `${data.title.slice(0, 8)}...`
-            //           : data.title}
-            //       </h3>
-            //       <h3>
-            //         {data.author.length > 8
-            //           ? `${data.author.slice(0, 8)}...`
-            //           : data.author}
-            //       </h3>
-            //     </Link>
-            //   </>
-            // </div>
             <WebtoonContainer
               data={data}
-              Iwidth={Iwidth}
-              Iheight={Iheight}
+              Iwidth={Iwidth * imgSize}
+              Iheight={Iheight * imgSize}
               handleImageLoad={handleImageLoad}
               lastBookElementRef={lastBookElementRef}
             />
           );
         } else {
           return (
-            // <div key={data._id} className={styles.dayWebtoon_Webtoon}>
-            //   <>
-            //     <Link to={`/webtoon/detail/${data.title + data.author}`}>
-            //       <WebtoonImage
-            //         width={Iwidth}
-            //         height={Iheight}
-            //         img={data.img}
-            //         title={data.title}
-            //         adult={data.additional.adult}
-            //         additional={data.additional}
-            //         handleImageLoad={handleImageLoad}
-            //       />
-            //       <h3>
-            //         {data.author.length > 8
-            //           ? `${data.author.slice(0, 8)}...`
-            //           : data.author}
-            //       </h3>
-            //     </Link>
-            //   </>
-            // </div>
             <>
               <WebtoonContainer
                 data={data}
-                Iwidth={Iwidth}
-                Iheight={Iheight}
+                Iwidth={Iwidth * imgSize}
+                Iheight={Iheight * imgSize}
                 handleImageLoad={handleImageLoad}
               />
             </>

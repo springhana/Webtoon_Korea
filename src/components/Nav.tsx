@@ -31,25 +31,25 @@ function Nav() {
           <div className={styles.nav_service_category}>
             <Link to={"/"}>
               <li
-                style={{ width: "80px" }}
+                style={{ width: "100%" }}
                 className={location.pathname === "/" ? styles.location : null}
               >
                 홈
               </li>
             </Link>
             <Link to={"/webtoon/naver"}>
-              <li style={{ width: "110px" }} className={NowLoaction("naver")}>
+              <li style={{ width: "100%" }} className={NowLoaction("naver")}>
                 네이버
               </li>
             </Link>
             <Link to={"/webtoon/kakao"}>
-              <li style={{ width: "110px" }} className={NowLoaction("kakao")}>
+              <li style={{ width: "100%" }} className={NowLoaction("kakao")}>
                 카카오
               </li>
             </Link>
             <Link to={"/webtoon/kakaoPage"}>
               <li
-                style={{ width: "165px" }}
+                style={{ width: "100%" }}
                 className={NowLoaction("kakaoPage")}
               >
                 카카오 페이지

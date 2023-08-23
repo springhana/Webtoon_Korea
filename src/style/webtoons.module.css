@@ -56,3 +56,18 @@
   font-size: 14px;
   padding: 3px;
 }
+
+@media screen and (max-width: 1024px) {
+  .webtoons {
+    width: 720px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .webtoons {
+    width: 240px;
+  }
+  .webtoons_nav {
+    flex-direction: column;
+  }
+}

@@ -24,3 +24,30 @@
 .service {
   font-size: 20px;
 }
+
+@media screen and (max-width: 1024px) {
+  .info ul li {
+    width: 400px;
+  }
+  .title {
+    font-size: 20px;
+  }
+  .author,
+  .service {
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .search {
+    display: block;
+    width: 400px;
+  }
+  .search_cotainer {
+    display: block;
+    margin: auto;
+  }
+  .info ul li {
+    width: 300px;
+  }
+}

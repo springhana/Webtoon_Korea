@@ -5,9 +5,9 @@
   margin: auto;
   margin-bottom: 80px;
 }
-.WeekWebtoon_Webtoon h3 {
-  height: 30px;
-}
-.WeekWebtoon_Webtoon h4 {
-  height: 30px;
+
+@media screen and (max-width: 1024px) {
+  .WeekWebtoon_Webtoon {
+    margin-bottom: 20px;
+  }
 }

@@ -1,5 +1,7 @@
+.detailPage {
+  margin: auto;
+}
 .detail {
-  width: 1200px;
   margin: auto;
   display: flex;
   padding: 5px;
@@ -51,7 +53,7 @@
 }
 .detail_info {
   padding: 30px;
-  width: 800px;
+  width: 600px;
 }
 .title,
 .service,
@@ -131,4 +133,29 @@
 
 .go:hover {
   background-color: #50f2f5;
+}
+
+@media screen and (max-width: 1024px) {
+  .detail {
+    width: 720px;
+    justify-content: center;
+    align-items: center;
+  }
+  .detail_info {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .detail {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .detail_info {
+    width: 100%;
+  }
+  .detailPage {
+    margin-top: 350px;
+  }
 }

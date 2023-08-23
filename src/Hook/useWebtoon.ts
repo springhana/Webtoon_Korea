@@ -14,7 +14,7 @@ export default function useWebtoon(
 
   useEffect(() => {
     setWebtoons([]);
-  }, [service]);
+  }, [service, updateDay]);
 
   useEffect(() => {
     setLoading(true);

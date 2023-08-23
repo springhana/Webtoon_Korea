@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { WebtoonsTypes } from "../types/webtoon";
 import WebtoonImage from "./WebtoonImage";
-import styles from "../style/DayWebtoon.module.css";
+import styles from "../style/WebtoonContainer.module.css";
 export default function WebtoonContainer({
   data,
   Iwidth,

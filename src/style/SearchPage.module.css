@@ -1,5 +1,5 @@
 .search_cotainer {
-  width: 1200px;
+  max-width: 1200px;
   margin: auto;
 }
 .search_null {
@@ -9,4 +9,20 @@
   justify-content: center;
   align-items: center;
   font-weight: bold;
+}
+@media screen and (max-width: 1024px) {
+  .search_cotainer {
+    width: 720px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .search_cotainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 350px;
+  }
 }

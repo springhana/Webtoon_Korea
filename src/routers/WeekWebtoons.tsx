@@ -41,7 +41,7 @@ function WeekWebtoons({
     } else {
       navigate("/not-found");
     }
-  }, [load, day, webtoon]);
+  }, [day, webtoon]);
   return (
     <div>
       <Category />
