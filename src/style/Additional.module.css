@@ -56,4 +56,8 @@
 }
 
 @media screen and (max-width: 768px) {
+  .additional div {
+    padding: 2px;
+    font-size: 10px;
+  }
 }
