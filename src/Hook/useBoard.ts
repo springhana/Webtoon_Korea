@@ -17,7 +17,7 @@ export default function useBoard(page: number) {
     let cancel: any;
     axios({
       method: "GET",
-      url: "https://port-0-webtoon-korea-server-30yyr422almfl7fw9.sel5.cloudtype.app/board/",
+      url: "/api/board/",
       params: { page: page },
       cancelToken: new axios.CancelToken((c) => (cancel = c)), // axios 취소 방법
     })
