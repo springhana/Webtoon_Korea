@@ -24,7 +24,12 @@ export default function MyPage({ img, Iwidth, Iheight }: any) {
     const Login = async () => {
       try {
         const response = await axios.get(
-          `https://port-0-webtoon-korea-server-30yyr422almfl7fw9.sel5.cloudtype.app/myPage/${loginCheck._id}`
+          `https://port-0-webtoon-korea-server-30yyr422almfl7fw9.sel5.cloudtype.app/myPage`,
+          {
+            params: {
+              userID: loginCheck._id,
+            },
+          }
         );
         console.log(response);
         if (response.data.login) {

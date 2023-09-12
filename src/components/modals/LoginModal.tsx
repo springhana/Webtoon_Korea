@@ -50,7 +50,7 @@ export default function LoginModal() {
         "https://port-0-webtoon-korea-server-30yyr422almfl7fw9.sel5.cloudtype.app/login",
         { id: id, pw: pw }
       );
-      console.log(response.data.login);
+      console.log(response.data);
       dispatch(login_Close());
       dispatch(loginCheck());
       LoginCheck();
