@@ -12,7 +12,9 @@ export default function SearchBoard() {
   useEffect(() => {
     const Search = async () => {
       try {
-        const response = await axios.get(`/api/search?value=${value}`);
+        const response = await axios.get(
+          `https://port-0-webtoon-korea-server-30yyr422almfl7fw9.sel5.cloudtype.app/search?value=${value}`
+        );
         setBoard(response.data);
         console.log(response);
       } catch (error) {

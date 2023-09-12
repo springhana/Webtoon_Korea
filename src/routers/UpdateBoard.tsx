@@ -17,16 +17,19 @@ export default function UpdateBoard() {
 
   const Image = async (board: any, date: any) => {
     try {
-      const response: any = await axios.get("/api/images", {
-        params: {
-          userId: board.userId,
-          date: date,
-          postNumber: board.postNumber,
-          image: board.image,
-          file: "board",
-        },
-        responseType: "blob",
-      });
+      const response: any = await axios.get(
+        "https://port-0-webtoon-korea-server-30yyr422almfl7fw9.sel5.cloudtype.app/images",
+        {
+          params: {
+            userId: board.userId,
+            date: date,
+            postNumber: board.postNumber,
+            image: board.image,
+            file: "board",
+          },
+          responseType: "blob",
+        }
+      );
       const imageUrl = URL.createObjectURL(response.data);
       setImage(imageUrl);
       console.log(response.data);
@@ -38,9 +41,12 @@ export default function UpdateBoard() {
   useEffect(() => {
     const Update = async () => {
       try {
-        const response = await axios.get("/api/boardDeatil", {
-          params: { postNumber: postNumber },
-        });
+        const response = await axios.get(
+          "https://port-0-webtoon-korea-server-30yyr422almfl7fw9.sel5.cloudtype.app/boardDeatil",
+          {
+            params: { postNumber: postNumber },
+          }
+        );
         const date = response.data.date.split(":");
         Image(response.data, date[0]);
         setTitle(response.data.title);
@@ -75,7 +81,7 @@ export default function UpdateBoard() {
           {/* 수정 input */}
           <form
             method="POST"
-            action="/api/edit?_method=PUT"
+            action="https://port-0-webtoon-korea-server-30yyr422almfl7fw9.sel5.cloudtype.app/edit?_method=PUT"
             encType="multipart/form-data"
           >
             <input value={board._id} type="hidden" name="_id" />
