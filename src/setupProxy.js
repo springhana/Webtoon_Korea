@@ -3,7 +3,8 @@ const { createProxyMiddleware } = require("http-proxy-middleware");
 module.exports = function (app) {
   app.use(
     createProxyMiddleware("/api", {
-      target: "http://localhost:8080",
+      target:
+        "https://port-0-webtoon-korea-server-30yyr422almfl7fw9.sel5.cloudtype.app/",
       changeOrigin: true,
       pathRewrite: {
         "^/api": "",
