@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/Webtoon_Korea/static/css/main.f18f0d17.css",
-    "main.js": "/Webtoon_Korea/static/js/main.7c72cfdb.js",
+    "main.js": "/Webtoon_Korea/static/js/main.5320cba3.js",
     "static/js/787.2c0e342c.chunk.js": "/Webtoon_Korea/static/js/787.2c0e342c.chunk.js",
     "service-worker.js": "/Webtoon_Korea/service-worker.js",
     "index.html": "/Webtoon_Korea/index.html",
     "main.f18f0d17.css.map": "/Webtoon_Korea/static/css/main.f18f0d17.css.map",
-    "main.7c72cfdb.js.map": "/Webtoon_Korea/static/js/main.7c72cfdb.js.map",
+    "main.5320cba3.js.map": "/Webtoon_Korea/static/js/main.5320cba3.js.map",
     "787.2c0e342c.chunk.js.map": "/Webtoon_Korea/static/js/787.2c0e342c.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f18f0d17.css",
-    "static/js/main.7c72cfdb.js"
+    "static/js/main.5320cba3.js"
   ]
 }
