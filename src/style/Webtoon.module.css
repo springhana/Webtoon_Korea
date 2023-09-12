@@ -13,6 +13,8 @@
 @media screen and (max-width: 768px) {
   .webtoon {
     width: 100%;
-    margin-top: 300px;
+  }
+  .webtoonContainer {
+    margin-top: 500px;
   }
 }

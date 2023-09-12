@@ -1,0 +1,21 @@
+.searchBar {
+  width: 300px;
+  border: 1px solid red;
+  padding: 10px;
+}
+.finder {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 300px;
+}
+.finder__input {
+  width: 100%;
+  padding: 10px;
+  /* border: none; */
+}
+.finder__icon {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+}

@@ -5,6 +5,12 @@ import { AiFillStar } from "react-icons/ai";
 import { FiSearch } from "react-icons/fi";
 import { WebtoonsTypes } from "../types/webtoon";
 import { useState } from "react";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { onOpen } from "../store/LoginStore";
+import WebtoonComment from "./WebtoonComment";
+
+import { FcLike, FcLikePlaceholder } from "react-icons/fc";
 function DetailPage({
   data,
   page,
@@ -32,6 +38,10 @@ function DetailPage({
 }) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [imgSize, setImgSize] = useState(1);
+  const login = useSelector((state: any) => {
+    return state.loginCheck;
+  });
+  const dispatch = useDispatch();
 
   useEffect(() => {
     img(data.service);
@@ -66,6 +76,44 @@ function DetailPage({
     };
   }, []);
 
+  //
+
+  const [webtoons, setWebtoons] = useState<boolean>(false);
+  useEffect(() => {
+    const subscribe = async () => {
+      try {
+        const response = await axios.get("/api/subscribeAll");
+        if (response.data) {
+          const a = response.data.title.includes(data.searchKeyword);
+          console.log(a);
+          setWebtoons(a);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    subscribe();
+  }, []);
+
+  const remove = async (title: string) => {
+    try {
+      const response = await axios.post("/api/remove_subscribe", {
+        title: title,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const add = async (title: string) => {
+    try {
+      const response = await axios.post("/api/subscribe", {
+        title: title,
+      });
+    } catch (errro) {
+      console.log(errro);
+    }
+  };
   return (
     <div style={{ margin: "auto" }}>
       <div className={styles.detail}>
@@ -120,6 +168,19 @@ function DetailPage({
                 </>
               ) : null}
             </div>
+
+            {/* 좋아요 */}
+            <div>
+              {webtoons ? (
+                <>
+                  <FcLike />
+                  <span>구독 중</span>
+                </>
+              ) : (
+                <FcLikePlaceholder />
+              )}
+            </div>
+
             <div className={styles.additional_cotainer}>
               {data.additional.new ? <div>New</div> : null}
               {data.additional.adult ? <div>19</div> : null}
@@ -139,6 +200,29 @@ function DetailPage({
         </div>
       </div>
       <div className={styles.btn}>
+        {webtoons ? (
+          <div
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              remove(data.searchKeyword);
+              setWebtoons(false);
+            }}
+            className={styles.next}
+          >
+            구독 해체
+          </div>
+        ) : (
+          <div
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              add(data.searchKeyword);
+              setWebtoons(true);
+            }}
+            className={styles.next}
+          >
+            구독
+          </div>
+        )}
         <a
           href={data.url}
           className={styles.go}
@@ -147,7 +231,7 @@ function DetailPage({
         >
           웹툰 보기
         </a>
-        {page + 1 < length ? (
+        {/* {page + 1 < length ? (
           <div onClick={PagePlus} className={styles.next}>
             넘기기
           </div>
@@ -156,7 +240,12 @@ function DetailPage({
           <div onClick={PageMinus} className={styles.next}>
             전으로
           </div>
-        ) : null}
+        ) : null} */}
+      </div>
+
+      {/* 댓글 */}
+      <div>
+        <WebtoonComment webtoonID={data._id} />
       </div>
     </div>
   );

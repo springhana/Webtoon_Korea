@@ -10,10 +10,14 @@ a {
 li {
   list-style: none;
 }
+input {
+  outline: none;
+}
+
 .App {
   position: relative;
-  width: 100%;
-  height: 100%;
+  /* width: 100%; */
+  height: 100vh;
 }
 
 .Loading {
@@ -35,14 +39,16 @@ li {
   align-items: center;
 }
 .touch_img_container {
-  position: absolute;
+  position: fixed;
   background: black;
   opacity: 0.8;
   width: 100%;
   height: 100%;
   overflow: hidden;
 }
-
+.ImageClick {
+  position: fixed;
+}
 .top_move {
   position: fixed;
   right: 0;

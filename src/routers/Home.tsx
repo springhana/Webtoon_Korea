@@ -8,6 +8,8 @@ import Loading from "../components/Loading/Loading";
 import { imgSize } from "../API/data/imgSize";
 import { Ktoday } from "../API/data/date";
 import About from "../components/About";
+import axios from "axios";
+import { error } from "console";
 
 function Home({
   load,

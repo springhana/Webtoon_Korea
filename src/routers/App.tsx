@@ -2,21 +2,31 @@ import { Routes, Route } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 
-import Nav from "./components/Nav";
-import Home from "./routers/Home";
-import Webtoon from "./routers/Webtoon";
+import Nav from "../components/Nav";
+import Home from "./Home";
+import Webtoon from "./Webtoon";
 
-import { fetchDetail_Search, fetchWebtoon } from "./API/webtoon";
-import today from "./API/data/day";
-import WeekWebtoons from "./routers/WeekWebtoons";
+import { fetchDetail_Search, fetchWebtoon } from "../API/webtoon";
+import today from "../API/data/day";
+import WeekWebtoons from "./WeekWebtoons";
 
-import { imgSize } from "./API/data/imgSize";
-import Detail from "./routers/Detail";
-import SearchPage from "./routers/SearchPage";
-import Footer from "./components/Footer";
-import NotFoundPage from "./NotFoundPage";
-import Image from "./components/Image";
-import Top from "./components/Top";
+import { imgSize } from "../API/data/imgSize";
+import Detail from "./Detail";
+import SearchPage from "./SearchPage";
+import Footer from "../components/Footer";
+import NotFoundPage from "../NotFoundPage";
+import Image from "../components/Image";
+import Top from "../components/Top";
+import LoginModal from "../components/modals/LoginModal";
+import RegisterModal from "../components/modals/RegisterModal";
+import MyPage from "./MyPage";
+import Board from "./Board";
+import Write from "./Write";
+import SearchBoard from "./SearchBoard";
+import DetailBoard from "./DetailBoard";
+import UpdateBoard from "./UpdateBoard";
+import UpdateComment from "./UpdateComment";
+import User from "./User";
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -113,6 +123,8 @@ function App() {
   return (
     <div className="App">
       <Nav />
+      <LoginModal />
+      <RegisterModal />
 
       {check ? (
         <div className="touch_img" style={{ width: `${window.innerWidth}` }}>
@@ -148,6 +160,7 @@ function App() {
             />
           }
         />
+
         <Route
           path="/webtoon/:webtoon"
           element={
@@ -202,6 +215,20 @@ function App() {
             />
           }
         />
+        <Route
+          path="/myPage"
+          element={<MyPage img={img} Iwidth={Iwidth} Iheight={Iheight} />}
+        />
+        <Route path="/board/:page" element={<Board />} />
+        <Route path="/board/write" element={<Write />} />
+        <Route path="/detail/:postNumber" element={<DetailBoard />} />
+        <Route path="/update/:postNumber" element={<UpdateBoard />} />
+        <Route
+          path="/update_Comment/:totalComment"
+          element={<UpdateComment />}
+        />
+        <Route path="/search/:value" element={<SearchBoard />} />
+        <Route path="/user" element={<User />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <Footer />

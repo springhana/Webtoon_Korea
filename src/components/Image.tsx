@@ -24,7 +24,7 @@ function Image({
           zIndex: "100",
         };
   return (
-    <div style={imgSize}>
+    <div style={imgSize} className="ImageClick">
       <img src={img} alt={title} style={{ width: "100%", height: "100%" }} />
     </div>
   );

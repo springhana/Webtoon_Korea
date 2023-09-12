@@ -1,0 +1,134 @@
+.board {
+  margin: auto;
+  margin-top: 30px;
+  width: 1200px;
+  text-align: center;
+  position: relative;
+}
+.board_logo {
+  display: flex;
+}
+.board_logo h3 {
+  font-weight: bold;
+  font-size: 28px;
+}
+.board_logo span {
+  margin-right: 5px;
+}
+.write {
+  text-align: center;
+  position: absolute;
+  right: 0;
+  padding: 10px;
+  background-color: #4db9ff;
+  color: white;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: 0.2s all;
+}
+.write:hover {
+  background-color: #50f2f5;
+}
+/* 게시판 내용 */
+.board_inner {
+  margin-top: 30px;
+  width: 100%;
+}
+.board_contents {
+  display: flex;
+  height: 60px;
+  border-bottom: 1px solid #d3d3d3;
+  border-top: 1px solid gray;
+}
+.board_number,
+.board_title,
+.board_author,
+.board_date {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}
+.board_number {
+  width: 100px;
+}
+.board_title {
+  width: 800px;
+}
+.board_author {
+  width: 150px;
+}
+.board_date {
+  width: 150px;
+}
+
+.search {
+  position: relative;
+  width: 300px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  margin-top: 30px;
+}
+.search_input {
+  background-color: white;
+  border: 1px solid gray;
+  padding: 10px 30px 10px 10px;
+  width: 100%;
+}
+.search_icon {
+  position: absolute;
+  right: 5px;
+  display: inline;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.paging {
+  margin-top: 30px;
+}
+.paging ul {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+.paging ul li {
+  cursor: pointer;
+}
+.nowPage {
+  scale: 1.5;
+  font-weight: bold;
+  color: #4db9ff;
+}
+.prev,
+.next {
+  font-weight: bold;
+}
+
+@media screen and (max-width: 1024px) {
+  .board {
+    width: 700px;
+  }
+  .board_number {
+    width: 56px;
+  }
+  .board_title {
+    width: 476px;
+  }
+  .board_author {
+    width: 84px;
+  }
+  .board_date {
+    width: 84px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .board {
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 550px;
+  }
+}

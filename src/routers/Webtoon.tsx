@@ -4,7 +4,6 @@ import { daysOfWeek } from "../API/data/date";
 import { useEffect, useState, useMemo } from "react";
 import Category from "../components/Category";
 import styles from "../style/Webtoon.module.css";
-import Button from "../components/button/Button";
 import { WebtoonType } from "../types/webtoon";
 import Loading from "../components/Loading/Loading";
 
@@ -50,7 +49,7 @@ function Webtoon({
   const [start, setStart] = useState(false);
 
   return (
-    <div>
+    <div className={styles.webtoonContainer}>
       <div>
         <Category />
       </div>

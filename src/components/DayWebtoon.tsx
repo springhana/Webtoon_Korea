@@ -106,24 +106,26 @@ function DayWebtoon({
       {webtoons.map((data: WebtoonsTypes, index: number) => {
         if (webtoons.length === index + 1) {
           return (
-            <WebtoonContainer
-              data={data}
-              Iwidth={Iwidth * imgSize}
-              Iheight={Iheight * imgSize}
-              handleImageLoad={handleImageLoad}
-              lastBookElementRef={lastBookElementRef}
-            />
+            <div key={index}>
+              <WebtoonContainer
+                data={data}
+                Iwidth={Iwidth * imgSize}
+                Iheight={Iheight * imgSize}
+                handleImageLoad={handleImageLoad}
+                lastBookElementRef={lastBookElementRef}
+              />
+            </div>
           );
         } else {
           return (
-            <>
+            <div key={index}>
               <WebtoonContainer
                 data={data}
                 Iwidth={Iwidth * imgSize}
                 Iheight={Iheight * imgSize}
                 handleImageLoad={handleImageLoad}
               />
-            </>
+            </div>
           );
         }
       })}

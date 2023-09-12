@@ -1,0 +1,113 @@
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 200;
+}
+.modal_container {
+  position: absolute;
+  background-color: #4db9ff;
+  border-radius: 30px;
+  color: white;
+  width: 1000px;
+}
+.modal_inner {
+  padding: 50px;
+}
+
+.title {
+  padding: 30px;
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+}
+.id,
+.pw,
+.name,
+.email {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+}
+.id label,
+.pw label,
+.name label,
+.email label {
+  width: 50%;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.id input,
+.pw input,
+.name input,
+.email input {
+  width: 50%;
+  height: 35px;
+  padding: 0 30px;
+  border: 2px solid #50f2f5;
+}
+.btn {
+  margin-top: 30px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn .login_btn {
+  padding: 10px 30px;
+  cursor: pointer;
+  background-color: #50f2f5;
+  color: white;
+  border: none;
+  transition: 0.2s all;
+}
+.btn button:hover {
+  background-color: #4db9ff;
+}
+.btn .register_btn {
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 10px;
+  border-bottom: 1px solid #dddddd;
+  color: #dddddd;
+  transition: 0.2s all;
+  margin-top: 20px;
+}
+.btn .register_btn:hover {
+  color: black;
+}
+.close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 30px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin: 20px;
+}
+.close:hover {
+  color: white;
+}
+
+@media screen and (max-width: 1024px) {
+  .modal_container {
+    width: 700px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .modal_container {
+    width: 500px;
+  }
+}

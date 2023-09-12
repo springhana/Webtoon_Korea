@@ -1,0 +1,38 @@
+.YesNo_Modal {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.YesNo_Modal_outter {
+  z-index: 1001;
+  border-radius: 5px;
+  text-align: center;
+  background-color: #4db9ff;
+  padding: 50px;
+}
+.YesNo_title {
+  font-weight: bold;
+  font-size: 25px;
+  margin-bottom: 30px;
+}
+.YesNo_Modal_outter button {
+  padding: 10px 30px;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: #50f2f5;
+  color: white;
+  border: none;
+  transition: 0.2s all;
+  margin: 0 10px;
+}
+.YesNo_Modal_outter button:hover {
+  background-color: #4db9ff;
+}

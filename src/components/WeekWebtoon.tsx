@@ -30,7 +30,7 @@ function WeekWebtoon({
     pageNumber,
     webtoon,
     day,
-    20
+    windowWidth > 1024 ? 28 : 24
   );
 
   const observer: any = useRef();

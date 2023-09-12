@@ -1,0 +1,89 @@
+.write {
+  border: 1px solid #d3d3d3;
+  padding: 30px;
+  border-radius: 10px;
+  width: 1200px;
+  margin: auto;
+  margin-top: 30px;
+}
+.write_title {
+  padding: 20px 0;
+  border-bottom: 1px solid #d3d3d3;
+}
+
+.write_content {
+  padding: 50px 0;
+}
+
+.write_title input,
+.write_content input {
+  width: 100%;
+  height: 50px;
+  padding: 10px;
+  border: none;
+  border: 1px solid #4db9ff;
+  border-radius: 5px;
+}
+
+.write_title h3,
+.write_content h3 {
+  width: 100%;
+  height: 50px;
+  padding: 10px;
+}
+
+.image {
+  margin-top: 30px;
+  width: 100%;
+  text-align: center;
+  font-size: 30px;
+  cursor: pointer;
+}
+.write_btn_outter {
+  margin-top: 30px;
+  text-align: center;
+}
+.write_btn {
+  width: 500px;
+  border: none;
+  padding: 10px;
+  background-color: #4db9ff;
+  border-radius: 3px;
+  transition: 0.2s all;
+  cursor: pointer;
+  color: white;
+}
+.write_btn:hover {
+  background-color: #50f2f5;
+}
+/* 첨부 파일 */
+.filebox {
+  margin-top: 10px;
+  text-align: center;
+}
+.filebox .upload_name {
+  display: inline-block;
+  height: 40px;
+  padding: 0 10px;
+  vertical-align: middle;
+  border: 1px solid #dddddd;
+  color: #999999;
+}
+.filebox label {
+  display: inline-block;
+  padding: 10px 20px;
+  color: #fff;
+  vertical-align: middle;
+  background-color: #999999;
+  cursor: pointer;
+  height: 40px;
+  margin-left: 10px;
+}
+.filebox input[type="file"] {
+  position: absolute;
+  width: 0;
+  height: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+}

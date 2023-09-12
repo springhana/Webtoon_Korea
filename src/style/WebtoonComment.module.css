@@ -1,0 +1,87 @@
+.webtoon_comment_logo {
+  border-bottom: 1px solid gray;
+  padding: 10px 0;
+  margin-bottom: 10px;
+}
+.webtoon_comment_login {
+  padding: 30px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+}
+.webtoon_comment_post_container {
+  display: flex;
+}
+.webtoon_comment_post {
+  display: flex;
+  gap: 10px;
+}
+.webtoon_comment_post input {
+  padding: 5px 10px;
+}
+.webtoon_comment_btn {
+  padding: 3px 10px;
+  background-color: white;
+  border: 1px solid gray;
+  cursor: pointer;
+}
+.webtoon_comment_outter {
+  margin-top: 30px;
+}
+.webtoon_comment_container:nth-child(1) {
+  border-top: 1px solid gray;
+}
+.webtoon_comment_container {
+  border-bottom: 1px solid gray;
+  padding: 40px 0;
+  position: relative;
+}
+.webtoon_comment_author {
+  position: absolute;
+  top: 10px;
+  font-weight: bold;
+}
+.webtoon_comment_date {
+  margin-left: 30px;
+  font-weight: 100;
+  font-size: 12px;
+  color: gray;
+}
+.webtoon_comment_comments {
+  padding: 20px 0;
+}
+.webtoon_comment_like {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin: 10px;
+  width: 90px;
+  padding: 0 10px;
+  cursor: pointer;
+  border: 1px solid gray;
+}
+.webtoon_comment_like_inner {
+  position: relative;
+}
+.webtoon_comment_like_length {
+  position: absolute;
+  right: 0;
+}
+
+.webtoon_comment_update {
+  bottom: 10px;
+}
+.webtoon_comment_update button {
+  padding: 5px 10px;
+  background-color: #4db9ff;
+  color: white;
+  cursor: pointer;
+  border: none;
+  transition: 0.2s all;
+}
+.webtoon_comment_update button:hover {
+  background-color: #50f2f5;
+}
+.webtoon_comment_update button:nth-child(1) {
+  border-right: 1px solid white;
+}

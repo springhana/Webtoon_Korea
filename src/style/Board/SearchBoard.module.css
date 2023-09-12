@@ -1,0 +1,63 @@
+.search_board {
+  width: 1200px;
+  margin: auto;
+  margin-top: 30px;
+}
+.value {
+  font-size: 30px;
+  font-weight: bold;
+}
+/* 게시판 내용 */
+.board_inner {
+  margin-top: 30px;
+}
+.board_contents {
+  display: flex;
+  height: 60px;
+  border-bottom: 1px solid #d3d3d3;
+  border-top: 1px solid gray;
+}
+.board_number,
+.board_title,
+.board_author,
+.board_date {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}
+.board_number {
+  width: 100px;
+}
+.board_title {
+  width: 800px;
+}
+.board_author {
+  width: 150px;
+}
+.board_date {
+  width: 150px;
+}
+
+/* 검색 */
+.search {
+  position: relative;
+  width: 300px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  margin-top: 30px;
+}
+.search_input {
+  background-color: white;
+  border: 1px solid gray;
+  padding: 10px 30px 10px 10px;
+  width: 100%;
+}
+.search_icon {
+  position: absolute;
+  right: 5px;
+  display: inline;
+  font-weight: bold;
+  cursor: pointer;
+}

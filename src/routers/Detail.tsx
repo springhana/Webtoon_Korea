@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 
 import DetailPage from "../components/DetailPage";
 import { WebtoonsTypes } from "../types/webtoon";
-import { detail_Search } from "../store/Detail_SearchStore";
+import { detail_Search } from "../store/Store";
 
 import styles from "../style/DetailPage.module.css";
 function Detail({
@@ -51,7 +51,13 @@ function Detail({
   }
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", padding: "30px" }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        padding: "30px",
+      }}
+    >
       {item.map((data: WebtoonsTypes, index: number) => (
         <div key={index} className={styles.detailPage}>
           {index === page ? (
