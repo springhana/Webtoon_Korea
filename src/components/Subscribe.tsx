@@ -11,18 +11,24 @@ export default function Subscribe({ webtoon, img, Iwidth, Iheight }: any) {
   const [구취, set구취] = useState(false);
   const remove = async (title: string) => {
     try {
-      const response = await axios.post("/api/remove_subscribe", {
-        title: title,
-      });
+      const response = await axios.post(
+        "https://port-0-webtoon-korea-server-30yyr422almfl7fw9.sel5.cloudtype.app/remove_subscribe",
+        {
+          title: title,
+        }
+      );
     } catch (error) {
       console.log(error);
     }
   };
   const add = async (title: string) => {
     try {
-      const response = await axios.post("/api/subscribe", {
-        title: title,
-      });
+      const response = await axios.post(
+        "https://port-0-webtoon-korea-server-30yyr422almfl7fw9.sel5.cloudtype.app/subscribe",
+        {
+          title: title,
+        }
+      );
       console.log(response);
     } catch (errro) {
       console.log(errro);

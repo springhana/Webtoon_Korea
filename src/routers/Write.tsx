@@ -30,7 +30,11 @@ export default function Write() {
   }
   return (
     <div className={styles.write}>
-      <form method="POST" action="/api/write" encType="multipart/form-data">
+      <form
+        method="POST"
+        action="https://port-0-webtoon-korea-server-30yyr422almfl7fw9.sel5.cloudtype.app/write"
+        encType="multipart/form-data"
+      >
         <div className={styles.write_title}>
           <h3>제목</h3>
           <input type="text" name="title" />

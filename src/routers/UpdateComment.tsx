@@ -13,17 +13,20 @@ export default function UpdateComment() {
   const [imageName, setImageName] = useState("파일찾기");
   const Image = async (comment: any, date: any) => {
     try {
-      const response: any = await axios.get("/api/images", {
-        params: {
-          userId: comment.userId,
-          date: date,
-          postNumber: comment.postNumber,
-          image: comment.image,
-          file: "comment",
-          totalComment: comment.totalComment,
-        },
-        responseType: "blob",
-      });
+      const response: any = await axios.get(
+        "https://port-0-webtoon-korea-server-30yyr422almfl7fw9.sel5.cloudtype.app/images",
+        {
+          params: {
+            userId: comment.userId,
+            date: date,
+            postNumber: comment.postNumber,
+            image: comment.image,
+            file: "comment",
+            totalComment: comment.totalComment,
+          },
+          responseType: "blob",
+        }
+      );
       const imageUrl = URL.createObjectURL(response.data);
       setImage(imageUrl);
       console.log(response.data);
@@ -35,9 +38,12 @@ export default function UpdateComment() {
   useEffect(() => {
     const Update = async () => {
       try {
-        const response = await axios.get("/api/commentOne", {
-          params: { totalComment: totalComment },
-        });
+        const response = await axios.get(
+          "https://port-0-webtoon-korea-server-30yyr422almfl7fw9.sel5.cloudtype.app/commentOne",
+          {
+            params: { totalComment: totalComment },
+          }
+        );
         const date = response.data.date.split(":");
         Image(response.data, date[0]);
         setComment(response.data);
@@ -68,7 +74,7 @@ export default function UpdateComment() {
     <div className={styles.update}>
       <form
         method="POST"
-        action="/api/editComment?_method=PUT"
+        action="https://port-0-webtoon-korea-server-30yyr422almfl7fw9.sel5.cloudtype.app/editComment?_method=PUT"
         encType="multipart/form-data"
         className={styles.container}
       >

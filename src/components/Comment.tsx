@@ -26,17 +26,20 @@ export default function Comment({ postNumber, _id }: any) {
 
   const Image = async (board: any, date: any, max: any, index: number) => {
     try {
-      const response: any = await axios.get("/api/images", {
-        params: {
-          userId: board.userId,
-          date: date,
-          postNumber: board.postNumber,
-          image: board.image,
-          file: "comment",
-          totalComment: board.totalComment,
-        },
-        responseType: "blob",
-      });
+      const response: any = await axios.get(
+        "https://port-0-webtoon-korea-server-30yyr422almfl7fw9.sel5.cloudtype.app/images",
+        {
+          params: {
+            userId: board.userId,
+            date: date,
+            postNumber: board.postNumber,
+            image: board.image,
+            file: "comment",
+            totalComment: board.totalComment,
+          },
+          responseType: "blob",
+        }
+      );
 
       const imageUrl = URL.createObjectURL(response.data);
       setImageFile((prevImageFile: any) => [...prevImageFile, imageUrl]);
@@ -51,9 +54,12 @@ export default function Comment({ postNumber, _id }: any) {
 
   const GetComment = async () => {
     try {
-      const response = await axios.get("/api/comment", {
-        params: { boardId: _id },
-      });
+      const response = await axios.get(
+        "https://port-0-webtoon-korea-server-30yyr422almfl7fw9.sel5.cloudtype.app/comment",
+        {
+          params: { boardId: _id },
+        }
+      );
       if (response) {
         for (let i = 0; i < response.data.length; i++) {
           if (response.data[i].image !== "default.jpg") {
@@ -80,10 +86,13 @@ export default function Comment({ postNumber, _id }: any) {
 
   const PostComment = async () => {
     try {
-      const response = await axios.post("/api/commentPost", {
-        boardId: _id,
-        comment: value,
-      });
+      const response = await axios.post(
+        "https://port-0-webtoon-korea-server-30yyr422almfl7fw9.sel5.cloudtype.app/commentPost",
+        {
+          boardId: _id,
+          comment: value,
+        }
+      );
       console.log(response);
     } catch (error) {
       console.log(error);
@@ -106,9 +115,12 @@ export default function Comment({ postNumber, _id }: any) {
 
   const removeComment = async (id: any) => {
     try {
-      const response = await axios.delete("/api/commentDelete", {
-        params: { _id: id },
-      });
+      const response = await axios.delete(
+        "https://port-0-webtoon-korea-server-30yyr422almfl7fw9.sel5.cloudtype.app/commentDelete",
+        {
+          params: { _id: id },
+        }
+      );
     } catch (error) {
       console.log(error);
     } finally {
@@ -118,9 +130,12 @@ export default function Comment({ postNumber, _id }: any) {
 
   const like = async (_id: any) => {
     try {
-      const response = await axios.put("/api/like", {
-        _id: _id,
-      });
+      const response = await axios.put(
+        "https://port-0-webtoon-korea-server-30yyr422almfl7fw9.sel5.cloudtype.app/like",
+        {
+          _id: _id,
+        }
+      );
     } catch (error) {
       console.log(error);
     } finally {
@@ -135,7 +150,7 @@ export default function Comment({ postNumber, _id }: any) {
         <div>
           <form
             method="POST"
-            action="/api/commentPost"
+            action="https://port-0-webtoon-korea-server-30yyr422almfl7fw9.sel5.cloudtype.app/commentPost"
             encType="multipart/form-data"
           >
             <input type="hidden" name="boardId" value={_id} />
