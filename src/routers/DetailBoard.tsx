@@ -21,19 +21,16 @@ export default function DetailBoard() {
   useEffect(() => {
     const Image = async (board: any, date: any) => {
       try {
-        const response: any = await axios.get(
-          "https://port-0-webtoon-korea-server-30yyr422almfl7fw9.sel5.cloudtype.app/images",
-          {
-            params: {
-              userId: board.userId,
-              date: date,
-              postNumber: board.postNumber,
-              image: board.image,
-              file: "board",
-            },
-            responseType: "blob",
-          }
-        );
+        const response: any = await axios.get("/api/images", {
+          params: {
+            userId: board.userId,
+            date: date,
+            postNumber: board.postNumber,
+            image: board.image,
+            file: "board",
+          },
+          responseType: "blob",
+        });
         const imageUrl = URL.createObjectURL(response.data);
         setImage(imageUrl);
       } catch (error) {
@@ -43,14 +40,11 @@ export default function DetailBoard() {
 
     const fetch = async () => {
       try {
-        const response: any = await axios.get(
-          "https://port-0-webtoon-korea-server-30yyr422almfl7fw9.sel5.cloudtype.app/boardDeatil",
-          {
-            params: {
-              postNumber: postNumber,
-            },
-          }
-        );
+        const response: any = await axios.get("/api/boardDeatil", {
+          params: {
+            postNumber: postNumber,
+          },
+        });
         if (response) {
           const date = response.data.date.split(":");
           Image(response.data, date[0]);
@@ -70,12 +64,9 @@ export default function DetailBoard() {
 
   const Delete = async () => {
     try {
-      const response = await axios.delete(
-        "https://port-0-webtoon-korea-server-30yyr422almfl7fw9.sel5.cloudtype.app/delete",
-        {
-          params: { _id: detail._id, postNumber: detail.postNumber },
-        }
-      );
+      const response = await axios.delete("/api/delete", {
+        params: { _id: detail._id, postNumber: detail.postNumber },
+      });
     } catch (error) {
       console.log(error);
     }

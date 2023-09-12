@@ -36,9 +36,7 @@ function Nav() {
   }
   const Logout = async () => {
     try {
-      const response = await axios.get(
-        "https://port-0-webtoon-korea-server-30yyr422almfl7fw9.sel5.cloudtype.app/logout"
-      );
+      const response = await axios.get("/api/logout");
       dispatch(logout());
       dispatch(removeId());
       navigate("/");
@@ -50,9 +48,7 @@ function Nav() {
   useEffect(() => {
     const LoginCheck = async () => {
       try {
-        const response: any = await axios.get(
-          "https://port-0-webtoon-korea-server-30yyr422almfl7fw9.sel5.cloudtype.app/loginCheck"
-        );
+        const response: any = await axios.get("/api/loginCheck");
         if (response.data.login) {
           setId(response.data._id);
           dispatch(login_check());

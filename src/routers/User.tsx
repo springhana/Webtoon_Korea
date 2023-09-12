@@ -8,10 +8,7 @@ export default function User() {
   const [user, setUser] = useState([]);
   const MyPage = async () => {
     try {
-      const reponse = await axios.get(
-        "https://port-0-webtoon-korea-server-30yyr422almfl7fw9.sel5.cloudtype.app/user",
-        { params: { pw: pw } }
-      );
+      const reponse = await axios.get("/api/user", { params: { pw: pw } });
       console.log(reponse);
       setUser(reponse.data);
       setLoading(true);
