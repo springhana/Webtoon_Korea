@@ -44,10 +44,7 @@ export default function LoginModal() {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post(
-        "https://port-0-webtoon-korea-server-30yyr422almfl7fw9.sel5.cloudtype.app/login",
-        { id: id, pw: pw }
-      );
+      const response = await axios.post("/api/login", { id: id, pw: pw });
       dispatch(login_Close());
       dispatch(loginCheck());
       LoginCheck();
