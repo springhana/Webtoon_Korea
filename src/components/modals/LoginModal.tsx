@@ -25,7 +25,7 @@ export default function LoginModal() {
   });
   const navigator = useNavigate();
   const [id, setId] = useState();
-  const [pw, setPw] = useState<string>();
+  const [pw, setPw] = useState();
   const dispatch = useDispatch();
 
   const LoginCheck = async () => {
@@ -50,6 +50,7 @@ export default function LoginModal() {
         "https://port-0-webtoon-korea-server-30yyr422almfl7fw9.sel5.cloudtype.app/login",
         { id: id, pw: pw }
       );
+      console.log(response.data.login);
       dispatch(login_Close());
       dispatch(loginCheck());
       LoginCheck();
@@ -73,7 +74,7 @@ export default function LoginModal() {
       <div className={styles.pw}>
         <label>비밀번호</label>
         <input
-          type="password"
+          type="text"
           onChange={(e: any) => {
             setPw(e.target.value);
           }}
