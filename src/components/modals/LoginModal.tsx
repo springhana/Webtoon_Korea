@@ -25,7 +25,7 @@ export default function LoginModal() {
   });
   const navigator = useNavigate();
   const [id, setId] = useState();
-  const [pw, setPw] = useState();
+  const [pw, setPw] = useState<string>();
   const dispatch = useDispatch();
 
   const LoginCheck = async () => {
