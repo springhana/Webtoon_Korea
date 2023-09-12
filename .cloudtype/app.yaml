@@ -1,0 +1,13 @@
+name: node
+app: node@18
+name: react
+app: web
+options:
+  docbase: /build
+  nodeversion: "18"
+  spa: true
+context:
+  git:
+    url:  https://github.com/springhana/Webtoon_Korea.git
+    branch: main
+  preset: react
