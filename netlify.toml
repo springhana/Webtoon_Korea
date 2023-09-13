@@ -1,4 +1,4 @@
 [[redirects]]
   from = "/api/*"
-  to = "https://port-0-webtoon-korea-server-30yyr422almfl7fw9.sel5.cloudtype.app/"
+  to = "https://port-0-webtoon-korea-server-30yyr422almfl7fw9.sel5.cloudtype.app/:splat"
   status = 200
