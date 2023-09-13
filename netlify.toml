@@ -1,5 +1,5 @@
 [[redirects]]
-from = "/api/*"
+from = "/proxy/*"
   to = "https://port-0-webtoon-korea-server-30yyr422almfl7fw9.sel5.cloudtype.app/"  
   status = 200
   force = true
