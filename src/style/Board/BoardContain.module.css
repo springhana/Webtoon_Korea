@@ -67,13 +67,16 @@
 }
 @media screen and (max-width: 768px) {
   .board {
-    width: 500px;
+    width: 400px;
+    justify-content: center;
+    align-items: center;
   }
   .board_number {
-    width: 40px;
+    display: none;
   }
   .board_title {
-    width: 340px;
+    width: 240px;
+    text-align: left;
   }
   .board_author {
     width: 60px;

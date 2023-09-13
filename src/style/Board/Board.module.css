@@ -36,6 +36,7 @@
 }
 .board_contents {
   display: flex;
+  justify-content: center;
   height: 60px;
   border-bottom: 1px solid #d3d3d3;
   border-top: 1px solid gray;
@@ -124,11 +125,23 @@
 }
 @media screen and (max-width: 768px) {
   .board {
-    width: 500px;
+    width: 400px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin-top: 550px;
+  }
+  .board_number {
+    display: none;
+  }
+  .board_title {
+    width: 240px;
+  }
+  .board_author {
+    width: 60px;
+  }
+  .board_date {
+    width: 60px;
   }
 }
