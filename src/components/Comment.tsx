@@ -304,7 +304,7 @@ export default function Comment({ postNumber, _id }: any) {
                 ) : null}
 
                 {/*  수정 */}
-                {login_check.loginCheck.login ||
+                {login_check.loginCheck.login &&
                 login_check.loginCheck._id === data.userId ? (
                   chaneg === 1 && id === data._id ? null : (
                     <div className={styles.webtoon_comment_update}>
