@@ -23,7 +23,7 @@ export default function MyPage({ img, Iwidth, Iheight }: any) {
   useEffect(() => {
     const Login = async () => {
       try {
-        const response = await axios.get(`/api/myPage`);
+        const response = await axios.get(`/api/myPage/${loginCheck._id}`);
         console.log(response);
         if (response.data.login) {
           setUser(response.data.name);
