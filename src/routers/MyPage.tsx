@@ -23,9 +23,7 @@ export default function MyPage({ img, Iwidth, Iheight }: any) {
   useEffect(() => {
     const Login = async () => {
       try {
-        const response = await axios.get(
-          `https://port-0-webtoon-korea-server-30yyr422almfl7fw9.sel5.cloudtype.app/myPage`
-        );
+        const response = await axios.get(`/api/myPage`);
         console.log(response);
         if (response.data.login) {
           setUser(response.data.name);
@@ -43,9 +41,7 @@ export default function MyPage({ img, Iwidth, Iheight }: any) {
   useEffect(() => {
     const subscribe = async () => {
       try {
-        const response = await axios.get(
-          "https://port-0-webtoon-korea-server-30yyr422almfl7fw9.sel5.cloudtype.app/subscribeAll"
-        );
+        const response = await axios.get("/api/subscribeAll");
         // console.log(response.data);
         setWebtoons((item) => (item = response.data.title));
         setLoading(false);

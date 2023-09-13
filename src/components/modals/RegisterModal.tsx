@@ -24,15 +24,12 @@ export default function RegisterModal() {
 
   const handleRegister = async () => {
     try {
-      const response = await axios.post(
-        "https://port-0-webtoon-korea-server-30yyr422almfl7fw9.sel5.cloudtype.app/register",
-        {
-          id: id,
-          pw: pw,
-          name: name,
-          email: email,
-        }
-      );
+      const response = await axios.post("/api/register", {
+        id: id,
+        pw: pw,
+        name: name,
+        email: email,
+      });
     } catch (error) {
       console.log(error);
     }

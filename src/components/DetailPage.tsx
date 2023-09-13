@@ -82,9 +82,7 @@ function DetailPage({
   useEffect(() => {
     const subscribe = async () => {
       try {
-        const response = await axios.get(
-          "https://port-0-webtoon-korea-server-30yyr422almfl7fw9.sel5.cloudtype.app/subscribeAll"
-        );
+        const response = await axios.get("/api/subscribeAll");
         if (response.data) {
           const a = response.data.title.includes(data.searchKeyword);
           console.log(a);
@@ -100,24 +98,18 @@ function DetailPage({
 
   const remove = async (title: string) => {
     try {
-      const response = await axios.post(
-        "https://port-0-webtoon-korea-server-30yyr422almfl7fw9.sel5.cloudtype.app/remove_subscribe",
-        {
-          title: title,
-        }
-      );
+      const response = await axios.post("/api/remove_subscribe", {
+        title: title,
+      });
     } catch (error) {
       console.log(error);
     }
   };
   const add = async (title: string) => {
     try {
-      const response = await axios.post(
-        "https://port-0-webtoon-korea-server-30yyr422almfl7fw9.sel5.cloudtype.app/subscribe",
-        {
-          title: title,
-        }
-      );
+      const response = await axios.post("/api/subscribe", {
+        title: title,
+      });
     } catch (errro) {
       console.log(errro);
     }

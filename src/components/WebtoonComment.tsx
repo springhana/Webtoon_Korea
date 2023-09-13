@@ -41,12 +41,9 @@ export default function WebtoonComment({ webtoonID }: any) {
   }, [yesNo]);
   const like = async (_id: any) => {
     try {
-      const response = await axios.put(
-        "https://port-0-webtoon-korea-server-30yyr422almfl7fw9.sel5.cloudtype.app/webtoon/like",
-        {
-          _id: _id,
-        }
-      );
+      const response = await axios.put("/api/webtoon/like", {
+        _id: _id,
+      });
     } catch (error) {
       console.log(error);
     } finally {
@@ -57,13 +54,10 @@ export default function WebtoonComment({ webtoonID }: any) {
 
   const PostComment = async () => {
     try {
-      const response = await axios.post(
-        "https://port-0-webtoon-korea-server-30yyr422almfl7fw9.sel5.cloudtype.app/webtoon/comment",
-        {
-          comment: comment,
-          webtoonID: webtoonID,
-        }
-      );
+      const response = await axios.post("/api/webtoon/comment", {
+        comment: comment,
+        webtoonID: webtoonID,
+      });
       GetComment();
       setComment("");
     } catch (error) {
@@ -72,12 +66,9 @@ export default function WebtoonComment({ webtoonID }: any) {
   };
   const removeComment = async (id: any) => {
     try {
-      const response = await axios.delete(
-        "https://port-0-webtoon-korea-server-30yyr422almfl7fw9.sel5.cloudtype.app/webtoon/delete",
-        {
-          params: { _id: id },
-        }
-      );
+      const response = await axios.delete("/api/webtoon/delete", {
+        params: { _id: id },
+      });
     } catch (error) {
       console.log(error);
     }
@@ -155,7 +146,7 @@ export default function WebtoonComment({ webtoonID }: any) {
                     id === data._id && yesNo ? (
                       <form
                         method="POST"
-                        action="https://port-0-webtoon-korea-server-30yyr422almfl7fw9.sel5.cloudtype.app/webtoon/update?_method=PUT"
+                        action="/api/webtoon/update?_method=PUT"
                         className={styles.webtoon_comment_post}
                       >
                         <input

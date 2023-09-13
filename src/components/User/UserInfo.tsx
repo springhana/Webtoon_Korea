@@ -12,15 +12,12 @@ export default function UserInfo({ user }: any) {
   const navigator = useNavigate();
   const Login_info = async () => {
     try {
-      const response = await axios.put(
-        "https://port-0-webtoon-korea-server-30yyr422almfl7fw9.sel5.cloudtype.app/user/update",
-        {
-          id: id,
-          pw: pw,
-          name: name,
-          email: email,
-        }
-      );
+      const response = await axios.put("/api/user/update", {
+        id: id,
+        pw: pw,
+        name: name,
+        email: email,
+      });
       if (response.data.edit) {
         navigator("/");
       }

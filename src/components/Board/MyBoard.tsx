@@ -14,12 +14,9 @@ export default function MyBoard() {
   useEffect(() => {
     const MyBoard = async () => {
       try {
-        const response = await axios.get(
-          "https://port-0-webtoon-korea-server-30yyr422almfl7fw9.sel5.cloudtype.app/myBoard",
-          {
-            params: { page: page },
-          }
-        );
+        const response = await axios.get("/api/myBoard", {
+          params: { page: page },
+        });
         // 페이징 - 처음 페이지 (5 => 1 이 되어야함 7 => 6)
         const firstPage =
           Math.floor((response.data.currentPage - 1) / 5) * 5 + 1;

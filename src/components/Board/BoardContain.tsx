@@ -10,12 +10,9 @@ export default function BoardContain({ data }: any) {
     console.log(data._id);
     const commentLength = async () => {
       try {
-        const respnse = await axios.get(
-          "https://port-0-webtoon-korea-server-30yyr422almfl7fw9.sel5.cloudtype.app/comment/length",
-          {
-            params: { board_id: data._id },
-          }
-        );
+        const respnse = await axios.get("/api/comment/length", {
+          params: { board_id: data._id },
+        });
         console.log("갯수" + respnse.data);
         setCommentLength(respnse.data);
       } catch (error) {
