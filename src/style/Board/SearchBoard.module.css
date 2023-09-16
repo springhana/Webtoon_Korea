@@ -27,16 +27,16 @@
   font-weight: bold;
 }
 .board_number {
-  width: 100px;
+  width: 8%;
 }
 .board_title {
-  width: 800px;
+  width: 68%;
 }
 .board_author {
-  width: 150px;
+  width: 12%;
 }
 .board_date {
-  width: 150px;
+  width: 12%;
 }
 
 /* 검색 */
@@ -60,4 +60,28 @@
   display: inline;
   font-weight: bold;
   cursor: pointer;
+}
+@media screen and (max-width: 1024px) {
+  .search_board {
+    width: 700px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .search_board {
+    margin-top: 500px;
+    width: 90%;
+  }
+
+  .board_number {
+    display: none;
+  }
+  .board_title {
+    width: 70%;
+  }
+  .board_author {
+    width: 15%;
+  }
+  .board_date {
+    width: 15%;
+  }
 }

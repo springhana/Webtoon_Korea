@@ -2,37 +2,50 @@ import axios from "axios";
 import { useState, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styles from "../style/Board/UpdateComment.module.css";
+import { commentType } from "../types/comment";
 
 export default function UpdateComment() {
   const { totalComment } = useParams();
-  const [image, setImage] = useState<any>("");
-  const [comment, setComment] = useState<any>([]);
+  const [image, setImage] = useState<string>("");
+  const data = {
+    author: "",
+    boardId: "",
+    comment: "",
+    date: "",
+    image: "",
+    likedIds: [],
+    postNumber: 0,
+    totalComment: 0,
+    userId: "",
+    _id: "",
+  };
+  const [comment, setComment] = useState<commentType>(data);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-  const imageInput: any = useRef();
+  const imageInput = useRef<HTMLInputElement>(null);
   const [imageName, setImageName] = useState("파일찾기");
-  const Image = async (comment: any, date: any) => {
-    try {
-      const response: any = await axios.get("/api/images", {
-        params: {
-          userId: comment.userId,
-          date: date,
-          postNumber: comment.postNumber,
-          image: comment.image,
-          file: "comment",
-          totalComment: comment.totalComment,
-        },
-        responseType: "blob",
-      });
-      const imageUrl = URL.createObjectURL(response.data);
-      setImage(imageUrl);
-      console.log(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   useEffect(() => {
+    const Image = async (comment: commentType, date: string) => {
+      try {
+        const response = await axios.get("/api/images", {
+          params: {
+            userId: comment.userId,
+            date: date,
+            postNumber: comment.postNumber,
+            image: comment.image,
+            file: "comment",
+            totalComment: comment.totalComment,
+          },
+          responseType: "blob",
+        });
+        const imageUrl = URL.createObjectURL(response.data);
+        setImage(imageUrl);
+        console.log(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
     const Update = async () => {
       try {
         const response = await axios.get("/api/commentOne", {
@@ -50,14 +63,17 @@ export default function UpdateComment() {
     Update();
   }, []);
 
-  const handleFileChange = (e: any) => {
-    const file = e.target.files[0];
-    setImageName(file.name);
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files ? e.target.files[0] : null;
+
     if (file) {
+      setImageName(file.name);
       const reader = new FileReader();
 
-      reader.onload = (e: any) => {
-        setImage(e.target.result);
+      reader.onload = (e: ProgressEvent<FileReader>) => {
+        if (e.target && e.target.result) {
+          setImage(e.target.result as string);
+        }
       };
 
       reader.readAsDataURL(file);

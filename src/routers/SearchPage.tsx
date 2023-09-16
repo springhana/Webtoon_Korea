@@ -1,35 +1,37 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { imgSize } from "../API/data/imgSize";
-import SearchWebtoon from "../components/SearchWebtoon";
-import styles from "../style/SearchPage.module.css";
+import SearchWebtoon from "../components/Webtoon/SearchPage/SearchWebtoon";
+import styles from "../style/Webtoon/SearchPage.module.css";
 import { WebtoonsTypes } from "../types/webtoon";
+import { fetchDetail_Search } from "../API/webtoon";
 function SearchPage({
-  load,
   TitleColor,
   handleImageLoad,
   removeImageLoad,
 }: {
-  load: (title: string) => void;
   TitleColor: (title: string) => string;
   handleImageLoad: () => void;
   removeImageLoad: () => void;
 }) {
-  const { title }: any = useParams();
+  const { title } = useParams() as { title: string };
+  const [loading, setLoading] = useState(true);
 
-  const [item, setItem] = useState<any>([]);
+  const [item, setItem] = useState<WebtoonsTypes[]>([]);
   useEffect(() => {
     const fetch = async () => {
-      const result: any = await load(title);
-      if (result) {
-        setItem(result);
+      try {
+        const response = await fetchDetail_Search(title);
+        setItem(response.webtoons);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
       }
     };
     fetch();
     removeImageLoad();
   }, [title]);
-
+  console.log(item);
   function width(service: string) {
     switch (service) {
       case "naver":
@@ -52,21 +54,23 @@ function SearchPage({
   }
   return (
     <div className={styles.search}>
-      {item.length > 0 ? (
-        <div className={styles.search_cotainer}>
-          {item.map((data: WebtoonsTypes) => (
-            <SearchWebtoon
-              data={data}
-              width={width as (service: string) => string}
-              height={height as (service: string) => string}
-              key={data._id}
-              TitleColor={TitleColor}
-              handleImageLoad={handleImageLoad}
-            />
-          ))}
-        </div>
-      ) : (
+      {loading ? (
         <div className={styles.search_null}>원하시는 검색어가 없습니다.</div>
+      ) : (
+        item && (
+          <div className={styles.search_cotainer}>
+            {item.map((data: WebtoonsTypes) => (
+              <SearchWebtoon
+                data={data}
+                width={width as (service: string) => string}
+                height={height as (service: string) => string}
+                key={data._id}
+                TitleColor={TitleColor}
+                handleImageLoad={handleImageLoad}
+              />
+            ))}
+          </div>
+        )
       )}
     </div>
   );

@@ -18,19 +18,20 @@ import { login as loginCheck } from "../../store/LoginStore";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AiFillCloseCircle } from "react-icons/ai";
+import { ReduxType } from "../../types/redux";
 
 export default function LoginModal() {
-  let login = useSelector((state: any) => {
+  let login = useSelector((state: ReduxType) => {
     return state.login;
   });
   const navigator = useNavigate();
-  const [id, setId] = useState();
-  const [pw, setPw] = useState();
+  const [id, setId] = useState<string>();
+  const [pw, setPw] = useState<string>();
   const dispatch = useDispatch();
 
   const LoginCheck = async () => {
     try {
-      const response: any = await axios.get("/api/loginCheck");
+      const response = await axios.get("/api/loginCheck");
       if (response.data.login) {
         dispatch(login());
         dispatch(addId(response.data._id));
@@ -62,7 +63,7 @@ export default function LoginModal() {
         <label>아이디</label>
         <input
           type="text"
-          onChange={(e: any) => {
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setId(e.target.value);
           }}
         />
@@ -71,7 +72,7 @@ export default function LoginModal() {
         <label>비밀번호</label>
         <input
           type="text"
-          onChange={(e: any) => {
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setPw(e.target.value);
           }}
         />

@@ -12,8 +12,9 @@ import {
 import styles from "../../style/Modal/Modal.module.css";
 import axios from "axios";
 import { AiFillCloseCircle } from "react-icons/ai";
+import { ReduxType } from "../../types/redux";
 export default function RegisterModal() {
-  let register = useSelector((state: any) => {
+  let register = useSelector((state: ReduxType) => {
     return state.register;
   });
   const dispatch = useDispatch();

@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { BsImageAlt } from "react-icons/bs";
-import styles from "../../style/Board/BoardContain.module.css";
+import styles from "../../style/Board/Update/BoardContain.module.css";
 import axios from "axios";
+import { BoardType } from "../../types/board";
 
-export default function BoardContain({ data }: any) {
+export default function BoardContain({ data }: { data: BoardType }) {
   const [commentLength, setCommentLength] = useState(0);
   useEffect(() => {
     console.log(data._id);
@@ -24,8 +25,8 @@ export default function BoardContain({ data }: any) {
 
   return (
     <div className={styles.board}>
-      <div className={styles.board_number}>{data.postNumber}</div>
-      <Link to={`/detail/${data.postNumber}`} style={{ display: "flex" }}>
+      <Link to={`/detail/${data.postNumber}`} className={styles.border_link}>
+        <div className={styles.board_number}>{data.postNumber}</div>
         <div className={styles.board_title}>
           {data.title.length > 30 ? (
             <div className={styles.board_title_inner}>
@@ -54,7 +55,7 @@ export default function BoardContain({ data }: any) {
         </div>
       </Link>
       <div className={styles.board_author}>
-        {data.author.length > 5 ? `${data.author.splic(0, 4)}...` : data.author}
+        {data.author.length > 5 ? `${data.author.slice(0, 4)}...` : data.author}
       </div>
       <div className={styles.board_date}>{data.date.split(":")[0]}</div>
     </div>

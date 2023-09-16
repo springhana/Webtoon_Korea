@@ -1,11 +1,11 @@
 import { useLocation, useParams } from "react-router-dom";
-import DayWebtoon from "../components/DayWebtoon";
+import DayWebtoon from "../components/Webtoon/Webtoon/DayWebtoon";
 import { daysOfWeek } from "../API/data/date";
 import { useEffect, useState, useMemo } from "react";
-import Category from "../components/Category";
-import styles from "../style/Webtoon.module.css";
+import Category from "../components/Webtoon/Category";
+import styles from "../style/Webtoon/Webtoon.module.css";
 import { WebtoonType } from "../types/webtoon";
-import Loading from "../components/Loading/Loading";
+import Loading from "../components/Loading";
 
 function Webtoon({
   load,

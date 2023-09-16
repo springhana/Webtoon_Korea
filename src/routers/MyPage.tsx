@@ -2,29 +2,29 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { onOpen } from "../store/LoginStore";
-import Subscribe from "../components/Subscribe";
+import Subscribe from "../components/MyPage/Subscribe";
 import { imgSize } from "../API/data/imgSize";
 import { useNavigate } from "react-router-dom";
 import styles from "../style/MyPage/Subscribe.module.css";
-import MyBoard from "../components/Board/MyBoard";
+import MyBoard from "../components/MyPage/MyBoard";
+import { ReduxType } from "../types/redux";
+import { SubscribeType } from "../types/board";
 
-export default function MyPage({ img, Iwidth, Iheight }: any) {
+export default function MyPage() {
   const dispatch = useDispatch();
-  const [webtoons, setWebtoons] = useState([]);
+  const [webtoons, setWebtoons] = useState<string[]>([]);
   const [user, setUser] = useState("");
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-
   const [toggle, setToggle] = useState(0);
 
-  const loginCheck = useSelector((state: any) => {
+  const loginCheck = useSelector((state: ReduxType) => {
     return state.loginCheck;
   });
   useEffect(() => {
     const Login = async () => {
       try {
         const response = await axios.get(`/api/myPage/${loginCheck._id}`);
-        console.log(response);
         if (response.data.login) {
           setUser(response.data.name);
           console.log(response.data.name);
@@ -42,7 +42,7 @@ export default function MyPage({ img, Iwidth, Iheight }: any) {
     const subscribe = async () => {
       try {
         const response = await axios.get("/api/subscribeAll");
-        // console.log(response.data);
+        console.log(response.data);
         setWebtoons((item) => (item = response.data.title));
         setLoading(false);
       } catch (error) {
@@ -109,11 +109,10 @@ export default function MyPage({ img, Iwidth, Iheight }: any) {
           {loading ? (
             <div className={styles.text}>구독을 해주세요</div>
           ) : (
-            webtoons.map((webtoon: any, index: number) => (
+            webtoons.map((webtoon: string, index: number) => (
               <div key={index}>
                 <Subscribe
                   webtoon={webtoon}
-                  img={img}
                   Iwidth={width as (service: string) => string}
                   Iheight={height as (service: string) => string}
                 />

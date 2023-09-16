@@ -1,7 +1,9 @@
 .modal {
   position: fixed;
-  top: 50%;
-  left: 50%;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -108,6 +110,18 @@
 }
 @media screen and (max-width: 768px) {
   .modal_container {
-    width: 500px;
+    width: 90%;
+  }
+  .id label,
+  .pw label,
+  .name label,
+  .email label {
+    width: 100%;
+  }
+  .id input,
+  .pw input,
+  .name input,
+  .email input {
+    width: 100%;
   }
 }

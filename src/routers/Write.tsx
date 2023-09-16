@@ -2,23 +2,27 @@ import { useState, useRef } from "react";
 import { useSelector } from "react-redux";
 import styles from "../style/Board/Write.module.css";
 import { BsCardImage } from "react-icons/bs";
+import { ReduxType } from "../types/redux";
 export default function Write() {
-  const [image, setImage] = useState<any>("");
-  const imageInput: any = useRef();
+  const [image, setImage] = useState<string>("");
+  const imageInput = useRef<HTMLInputElement>(null);
   const [imageName, setImageName] = useState("파일찾기");
+  const [deleteImg, setDeleteImg] = useState(0);
 
-  const loginCheck = useSelector((state: any) => {
+  const loginCheck = useSelector((state: ReduxType) => {
     return state.loginCheck;
   });
 
-  const handleFileChange = (e: any) => {
-    const file = e.target.files[0];
-    setImageName(file.name);
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files ? e.target.files[0] : null;
     if (file) {
+      setImageName(file.name);
       const reader = new FileReader();
 
-      reader.onload = (e: any) => {
-        setImage(e.target.result);
+      reader.onload = (e: ProgressEvent<FileReader>) => {
+        if (e.target && e.target.result) {
+          setImage(e.target.result as string);
+        }
       };
 
       reader.readAsDataURL(file);
@@ -66,6 +70,7 @@ export default function Write() {
           <label
             htmlFor="file"
             onClick={() => {
+              setDeleteImg((prev) => (prev = 0));
               if (imageInput.current) {
                 imageInput.current.click();
               }
@@ -73,7 +78,21 @@ export default function Write() {
           >
             파일찾기
           </label>
-
+          {image ? (
+            <>
+              <label
+                htmlFor="file"
+                onClick={() => {
+                  setImageName("");
+                  setImage("");
+                  setDeleteImg((prev) => (prev = 1));
+                }}
+              >
+                사진 삭제
+              </label>
+              <input type="hidden" name="deleteImg" value={deleteImg} />
+            </>
+          ) : null}
           <div className={styles.write_btn_outter}>
             <input
               ref={imageInput}

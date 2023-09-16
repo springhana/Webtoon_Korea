@@ -1,0 +1,87 @@
+.board {
+  width: 1200px;
+  margin: auto;
+}
+
+/* 게시판 내용 */
+.board_inner {
+  width: 100%;
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.board_contents {
+  width: 100%;
+  display: flex;
+  height: 60px;
+  border-bottom: 1px solid #d3d3d3;
+  border-top: 1px solid gray;
+}
+.board_number,
+.board_title,
+.board_author,
+.board_date {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}
+.board_number {
+  width: 8%;
+}
+.board_title {
+  width: 68%;
+}
+.board_author {
+  width: 12%;
+}
+.board_date {
+  width: 12%;
+}
+
+.paging {
+  margin-top: 30px;
+}
+.paging ul {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+.paging ul li {
+  cursor: pointer;
+}
+.nowPage {
+  scale: 1.5;
+  font-weight: bold;
+  color: #4db9ff;
+}
+.prev,
+.next {
+  font-weight: bold;
+}
+
+@media screen and (max-width: 1024px) {
+  .board {
+    width: 700px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .board {
+    width: 100%;
+  }
+
+  .board_number {
+    display: none;
+  }
+  .board_title {
+    width: 70%;
+  }
+  .board_author {
+    width: 15%;
+  }
+  .board_date {
+    width: 15%;
+  }
+}

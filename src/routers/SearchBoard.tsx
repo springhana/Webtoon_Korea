@@ -4,10 +4,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import styles from "../style/Board/SearchBoard.module.css";
 import BoardContain from "../components/Board/BoardContain";
 import { BsSearch } from "react-icons/bs";
+import { BoardType } from "../types/board";
 export default function SearchBoard() {
-  const { value }: any = useParams();
-  const [board, setBoard] = useState<any>([]);
-  const [searchKeyWord, setSearchKeyWord] = useState();
+  const { value } = useParams() as { value: string };
+  const [board, setBoard] = useState<BoardType[]>([]);
+  const [searchKeyWord, setSearchKeyWord] = useState<string>("");
   const navigator = useNavigate();
   useEffect(() => {
     const Search = async () => {
@@ -38,7 +39,7 @@ export default function SearchBoard() {
           <div className={styles.board_date}>날짜</div>
         </div>
         {board &&
-          board.map((data: any, index: number) => (
+          board.map((data: BoardType, index: number) => (
             <div key={index}>
               <BoardContain data={data} />
             </div>
@@ -51,7 +52,7 @@ export default function SearchBoard() {
           className={styles.search_input}
           type="text"
           placeholder="검색해주세요"
-          onChange={(e: any) => {
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setSearchKeyWord(e.target.value);
           }}
         />

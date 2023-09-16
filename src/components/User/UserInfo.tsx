@@ -1,6 +1,6 @@
 import axios from "axios";
 import styles from "../../style/User/User.module.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 export default function UserInfo({ user }: any) {
   const [disabled, setDisabled] = useState(true);

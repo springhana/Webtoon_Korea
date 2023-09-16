@@ -26,7 +26,7 @@ export default function User() {
           <p>비밀번호를 입력하세요</p>
           <input
             type="password"
-            onChange={(e: any) => {
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setPw(e.target.value);
             }}
           />

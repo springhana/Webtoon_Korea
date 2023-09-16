@@ -1,14 +1,14 @@
 import { useEffect, useState, useMemo } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
-import DetailPage from "../components/DetailPage";
+import DetailPage from "../components/Webtoon/Detail/DetailPage";
 import { WebtoonsTypes } from "../types/webtoon";
 import { detail_Search } from "../store/Store";
 
-import styles from "../style/DetailPage.module.css";
+import styles from "../style/Webtoon/Detail/DetailPage.module.css";
+import { fetchDetail_Search } from "../API/webtoon";
 function Detail({
-  load,
   AddCheck,
   img,
   width,
@@ -17,7 +17,6 @@ function Detail({
   removeImageLoad,
   TitleColor,
 }: {
-  load: (title: string) => void;
   AddCheck: (url: string, title: string, service: string) => void;
   img: (url: string) => void;
   width: number;
@@ -29,15 +28,13 @@ function Detail({
   const [page, setPage] = useState(0);
   useMemo(() => page, []);
   const { title } = useParams() as { title: string };
-  const [item, setItem] = useState<any>([]);
+  const [item, setItem] = useState<WebtoonsTypes[]>([]);
   const dispatch = useDispatch();
   useEffect(() => {
     const fetch = async () => {
-      const result: any = await load(title);
-      if (result) {
-        setItem(result);
-        dispatch(detail_Search(title));
-      }
+      const response = await fetchDetail_Search(title);
+      setItem(response.webtoons);
+      dispatch(detail_Search(title));
     };
     fetch();
     removeImageLoad();

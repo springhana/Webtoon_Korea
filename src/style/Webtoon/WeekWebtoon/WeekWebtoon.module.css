@@ -1,0 +1,18 @@
+.WeekWebtoon_Webtoon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  margin-bottom: 80px;
+}
+
+@media screen and (max-width: 1024px) {
+  .WeekWebtoon_Webtoon {
+    margin-bottom: 20px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .WeekWebtoon_Webtoon {
+    margin-bottom: 20px;
+  }
+}

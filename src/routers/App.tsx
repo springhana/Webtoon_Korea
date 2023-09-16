@@ -1,12 +1,11 @@
 import { Routes, Route } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { useState } from "react";
 
-import Nav from "../components/Nav";
+import Nav from "../components/Nav/Nav";
 import Home from "./Home";
 import Webtoon from "./Webtoon";
 
-import { fetchDetail_Search, fetchWebtoon } from "../API/webtoon";
+import { fetchWebtoon } from "../API/webtoon";
 import today from "../API/data/day";
 import WeekWebtoons from "./WeekWebtoons";
 
@@ -17,8 +16,8 @@ import Footer from "../components/Footer";
 import NotFoundPage from "../NotFoundPage";
 import Image from "../components/Image";
 import Top from "../components/Top";
-import LoginModal from "../components/modals/LoginModal";
-import RegisterModal from "../components/modals/RegisterModal";
+import LoginModal from "../components/Modals/LoginModal";
+import RegisterModal from "../components/Modals/RegisterModal";
 import MyPage from "./MyPage";
 import Board from "./Board";
 import Write from "./Write";
@@ -30,8 +29,8 @@ import User from "./User";
 
 function App() {
   const [loading, setLoading] = useState(false);
-  const [Iwidth, setIwidth] = useState<any>(0);
-  const [Iheight, setIheight] = useState<any>(0);
+  const [Iwidth, setIwidth] = useState<number>(0);
+  const [Iheight, setIheight] = useState<number>(0);
   const [isImageLoaded, setImageLoaded] = useState(false);
 
   const handleImageLoad = () => {
@@ -72,11 +71,6 @@ function App() {
     } catch (error) {
       console.log(error);
     }
-  }
-
-  async function Detail_Search(title: string) {
-    let response = await fetchDetail_Search(title);
-    return response.webtoons;
   }
 
   function img(url: string, size: number = 1) {
@@ -179,7 +173,6 @@ function App() {
           path="/webtoon/week/:webtoon/:day"
           element={
             <WeekWebtoons
-              load={LoadDay}
               img={img}
               Iwidth={Iwidth}
               Iheight={Iheight}
@@ -193,7 +186,6 @@ function App() {
           path="/webtoon/detail/:title"
           element={
             <Detail
-              load={Detail_Search}
               AddCheck={AddCheck}
               img={img}
               width={Iwidth}
@@ -208,17 +200,13 @@ function App() {
           path="/webtoon/search/:title"
           element={
             <SearchPage
-              load={Detail_Search}
               TitleColor={TitleColor}
               handleImageLoad={handleImageLoad}
               removeImageLoad={removeImageLoad}
             />
           }
         />
-        <Route
-          path="/myPage"
-          element={<MyPage img={img} Iwidth={Iwidth} Iheight={Iheight} />}
-        />
+        <Route path="/myPage" element={<MyPage />} />
         <Route path="/board/:page" element={<Board />} />
         <Route path="/board/write" element={<Write />} />
         <Route path="/detail/:postNumber" element={<DetailBoard />} />

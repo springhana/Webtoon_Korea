@@ -12,7 +12,6 @@ const request = async (url: string) => {
 
 export const fetchWebtoon = async (
   day: string = today,
-  // service: string = DefaultService
   service: string = DefaultService,
   perPage: number = 15,
   page: number = 0

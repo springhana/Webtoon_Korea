@@ -1,0 +1,4 @@
+1. git push로 git 업데이트
+2. npm run build로 build 파일 업데이트
+3. netlify deploy netlify 업데이트
+4. 디렉터리명은 build

@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { AiFillLike, AiOutlineLike } from "react-icons/ai";
-import styles from "../style/Board/Comment.module.css";
+import styles from "../style/Comment.module.css";
 
 export default function Comment({ postNumber, _id }: any) {
   const [value, setValue] = useState("");

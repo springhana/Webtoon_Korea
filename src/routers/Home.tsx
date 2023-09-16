@@ -1,15 +1,13 @@
-import styles from "../style/Home.module.css";
+import styles from "../style/Home/Home.module.css";
 import { useEffect } from "react";
 
 import services from "../API/data/service";
 
-import Webtoons from "../components/Webtoons";
-import Loading from "../components/Loading/Loading";
+import Webtoons from "../components/Home/Webtoons";
 import { imgSize } from "../API/data/imgSize";
 import { Ktoday } from "../API/data/date";
-import About from "../components/About";
-import axios from "axios";
-import { error } from "console";
+import About from "../components/Home/About";
+import Loading from "../components/Loading";
 
 function Home({
   load,

@@ -1,30 +1,30 @@
 import useBoard from "../Hook/useBoard";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { onOpen as login_Open } from "../store/LoginStore";
-import axios from "axios";
 import BoardContain from "../components/Board/BoardContain";
 import styles from "../style/Board/Board.module.css";
 import { BsSearch } from "react-icons/bs";
 import { FaPencilAlt } from "react-icons/fa";
+import { BoardType } from "../types/board";
+import { ReduxType } from "../types/redux";
 export default function Board() {
-  const { page }: any = useParams();
-  const { loading, error, board, hasMore } = useBoard(page);
+  const { page } = useParams() as { page: string };
+  const { loading, error, board, hasMore } = useBoard(parseInt(page));
   const [pages, setPages] = useState<number[]>([]); // 페이지를 보여줄 배열 [1,2,3,4,5]
   const [firstPage, setFirstPage] = useState<number>(1); // 처음 페이지 (초기값 1)
   //   console.log(loading, error, board, hasMore);
   const navigator = useNavigate();
   const dispatch = useDispatch();
-  const [searchKeyWord, setSearchKeyWord] = useState();
-  const loginCheck = useSelector((state: any) => {
+  const [searchKeyWord, setSearchKeyWord] = useState<string>("");
+  const loginCheck = useSelector((state: ReduxType) => {
     return state.loginCheck;
   });
+
   useEffect(() => {
     console.log(board);
     // 처음 페이지 (5 => 1 이 되어야함 7 => 6)
     const firstPage = Math.floor((board.currentPage - 1) / 5) * 5 + 1;
-    // console.log(firstPage);
     let pagesArr = []; // 페이지를 담을 배열
 
     // 페이지 담기 5개 씩
@@ -74,7 +74,7 @@ export default function Board() {
           <div className={styles.board_date}>날짜</div>
         </div>
         {board.result &&
-          board.result.map((data: any, index: number) => (
+          board.result.map((data: BoardType, index: number) => (
             <div key={index}>
               <BoardContain data={data} />
             </div>
@@ -147,7 +147,7 @@ export default function Board() {
           className={styles.search_input}
           type="text"
           placeholder="검색해주세요"
-          onChange={(e: any) => {
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setSearchKeyWord(e.target.value);
           }}
         />

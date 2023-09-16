@@ -1,12 +1,11 @@
-import Category from "../components/Category";
+import Category from "../components/Webtoon/Category";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
-import styles from "../style/WeekWebtoons.module.css";
+import styles from "../style/Webtoon/WeekWebtoons.module.css";
 import { daysOfWeek } from "../API/data/date";
-import WeekWebtoon from "../components/WeekWebtoon";
-import Loading from "../components/Loading/Loading";
+import WeekWebtoon from "../components/Webtoon/WeekWebtoon/WeekWebtoon";
+import Loading from "../components/Loading";
 function WeekWebtoons({
-  load,
   img,
   Iwidth,
   Iheight,
@@ -14,7 +13,6 @@ function WeekWebtoons({
   removeImageLoad,
   isImageLoaded,
 }: {
-  load: (day: string, webtoon: string, perPage: number, page: number) => void;
   img: (webtoon: string, size: number) => void;
   Iwidth: number;
   Iheight: number;
@@ -43,7 +41,7 @@ function WeekWebtoons({
     }
   }, [day, webtoon]);
   return (
-    <div>
+    <div className={styles.weekWebtoon_outter}>
       <Category />
       <div className={styles.WeekWebtoon}>
         <WeekWebtoon
@@ -52,7 +50,6 @@ function WeekWebtoons({
           Iwidth={Iwidth}
           Iheight={Iheight}
           handleImageLoad={handleImageLoad}
-          load={load}
         />
       </div>
       {isImageLoaded ? null : (
