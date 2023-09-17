@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { BsImageAlt } from "react-icons/bs";
-import styles from "../../style/Board/Update/BoardContain.module.css";
+import styles from "../../style/Board/BoardContain.module.css";
 import axios from "axios";
 import { BoardType } from "../../types/board";
 

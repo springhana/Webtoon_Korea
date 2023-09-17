@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useEffect, useState, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import styles from "../style/Board/UpdateBoard.module.css";
 
 import { BoardType } from "../types/board";
 import UpdateBoardContain from "../components/Board/Update/UpdateBoardContain";

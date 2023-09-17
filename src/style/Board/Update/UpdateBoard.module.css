@@ -98,6 +98,9 @@
     width: 700px;
     margin-top: 300px;
   }
+  .update_btn {
+    width: 100%;
+  }
 }
 @media screen and (max-width: 768px) {
   .update {

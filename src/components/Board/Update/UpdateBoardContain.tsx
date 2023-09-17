@@ -1,5 +1,5 @@
-import { useEffect, useState, useRef } from "react";
-import styles from "../../../style/Board/UpdateBoard.module.css";
+import { useState, useRef } from "react";
+import styles from "../../../style/Board/Update/UpdateBoard.module.css";
 import { BsCardImage } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { BoardType } from "../../../types/board";

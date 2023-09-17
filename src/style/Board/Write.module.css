@@ -92,6 +92,9 @@
     width: 700px;
     margin-top: 300px;
   }
+  .write_btn {
+    width: 100%;
+  }
 }
 @media screen and (max-width: 768px) {
   .write {

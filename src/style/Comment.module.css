@@ -127,3 +127,19 @@
 .file_image {
   margin: 10px 0 5px 0;
 }
+@media screen and (max-width: 1024px) {
+  .filebox .upload_name {
+    width: 50%;
+  }
+  .filebox label {
+    width: 50%;
+  }
+  .webtoon_comment_btn {
+    width: 50%;
+  }
+  .webtoon_comment_post input {
+    width: 50%;
+  }
+}
+@media screen and (max-width: 768px) {
+}
