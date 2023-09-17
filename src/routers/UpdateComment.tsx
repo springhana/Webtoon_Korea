@@ -129,7 +129,13 @@ export default function UpdateComment() {
         </div>
         <div className={styles.webtoon_comment_update}>
           <button type="submit">전송</button>
-          <button>취소</button>
+          <button
+            onClick={() => {
+              navigate(-1);
+            }}
+          >
+            취소
+          </button>
         </div>
       </form>
     </div>
