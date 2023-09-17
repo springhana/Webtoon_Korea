@@ -14,14 +14,14 @@
     width: 720px;
     padding: 0px;
   }
+  .weekWebtoon_outter {
+    margin-top: 230px;
+  }
 }
 
 @media screen and (max-width: 768px) {
   .WeekWebtoon {
     width: 370px;
     text-align: center;
-  }
-  .weekWebtoon_outter {
-    margin-top: 500px;
   }
 }

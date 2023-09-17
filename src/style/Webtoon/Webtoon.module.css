@@ -10,11 +10,14 @@
   justify-content: center;
   align-items: center;
 }
+@media screen and (max-width: 1024px) {
+  .webtoonContainer {
+    margin-top: 230px;
+  }
+}
+
 @media screen and (max-width: 768px) {
   .webtoon {
     width: 100%;
-  }
-  .webtoonContainer {
-    margin-top: 500px;
   }
 }

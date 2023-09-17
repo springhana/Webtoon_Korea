@@ -57,11 +57,11 @@
 @media screen and (max-width: 1024px) {
   .detail_board_outter {
     width: 700px;
+    margin-top: 300px;
   }
 }
 @media screen and (max-width: 768px) {
   .detail_board_outter {
     width: 90%;
-    margin-top: 500px;
   }
 }

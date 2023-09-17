@@ -13,6 +13,7 @@
 @media screen and (max-width: 1024px) {
   .search_cotainer {
     width: 720px;
+    margin-top: 300px;
   }
 }
 
@@ -23,6 +24,5 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 500px;
   }
 }

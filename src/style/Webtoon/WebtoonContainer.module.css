@@ -11,16 +11,12 @@
     padding: 2px;
   }
   .dayWebtoon_Webtoon h3 {
-    height: 80px;
+    height: 50px;
     font-size: 13px;
   }
 }
-/* @media screen and (max-width: 768px) {
-  .dayWebtoon {
-    padding: 2px;
-  }
+@media screen and (max-width: 768px) {
   .dayWebtoon_Webtoon h3 {
-    height: 80px;
-    font-size: 13px;
+    display: none;
   }
-} */
+}

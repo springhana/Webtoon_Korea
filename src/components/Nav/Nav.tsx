@@ -10,15 +10,17 @@ import {
   onOpen as login_Open,
   removeId,
 } from "../../store/LoginStore";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { logout, login as login_check } from "../../store/LoginStore";
 import axios from "axios";
+import MenuBar from "./MenuBar";
 function Nav() {
   const dispatch = useDispatch();
   const [id, setId] = useState<any>(null);
 
   const location = useLocation();
   const navigate = useNavigate();
+  const menubar = useRef<HTMLUListElement>(null);
   let loginCheck = useSelector((state: any) => {
     return state.loginCheck;
   });
@@ -97,8 +99,11 @@ function Nav() {
         </div>
       </div>
 
+      {/* 메뉴 바 */}
       <div className={styles.nav_service}>
-        <ul>
+        <MenuBar menubar={menubar} />
+
+        <ul ref={menubar}>
           <div className={styles.nav_service_category}>
             <Link to={"/"}>
               <li

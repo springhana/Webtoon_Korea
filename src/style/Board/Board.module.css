@@ -110,6 +110,7 @@
 @media screen and (max-width: 1024px) {
   .board {
     width: 700px;
+    margin-top: 300px;
   }
 }
 @media screen and (max-width: 768px) {
@@ -119,7 +120,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 550px;
   }
   .board_number {
     display: none;

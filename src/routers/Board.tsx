@@ -17,6 +17,7 @@ export default function Board() {
   const navigator = useNavigate();
   const dispatch = useDispatch();
   const [searchKeyWord, setSearchKeyWord] = useState<string>("");
+
   const loginCheck = useSelector((state: ReduxType) => {
     return state.loginCheck;
   });

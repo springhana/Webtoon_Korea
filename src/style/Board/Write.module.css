@@ -87,3 +87,14 @@
   overflow: hidden;
   border: 0;
 }
+@media screen and (max-width: 1024px) {
+  .write {
+    width: 700px;
+    margin-top: 300px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .write {
+    width: 90%;
+  }
+}

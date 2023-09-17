@@ -90,6 +90,7 @@
 @media screen and (max-width: 1024px) {
   .main {
     width: 700px;
+    margin-top: 300px;
   }
   .myPage_container {
     width: 100%;
@@ -98,7 +99,6 @@
 @media screen and (max-width: 768px) {
   .main {
     width: 90%;
-    margin-top: 500px;
   }
   .user {
     text-align: center;

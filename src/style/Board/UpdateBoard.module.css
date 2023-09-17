@@ -96,11 +96,11 @@
 @media screen and (max-width: 1024px) {
   .update {
     width: 700px;
+    margin-top: 300px;
   }
 }
 @media screen and (max-width: 768px) {
   .update {
     width: 90%;
-    margin-top: 500px;
   }
 }

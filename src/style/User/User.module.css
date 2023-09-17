@@ -73,11 +73,11 @@ input:disabled {
 @media screen and (max-width: 1024px) {
   .user {
     width: 700px;
+    margin-top: 300px;
   }
 }
 @media screen and (max-width: 768px) {
   .user {
     width: 100%;
-    margin-top: 500px;
   }
 }

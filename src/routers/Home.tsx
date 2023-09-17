@@ -30,7 +30,7 @@ function Home({
   }, []);
 
   return (
-    <div>
+    <div className={styles.home}>
       {loading ? (
         <div>
           <div className={styles.Home_today}>{Ktoday}요일 웹툰</div>

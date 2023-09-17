@@ -64,11 +64,11 @@
 @media screen and (max-width: 1024px) {
   .search_board {
     width: 700px;
+    margin-top: 300px;
   }
 }
 @media screen and (max-width: 768px) {
   .search_board {
-    margin-top: 500px;
     width: 90%;
   }
 

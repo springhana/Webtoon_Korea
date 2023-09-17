@@ -143,6 +143,7 @@
     width: 720px;
     justify-content: center;
     align-items: center;
+    margin-top: 300px;
   }
   .detail_info {
     width: 50%;
@@ -158,8 +159,5 @@
   }
   .detail_info {
     width: 100%;
-  }
-  .detailPage {
-    margin-top: 500px;
   }
 }
