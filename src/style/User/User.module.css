@@ -78,6 +78,15 @@ input:disabled {
 }
 @media screen and (max-width: 768px) {
   .user {
+    width: 90%;
+  }
+  .user_info_inner {
+    width: 100%;
+  }
+  .user_info_inner input {
+    width: 100%;
+  }
+  .user_info_btn {
     width: 100%;
   }
 }
