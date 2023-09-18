@@ -26,7 +26,6 @@ export default function Comment({
   });
   const [image, setImage] = useState<string>("");
   const [imageFile, setImageFile] = useState<string[]>([]);
-
   const [chaneg, setChaneg] = useState(0);
   // 수정을 위한 state
   const [id, setId] = useState("");
@@ -59,21 +58,20 @@ export default function Comment({
       const response = await axios.get("/api/comment", {
         params: { boardId: _id },
       });
-      if (response) {
-        for (let i = 0; i < response.data.length; i++) {
-          if (response.data[i].image !== "default.jpg") {
-            const date = response.data[i].date.split(":");
-            // 비동기로 해야 else로 순서대로 들어감
-            await Image(response.data[i], date[0]);
-          } else {
-            setImageFile((prevImageFile: string[]) => [...prevImageFile, ""]);
-          }
+      for (let i = 0; i < response.data.length; i++) {
+        if (response.data[i].image !== "default.jpg") {
+          const date = response.data[i].date.split(":");
+          // 비동기로 해야 else로 순서대로 들어감
+          await Image(response.data[i], date[0]);
+        } else {
+          await setImageFile((prevImageFile: string[]) => [
+            ...prevImageFile,
+            "",
+          ]);
         }
-        console.log(response.data);
-        setLoading(false);
-
-        setComment(response.data);
       }
+      setLoading(false);
+      setComment(response.data);
     } catch (error) {
       console.log(error);
     }
