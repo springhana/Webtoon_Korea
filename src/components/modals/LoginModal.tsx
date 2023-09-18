@@ -4,7 +4,7 @@ import {
   onOpen as login_Open,
   onClose as login_Close,
   addId,
-  login,
+  login as logins,
   removeId,
 } from "../../store/LoginStore";
 import {
@@ -14,7 +14,6 @@ import {
 import styles from "../../style/Modal/Modal.module.css";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { login as loginCheck } from "../../store/LoginStore";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AiFillCloseCircle } from "react-icons/ai";
@@ -29,27 +28,13 @@ export default function LoginModal() {
   const [pw, setPw] = useState<string>();
   const dispatch = useDispatch();
 
-  const LoginCheck = async () => {
-    try {
-      const response = await axios.get("/api/loginCheck");
-      if (response.data.login) {
-        dispatch(login());
-        dispatch(addId(response.data._id));
-      } else {
-        dispatch(removeId());
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const handleLogin = async () => {
     try {
       const response = await axios.post("/api/login", { id: id, pw: pw });
       if (response.data.login) {
+        dispatch(addId(response.data._id));
+        dispatch(logins());
         dispatch(login_Close());
-        dispatch(loginCheck());
-        LoginCheck();
       }
     } catch (error) {
       console.log(error);

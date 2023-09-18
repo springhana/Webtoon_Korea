@@ -8,6 +8,7 @@ import { BsSearch } from "react-icons/bs";
 import { FaPencilAlt } from "react-icons/fa";
 import { BoardType } from "../types/board";
 import { ReduxType } from "../types/redux";
+import { onOpen } from "../store/LoginStore";
 export default function Board() {
   const { page } = useParams() as { page: string };
   const { loading, error, board, hasMore } = useBoard(parseInt(page));
@@ -43,6 +44,7 @@ export default function Board() {
   const Search = async () => {
     navigator(`/search/${searchKeyWord}`);
   };
+
   return (
     <div className={styles.board}>
       {/* 글쓰기 로그인 시 */}
@@ -54,8 +56,8 @@ export default function Board() {
             if (loginCheck.login) {
               navigator("/board/write");
             } else {
-              navigator("/board/write");
-              // dispatch(login_Open());
+              // navigator("/board/write");
+              dispatch(onOpen());
             }
           }}
         >

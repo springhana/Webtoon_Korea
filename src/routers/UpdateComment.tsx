@@ -24,7 +24,8 @@ export default function UpdateComment() {
   const navigate = useNavigate();
   const imageInput = useRef<HTMLInputElement>(null);
   const [imageName, setImageName] = useState("파일찾기");
-
+  const [deleteImg, setDeleteImg] = useState(0);
+  const [value, setValue] = useState("");
   useEffect(() => {
     const Image = async (comment: commentType, date: string) => {
       try {
@@ -53,6 +54,7 @@ export default function UpdateComment() {
         });
         const date = response.data.date.split(":");
         Image(response.data, date[0]);
+        setValue(response.data.comment);
         setComment(response.data);
         setLoading(false);
         console.log(response.data);
@@ -79,7 +81,21 @@ export default function UpdateComment() {
       reader.readAsDataURL(file);
     }
   };
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
 
+    try {
+      const response = await fetch("/api/editComment", {
+        method: "put",
+        body: new FormData(event.currentTarget), // 폼 데이터를 직접 전송
+      });
+      if (response.ok) {
+        navigate(-1);
+      }
+    } catch (error) {
+      console.error("에러 발생:", error);
+    }
+  };
   return (
     <div className={styles.update}>
       <form
@@ -87,12 +103,16 @@ export default function UpdateComment() {
         action="/api/editComment?_method=PUT"
         encType="multipart/form-data"
         className={styles.container}
+        onSubmit={handleSubmit}
       >
         <input
           type="text"
           name="comment"
-          placeholder={comment.comment}
           className={styles.comment}
+          value={value}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            setValue(e.target.value);
+          }}
         />
         <input type="hidden" name="_id" value={comment._id} />
         <input type="hidden" name="totalComment" value={totalComment} />
@@ -117,6 +137,21 @@ export default function UpdateComment() {
           >
             파일찾기
           </label>
+          {image ? (
+            <>
+              <label
+                htmlFor="file"
+                onClick={() => {
+                  setImageName("");
+                  setImage("");
+                  setDeleteImg((prev) => (prev = 1));
+                }}
+              >
+                사진 삭제
+              </label>
+              <input type="hidden" name="deleteImg" value={deleteImg} />
+            </>
+          ) : null}
 
           <input
             ref={imageInput}

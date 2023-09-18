@@ -4,6 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 
 import { BoardType } from "../types/board";
 import UpdateBoardContain from "../components/Board/Update/UpdateBoardContain";
+import Loading from "../components/Loading";
 export default function UpdateBoard() {
   const { postNumber } = useParams() as { postNumber: string };
   const data = {
@@ -66,7 +67,9 @@ export default function UpdateBoard() {
   return (
     <div>
       {loading ? (
-        "Loading..."
+        <div className="Loading">
+          <Loading />
+        </div>
       ) : (
         <UpdateBoardContain board={board} image={image} />
       )}

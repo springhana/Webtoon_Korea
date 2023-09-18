@@ -3,12 +3,14 @@ import { useSelector } from "react-redux";
 import styles from "../style/Board/Write.module.css";
 import { BsCardImage } from "react-icons/bs";
 import { ReduxType } from "../types/redux";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 export default function Write() {
   const [image, setImage] = useState<string>("");
   const imageInput = useRef<HTMLInputElement>(null);
   const [imageName, setImageName] = useState("파일찾기");
   const [deleteImg, setDeleteImg] = useState(0);
-
+  const navigator = useNavigate();
   const loginCheck = useSelector((state: ReduxType) => {
     return state.loginCheck;
   });
@@ -30,11 +32,32 @@ export default function Write() {
   };
 
   if (!loginCheck.login) {
-    return <div>로그인해주세요.</div>;
+    navigator("/");
   }
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    try {
+      const response = await fetch("/api/write", {
+        method: "POST",
+        body: new FormData(event.currentTarget), // 폼 데이터를 직접 전송
+      });
+      if (response.ok) {
+        navigator(-1);
+      }
+    } catch (error) {
+      console.error("에러 발생:", error);
+    }
+  };
   return (
     <div className={styles.write}>
-      <form method="POST" action="/api/write" encType="multipart/form-data">
+      <form
+        method="POST"
+        action="/api/write"
+        encType="multipart/form-data"
+        onSubmit={handleSubmit}
+      >
         <div className={styles.write_title}>
           <h3>제목</h3>
           <input type="text" name="title" />

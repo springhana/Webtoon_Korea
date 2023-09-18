@@ -33,7 +33,21 @@ export default function UpdateBoardContain({
       reader.readAsDataURL(file);
     }
   };
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
 
+    try {
+      const response = await fetch("/api/edit", {
+        method: "PUT",
+        body: new FormData(event.currentTarget), // 폼 데이터를 직접 전송
+      });
+      if (response.ok) {
+        navigate(-1);
+      }
+    } catch (error) {
+      console.error("에러 발생:", error);
+    }
+  };
   return (
     <div className={styles.update}>
       {/* 수정 input */}
@@ -41,6 +55,7 @@ export default function UpdateBoardContain({
         method="POST"
         action="/api/edit?_method=PUT"
         encType="multipart/form-data"
+        onSubmit={handleSubmit}
       >
         <input value={board._id} type="hidden" name="_id" />
         <input value={board.postNumber} type="hidden" name="postNumber" />

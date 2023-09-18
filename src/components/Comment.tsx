@@ -4,42 +4,51 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { AiFillLike, AiOutlineLike } from "react-icons/ai";
 import styles from "../style/Comment.module.css";
+import { ReduxType } from "../types/redux";
+import { commentType } from "../types/comment";
 
-export default function Comment({ postNumber, _id }: any) {
+export default function Comment({
+  postNumber,
+  _id,
+}: {
+  postNumber: string;
+  _id: string;
+}) {
   const [value, setValue] = useState("");
-  const [comment, setComment] = useState<any>([]);
+  const [comment, setComment] = useState<commentType[]>([]);
   const [loading, setLoading] = useState(true);
   const [yesNo, setYesNo] = useState(false);
   const [commentId, setCommentId] = useState("");
   const navgator = useNavigate();
-  const imageInput: any = useRef();
-  const login_check = useSelector((state: any) => {
+  const imageInput = useRef<HTMLInputElement>(null);
+  const login_check = useSelector((state: ReduxType) => {
     return state;
   });
-  const [image, setImage] = useState<any>("");
-  const [imageFile, setImageFile] = useState<any>([]);
+  const [image, setImage] = useState<string>("");
+  const [imageFile, setImageFile] = useState<string[]>([]);
 
   const [chaneg, setChaneg] = useState(0);
   // 수정을 위한 state
   const [id, setId] = useState("");
   const [imageName, setImageName] = useState("파일찾기");
+  const [deleteImg, setDeleteImg] = useState(0);
 
-  const Image = async (board: any, date: any, max: any, index: number) => {
+  const Image = async (comment: commentType, date: string) => {
     try {
-      const response: any = await axios.get("/api/images", {
+      const response = await axios.get("/api/images", {
         params: {
-          userId: board.userId,
+          userId: comment.userId,
           date: date,
-          postNumber: board.postNumber,
-          image: board.image,
+          postNumber: comment.postNumber,
+          image: comment.image,
           file: "comment",
-          totalComment: board.totalComment,
+          totalComment: comment.totalComment,
         },
         responseType: "blob",
       });
 
       const imageUrl = URL.createObjectURL(response.data);
-      setImageFile((prevImageFile: any) => [...prevImageFile, imageUrl]);
+      setImageFile((prevImageFile: string[]) => [...prevImageFile, imageUrl]);
     } catch (error) {
       console.log(error);
     } finally {
@@ -59,9 +68,9 @@ export default function Comment({ postNumber, _id }: any) {
           if (response.data[i].image !== "default.jpg") {
             const date = response.data[i].date.split(":");
             // 비동기로 해야 else로 순서대로 들어감
-            await Image(response.data[i], date[0], response.data.length, i);
+            await Image(response.data[i], date[0]);
           } else {
-            setImageFile((prevImageFile: any) => [...prevImageFile, ""]);
+            setImageFile((prevImageFile: string[]) => [...prevImageFile, ""]);
           }
         }
         console.log(response.data);
@@ -78,33 +87,23 @@ export default function Comment({ postNumber, _id }: any) {
     GetComment();
   }, [yesNo]);
 
-  const PostComment = async () => {
-    try {
-      const response = await axios.post("/api/commentPost", {
-        boardId: _id,
-        comment: value,
-      });
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handleFileChange = (e: any) => {
-    const file = e.target.files[0];
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files ? e.target.files[0] : null;
     if (file) {
       setImageName(file.name);
       const reader = new FileReader();
 
-      reader.onload = (e: any) => {
-        setImage(e.target.result);
+      reader.onload = (e: ProgressEvent<FileReader>) => {
+        if (e.target && e.target.result) {
+          setImage(e.target.result as string);
+        }
       };
 
       reader.readAsDataURL(file);
     }
   };
 
-  const removeComment = async (id: any) => {
+  const removeComment = async (id: string) => {
     try {
       const response = await axios.delete("/api/commentDelete", {
         params: { _id: id },
@@ -116,7 +115,7 @@ export default function Comment({ postNumber, _id }: any) {
     }
   };
 
-  const like = async (_id: any) => {
+  const like = async (_id: string) => {
     try {
       const response = await axios.put("/api/like", {
         _id: _id,
@@ -128,6 +127,25 @@ export default function Comment({ postNumber, _id }: any) {
       console.log("finally");
     }
   };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    try {
+      const response = await fetch("/api/commentPost", {
+        method: "POST",
+        body: new FormData(event.currentTarget), // 폼 데이터를 직접 전송
+      });
+      if (response.ok) {
+        GetComment();
+        setValue("");
+        setImage("");
+        setImageName("");
+      }
+    } catch (error) {
+      console.error("에러 발생:", error);
+    }
+  };
   return (
     <div className={styles.main}>
       <h3 className={styles.logo}>Comments</h3>
@@ -137,13 +155,21 @@ export default function Comment({ postNumber, _id }: any) {
             method="POST"
             action="/api/commentPost"
             encType="multipart/form-data"
+            onSubmit={handleSubmit}
           >
             <input type="hidden" name="boardId" value={_id} />
             <input type="hidden" name="postNumber" value={postNumber} />
 
             <div>
               <div className={styles.webtoon_comment_post}>
-                <input type="text" name="comment" />
+                <input
+                  type="text"
+                  name="comment"
+                  value={value}
+                  onChange={(e) => {
+                    setValue(e.target.value);
+                  }}
+                />
                 <button type="submit" className={styles.webtoon_comment_btn}>
                   댓글 쓰기
                 </button>
@@ -171,13 +197,28 @@ export default function Comment({ postNumber, _id }: any) {
                     htmlFor="file"
                     onClick={() => {
                       if (imageInput.current) {
+                        setDeleteImg((prev) => (prev = 0));
                         imageInput.current.click();
                       }
                     }}
                   >
                     파일찾기
                   </label>
-
+                  {image ? (
+                    <>
+                      <label
+                        htmlFor="file"
+                        onClick={() => {
+                          setImageName("");
+                          setImage("");
+                          setDeleteImg((prev) => (prev = 1));
+                        }}
+                      >
+                        사진 삭제
+                      </label>
+                      <input type="hidden" name="deleteImg" value={deleteImg} />
+                    </>
+                  ) : null}
                   <input
                     ref={imageInput}
                     type="file"
@@ -197,30 +238,10 @@ export default function Comment({ postNumber, _id }: any) {
         </div>
       )}
 
-      {/* {yesNo ? (
-        <div>
-          <span
-            onClick={() => {
-              setYesNo(false);
-              removeComment(commentId);
-            }}
-          >
-            삭제
-          </span>
-          <span
-            onClick={() => {
-              setYesNo(false);
-            }}
-          >
-            취소
-          </span>
-        </div>
-      ) : null} */}
-
       {/* 댓글 들 */}
       {loading
         ? "댓글을 달아주세요..."
-        : comment.map((data: any, index: number) => (
+        : comment.map((data: commentType, index: number) => (
             <div key={index} className={styles.webtoon_comment_container}>
               <p className={styles.webtoon_comment_author}>
                 {data.author}

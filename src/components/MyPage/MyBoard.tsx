@@ -4,6 +4,7 @@ import styles from "../../style/MyPage/MyBoard.module.css";
 import BoardContain from "../Board/BoardContain";
 import { useNavigate } from "react-router-dom";
 import { BoardType } from "../../types/board";
+import Loading from "../Loading";
 export default function MyBoard() {
   const [board, setBoard] = useState<BoardType[]>([]);
   const [loading, setLoading] = useState(true);
@@ -31,21 +32,28 @@ export default function MyBoard() {
   return (
     <div className={styles.board}>
       {/* 글 내용 컴포넌트 추가 */}
-      <div className={styles.board_inner}>
-        <div className={styles.board_contents}>
-          <div className={styles.board_number}></div>
-          <div className={styles.board_title}>제목</div>
-          <div className={styles.board_author}>작성자</div>
-          <div className={styles.board_date}>날짜</div>
+
+      {loading ? (
+        <div className="Loading">
+          <Loading />
         </div>
-      </div>
-      {loading
-        ? null
-        : board.map((data: BoardType, index: number) => (
+      ) : (
+        <>
+          <div className={styles.board_inner}>
+            <div className={styles.board_contents}>
+              <div className={styles.board_number}></div>
+              <div className={styles.board_title}>제목</div>
+              <div className={styles.board_author}>작성자</div>
+              <div className={styles.board_date}>날짜</div>
+            </div>
+          </div>
+          {board.map((data: BoardType, index: number) => (
             <div key={index} className={styles.myBoard}>
               <BoardContain data={data} />
             </div>
           ))}
+        </>
+      )}
     </div>
   );
 }

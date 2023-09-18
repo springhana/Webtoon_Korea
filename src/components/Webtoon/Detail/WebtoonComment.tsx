@@ -10,6 +10,7 @@ export default function WebtoonComment({ webtoonID }: { webtoonID: string }) {
   const [comment, setComment] = useState("");
   const [commentAll, setCommentAll] = useState<commentType[]>([]);
   const [loading, setLoading] = useState(true);
+  const [value, setValue] = useState("");
   const login = useSelector((state: ReduxType) => {
     return state;
   });
@@ -22,21 +23,15 @@ export default function WebtoonComment({ webtoonID }: { webtoonID: string }) {
   const [id, setId] = useState("");
   const GetComment = async () => {
     try {
-      const response = await axios.get(
-        "https://port-0-webtoon-korea-server-30yyr422almfl7fw9.sel5.cloudtype.app/webtoon/commentAll",
-        {
-          params: { webtoonID: webtoonID },
-        }
-      );
-      if (response) {
-        setCommentAll(response.data);
-        setLoading(false);
-      }
+      const response = await axios.get("/api/webtoon/commentAll", {
+        params: { webtoonID: webtoonID },
+      });
+      setCommentAll(response.data);
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
   };
-
   useEffect(() => {
     GetComment();
   }, [yesNo]);
@@ -72,6 +67,19 @@ export default function WebtoonComment({ webtoonID }: { webtoonID: string }) {
       });
     } catch (error) {
       console.log(error);
+    }
+  };
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    try {
+      const response = await fetch("/api/webtoon/update", {
+        method: "put",
+        body: new FormData(event.currentTarget), // 폼 데이터를 직접 전송
+      });
+      if (response.ok) {
+        navgator(0);
+      }
+    } catch (error) {
+      console.error("에러 발생:", error);
     }
   };
   return (
@@ -149,13 +157,17 @@ export default function WebtoonComment({ webtoonID }: { webtoonID: string }) {
                         method="POST"
                         action="/api/webtoon/update?_method=PUT"
                         className={styles.webtoon_comment_post}
+                        onSubmit={handleSubmit}
                       >
                         <input
                           type="text"
                           name="comment"
-                          placeholder={data.comment}
+                          value={value}
+                          onChange={(e: any) => {
+                            setValue(e.target.value);
+                          }}
                         />
-                        <input type="hidden" name="_id" value={data._id} />
+                        <input type="hidden" name="_id" value={id} />
                         <button
                           type="submit"
                           className={styles.webtoon_comment_btn}
@@ -167,6 +179,7 @@ export default function WebtoonComment({ webtoonID }: { webtoonID: string }) {
                           onClick={() => {
                             setId("");
                             setChaneg(0);
+                            setValue("");
                           }}
                         >
                           취소
@@ -176,9 +189,9 @@ export default function WebtoonComment({ webtoonID }: { webtoonID: string }) {
                       <div className={styles.webtoon_comment_update}>
                         <button
                           onClick={() => {
-                            // navgator(`/update_Comment/${data.totalComment}`);
                             setChaneg((prev) => (prev = 2));
                             setId((prev) => (prev = data._id));
+                            setValue(data.comment);
                             setYesNo(true);
                           }}
                         >

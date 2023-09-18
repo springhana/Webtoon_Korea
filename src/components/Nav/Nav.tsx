@@ -41,7 +41,6 @@ function Nav() {
       const response = await axios.get("/api/logout");
       dispatch(logout());
       dispatch(removeId());
-      navigate("/");
     } catch (error) {
       console.log(error);
     }

@@ -28,7 +28,7 @@ export default function BoardContain({ data }: { data: BoardType }) {
       <Link to={`/detail/${data.postNumber}`} className={styles.border_link}>
         <div className={styles.board_number}>{data.postNumber}</div>
         <div className={styles.board_title}>
-          {data.title.length > 30 ? (
+          {data.title && data.title.length > 30 ? (
             <div className={styles.board_title_inner}>
               {`${data.title.slice(0, 29)}...`}
               {commentLength > 0 ? (

@@ -6,6 +6,7 @@ import YesNo from "../components/Modals/YesNo";
 import styles from "../style/Board/DetailBoard.module.css";
 import { BoardType } from "../types/board";
 import DetailBoardContain from "../components/Board/Detail/DetailBoardContain";
+import Loading from "../components/Loading";
 export default function DetailBoard() {
   const { postNumber } = useParams() as { postNumber: string };
   const data = {
@@ -65,7 +66,9 @@ export default function DetailBoard() {
     <div className={styles.detail_board}>
       <YesNo />
       {loading ? (
-        "...Loading"
+        <div className="Loading">
+          <Loading />
+        </div>
       ) : (
         <DetailBoardContain
           postNumber={postNumber}
