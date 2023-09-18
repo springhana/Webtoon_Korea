@@ -51,10 +51,6 @@ export default function Comment({
       setImageFile((prevImageFile: string[]) => [...prevImageFile, imageUrl]);
     } catch (error) {
       console.log(error);
-    } finally {
-      // if (index === max - 1) {
-      //   setLoading(true);
-      // }
     }
   };
 
@@ -144,6 +140,8 @@ export default function Comment({
       }
     } catch (error) {
       console.error("에러 발생:", error);
+    } finally {
+      GetComment();
     }
   };
   return (
