@@ -7,6 +7,7 @@ export interface BoardType {
   content: string;
   date: string;
   image: string;
+  likedIds: string[];
 }
 export interface Paging {
   totalPages: number;

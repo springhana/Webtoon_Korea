@@ -56,7 +56,7 @@ export default function LoginModal() {
       <div className={styles.pw}>
         <label>비밀번호</label>
         <input
-          type="text"
+          type="password"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setPw(e.target.value);
           }}

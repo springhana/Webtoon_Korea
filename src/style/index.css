@@ -25,6 +25,7 @@ input {
   justify-content: center;
   align-items: center;
   height: 500px;
+  z-index: 10000;
 }
 
 .touch_img {
@@ -53,8 +54,8 @@ input {
   position: fixed;
   right: 0;
   bottom: 0;
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   background: white;
   border-radius: 50%;
   display: flex;
@@ -75,6 +76,13 @@ input {
     border: 2px solid black;
   }
 }
+@media screen and (max-width: 768px) {
+  .top_move {
+    scale: 0.8;
+    margin: 10px;
+  }
+}
+
 ::-webkit-scrollbar {
   width: 10px; /* 스크롤바의 너비 */
 }

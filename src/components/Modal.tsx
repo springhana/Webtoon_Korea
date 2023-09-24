@@ -1,6 +1,15 @@
 import styles from "../style/Modal/Modal.module.css";
 
-export default function Modal({ isOpen, title, input, button, close }: any) {
+export default function Modal({
+  isOpen,
+  title,
+  input,
+  button,
+  close,
+  fileCheck,
+  imageFile,
+  form,
+}: any) {
   if (!isOpen.isOpen) {
     return null;
   }
@@ -19,10 +28,13 @@ export default function Modal({ isOpen, title, input, button, close }: any) {
 
       <div className={styles.modal_container}>
         <div className={styles.modal_inner}>
-          {title}
-          {input}
-          {button}
-          {close}
+          {title ? title : null}
+          {input ? input : null}
+          {fileCheck ? fileCheck : null}
+          {imageFile ? imageFile : null}
+          {form ? form : null}
+          {button ? button : null}
+          {close ? close : null}
         </div>
       </div>
     </div>

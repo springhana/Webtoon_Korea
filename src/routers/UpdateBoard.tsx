@@ -16,6 +16,7 @@ export default function UpdateBoard() {
     content: "",
     date: "",
     image: "",
+    likedIds: [],
   };
   const [board, setBoard] = useState<BoardType>(data);
   const [image, setImage] = useState<string>("");

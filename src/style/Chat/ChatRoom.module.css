@@ -1,0 +1,48 @@
+.message {
+  height: 100%;
+  width: 100%;
+}
+.msg {
+  padding: 10px;
+  margin: 5px 10px;
+}
+.content {
+  width: 100%;
+}
+.content span {
+  padding: 10px;
+  background-color: gray;
+  border-radius: 3px;
+  color: white;
+}
+.content p {
+  margin-top: 10px;
+}
+.end {
+  text-align: center;
+  padding: 10px;
+  font-weight: bold;
+  color: #4db9ff;
+  margin-top: 30px;
+}
+.upDown {
+  position: fixed;
+  width: 100%;
+
+  background: none;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.upDown div {
+  padding: 3px;
+  width: 30px;
+  height: 30px;
+  background-color: #4db9ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  cursor: pointer;
+}

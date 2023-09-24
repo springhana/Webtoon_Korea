@@ -6,10 +6,10 @@ export default function User() {
   const [loading, setLoading] = useState(false);
   const [pw, setPw] = useState("");
   const [user, setUser] = useState([]);
+
   const MyPage = async () => {
     try {
       const reponse = await axios.get("/api/user", { params: { pw: pw } });
-      console.log(reponse);
       setUser(reponse.data);
       setLoading(true);
     } catch (error) {

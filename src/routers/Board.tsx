@@ -78,7 +78,7 @@ export default function Board() {
         </div>
         {board.result &&
           board.result.map((data: BoardType, index: number) => (
-            <div key={index}>
+            <div key={index} className={styles.boards}>
               <BoardContain data={data} />
             </div>
           ))}

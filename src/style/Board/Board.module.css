@@ -66,7 +66,7 @@
 
 .search {
   position: relative;
-  width: 300px;
+  max-width: 500px;
   margin: auto;
   display: flex;
   align-items: center;
@@ -112,25 +112,32 @@
     width: 700px;
     margin-top: 300px;
   }
+  .board_contents {
+    height: 0;
+  }
+
+  .board_number,
+  .board_title,
+  .board_author,
+  .board_date {
+    display: none;
+  }
 }
 @media screen and (max-width: 768px) {
   .board {
-    width: 90%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    min-width: 300px;
   }
-  .board_number {
-    display: none;
+
+  .board_logo {
+    flex-direction: column;
   }
-  .board_title {
-    width: 70%;
-  }
-  .board_author {
-    width: 15%;
-  }
-  .board_date {
-    width: 15%;
+  .write {
+    position: relative;
+    margin-top: 5px;
   }
 }

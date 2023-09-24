@@ -1,0 +1,50 @@
+.header {
+  width: 1200px;
+  margin: auto;
+  margin-top: 30px;
+  text-align: center;
+}
+
+.toggle {
+  margin-top: 30px;
+}
+.toggle ul {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+.toggle ul li:nth-child(1) {
+  border-left: 1px solid #4db9ff;
+}
+.toggle ul li {
+  padding: 10px;
+  border-right: 1px solid #4db9ff;
+  cursor: pointer;
+}
+@media screen and (max-width: 1024px) {
+  .header {
+    width: 700px;
+    margin-top: 300px;
+  }
+  .toggle {
+    width: 100%;
+  }
+  .toggle ul {
+    justify-content: center;
+  }
+  .toggle ul li {
+    width: 25%;
+  }
+}
+@media screen and (max-width: 768px) {
+  .header {
+    width: 100%;
+    min-width: 300px;
+  }
+  .toggle ul li {
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

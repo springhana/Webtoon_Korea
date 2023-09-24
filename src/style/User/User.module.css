@@ -2,7 +2,7 @@
   width: 1200px;
   height: 500px;
   margin: auto;
-  margin-top: 30px;
+  margin-top: 50px;
 }
 .user_inner {
   height: 100%;
@@ -49,6 +49,7 @@
 .user_info_inner {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 .user_info_inner input {
   width: 500px;
@@ -69,6 +70,59 @@ input:disabled {
   border-radius: 5px;
   border: none;
   cursor: pointer;
+}
+.image_pick {
+  width: 100px;
+  height: 100px;
+  margin: auto;
+  margin-top: 30px;
+  overflow: hidden;
+  border-radius: 50%;
+  border: 2px solid #dddddd;
+  cursor: pointer;
+}
+.image_pick .image {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.image_pick .image img {
+  width: 100%;
+}
+
+/* 첨부 파일 */
+.filebox {
+  text-align: center;
+  margin-top: 10px;
+}
+.filebox .upload_name {
+  display: inline-block;
+  height: 40px;
+  padding: 0 10px;
+  vertical-align: middle;
+  border: 1px solid #dddddd;
+  color: #999999;
+}
+.filebox label {
+  display: inline-block;
+  padding: 10px 20px;
+  color: #fff;
+  vertical-align: middle;
+  background-color: #999999;
+  cursor: pointer;
+  height: 40px;
+}
+.filebox input[type="file"] {
+  position: absolute;
+  width: 0;
+  height: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+}
+.file_image {
+  margin: 10px 0 5px 0;
 }
 @media screen and (max-width: 1024px) {
   .user {

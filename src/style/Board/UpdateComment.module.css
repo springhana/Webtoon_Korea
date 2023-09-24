@@ -23,6 +23,9 @@
 .image {
   width: 100%;
 }
+.image img {
+  width: 100%;
+}
 /* 첨부 파일 */
 .filebox {
   margin-top: 10px;

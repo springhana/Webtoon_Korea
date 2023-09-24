@@ -10,7 +10,7 @@
   width: 100vw;
   height: 100vh;
   font-family: "Raleway", sans-serif;
-  z-index: 3000;
+  z-index: 10000;
 }
 .screen {
   background-color: black;

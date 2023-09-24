@@ -10,9 +10,11 @@ import { commentType } from "../types/comment";
 export default function Comment({
   postNumber,
   _id,
+  title,
 }: {
   postNumber: string;
   _id: string;
+  title?: string;
 }) {
   const [value, setValue] = useState("");
   const [comment, setComment] = useState<commentType[]>([]);
@@ -31,7 +33,9 @@ export default function Comment({
   const [id, setId] = useState("");
   const [imageName, setImageName] = useState("파일찾기");
   const [deleteImg, setDeleteImg] = useState(0);
-
+  const login = useSelector((state: ReduxType) => {
+    return state;
+  });
   const Image = async (comment: commentType, date: string) => {
     try {
       const response = await axios.get("/api/images", {
@@ -79,7 +83,7 @@ export default function Comment({
 
   useEffect(() => {
     GetComment();
-  }, [yesNo]);
+  }, []);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files ? e.target.files[0] : null;
@@ -155,7 +159,7 @@ export default function Comment({
           >
             <input type="hidden" name="boardId" value={_id} />
             <input type="hidden" name="postNumber" value={postNumber} />
-
+            <input type="hidden" name="title" value={title} />
             <div>
               <div className={styles.webtoon_comment_post}>
                 <input
@@ -253,7 +257,8 @@ export default function Comment({
                 }}
                 className={styles.webtoon_comment_like}
               >
-                {data.likedIds && data.likedIds.length > 0 ? (
+                {data.likedIds &&
+                data.likedIds.includes(login.loginCheck._id) ? (
                   <div className={styles.webtoon_comment_like_inner}>
                     <AiFillLike />
                     <span className={styles.webtoon_comment_like_length}>
@@ -285,9 +290,10 @@ export default function Comment({
                     <div className={styles.webtoon_comment_post}>
                       <span
                         onClick={() => {
-                          setYesNo(false);
                           removeComment(commentId);
                           setChaneg(0);
+                          setId("");
+                          setYesNo(false);
                         }}
                         className={styles.webtoon_comment_btn}
                       >
@@ -304,7 +310,7 @@ export default function Comment({
                         취소
                       </span>
                     </div>
-                  ) : chaneg === 2 && _id === data._id ? null : (
+                  ) : chaneg === 1 && _id === data._id ? null : (
                     <div className={styles.webtoon_comment_update}>
                       <button
                         onClick={() => {

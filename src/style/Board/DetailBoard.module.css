@@ -50,9 +50,36 @@
   font-size: 15px;
   color: #aeaeae;
 }
+.user_length {
+  display: flex;
+  margin-top: 5px;
+  gap: 10px;
+  cursor: pointer;
+}
 .user_content {
   padding: 10px 0;
   font-size: 20px;
+}
+.webtoon_comment_like_inner span {
+  margin-left: 3px;
+}
+.userImage_pic {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: wheat;
+}
+.userImage {
+  width: 100%;
+}
+.user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 @media screen and (max-width: 1024px) {
   .detail_board_outter {

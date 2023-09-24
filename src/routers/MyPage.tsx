@@ -6,7 +6,6 @@ import Subscribe from "../components/MyPage/Subscribe";
 import { imgSize } from "../API/data/imgSize";
 import { useNavigate } from "react-router-dom";
 import styles from "../style/MyPage/Subscribe.module.css";
-import MyBoard from "../components/MyPage/MyBoard";
 import { ReduxType } from "../types/redux";
 import { SubscribeType } from "../types/board";
 
@@ -83,7 +82,7 @@ export default function MyPage() {
         <div>{user}님 환영합니다.</div>
         <button
           onClick={() => {
-            setToggle(1);
+            navigate(`/profile/${loginCheck._id}`);
           }}
         >
           내 글 보기
@@ -121,8 +120,6 @@ export default function MyPage() {
           )}
           <div style={{ clear: "both" }}></div>
         </div>
-      ) : toggle === 1 ? (
-        <MyBoard />
       ) : null}
     </div>
   );

@@ -26,6 +26,8 @@ import DetailBoard from "./DetailBoard";
 import UpdateBoard from "./UpdateBoard";
 import UpdateComment from "./UpdateComment";
 import User from "./User";
+import Chat from "../components/Chat/Chat";
+import Profile from "./Profile";
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -154,7 +156,6 @@ function App() {
             />
           }
         />
-
         <Route
           path="/webtoon/:webtoon"
           element={
@@ -217,8 +218,12 @@ function App() {
         />
         <Route path="/search/:value" element={<SearchBoard />} />
         <Route path="/user" element={<User />} />
+        <Route path="/profile/:_id" element={<Profile />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
+
+      {/* 채팅 */}
+      <Chat />
       <Footer />
     </div>
   );
