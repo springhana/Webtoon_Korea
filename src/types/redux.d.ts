@@ -4,6 +4,7 @@ export interface ReduxType {
   loginCheck: loginCheck;
   register: register;
   yesNo: yesNo;
+  image: image;
 }
 interface detail_search {
   data: any;
@@ -21,4 +22,8 @@ interface register {
 interface yesNo {
   open: boolean;
   yes: boolean;
+}
+interface image {
+  isOpen: boolean;
+  url: string;
 }

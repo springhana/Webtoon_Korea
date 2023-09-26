@@ -1,26 +1,29 @@
 import axios from "axios";
-import { useEffect, useState, useRef } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
-import { BoardType } from "../types/board";
 import UpdateBoardContain from "../components/Board/Update/UpdateBoardContain";
 import Loading from "../components/Loading";
+
+import { BoardType } from "../types/board";
+
+const data = {
+  _id: "",
+  userId: "",
+  postNumber: 0,
+  author: "",
+  title: "",
+  content: "",
+  date: "",
+  image: "",
+  likedIds: [],
+};
+
 export default function UpdateBoard() {
   const { postNumber } = useParams() as { postNumber: string };
-  const data = {
-    _id: "",
-    userId: "",
-    postNumber: 0,
-    author: "",
-    title: "",
-    content: "",
-    date: "",
-    image: "",
-    likedIds: [],
-  };
-  const [board, setBoard] = useState<BoardType>(data);
   const [image, setImage] = useState<string>("");
   const [loading, setLoading] = useState(true);
+  const [board, setBoard] = useState<BoardType>(data);
 
   useEffect(() => {
     const Image = async (board: BoardType, date: string) => {

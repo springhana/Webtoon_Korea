@@ -1,31 +1,24 @@
-import styles from "../style/Home/Home.module.css";
 import { useEffect } from "react";
 
-import services from "../API/data/service";
-
 import Webtoons from "../components/Home/Webtoons";
-import { imgSize } from "../API/data/imgSize";
-import { Ktoday } from "../API/data/date";
 import About from "../components/Home/About";
 import Loading from "../components/Loading";
+
+import services from "../API/data/service";
+import { imgSize } from "../API/data/imgSize";
+import { Ktoday } from "../API/data/date";
+import styles from "../style/Home/Home.module.css";
 
 function Home({
   load,
   loading,
   TitleColor,
-  handleImageLoad,
-  removeImageLoad,
-  isImageLoaded,
 }: {
   load: () => void;
   loading: boolean;
   TitleColor: (title: string) => string;
-  handleImageLoad: () => void;
-  removeImageLoad: () => void;
-  isImageLoaded: boolean;
 }) {
   useEffect(() => {
-    removeImageLoad();
     load();
   }, []);
 
@@ -41,7 +34,6 @@ function Home({
                 load={load}
                 size={imgSize[index]}
                 TitleColor={TitleColor}
-                handleImageLoad={handleImageLoad}
               />
             </div>
           ))}

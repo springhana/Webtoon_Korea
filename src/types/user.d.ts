@@ -1,7 +1,10 @@
-interface UserType {
-  email: string;
-  id: string;
-  name: string;
-  pw: string;
+export interface UserType {
   _id: string;
+  id: string;
+  pw: string;
+  name: string;
+  email: string;
+  image: string;
+  totalBoard: number;
+  totalComment: number;
 }

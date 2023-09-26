@@ -1,31 +1,36 @@
 import axios from "axios";
 import { useState, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import styles from "../style/Board/UpdateComment.module.css";
+
 import { commentType } from "../types/comment";
+import styles from "../style/Board/UpdateComment.module.css";
+
+const data = {
+  _id: "",
+  userId: "",
+  postNumber: 0,
+  author: "",
+  title: "",
+  content: "",
+  date: "",
+  image: "",
+  likedIds: [],
+  totalComment: 0,
+  boardId: "",
+  comment: "",
+};
 
 export default function UpdateComment() {
   const { totalComment } = useParams();
   const [image, setImage] = useState<string>("");
-  const data = {
-    author: "",
-    boardId: "",
-    comment: "",
-    date: "",
-    image: "",
-    likedIds: [],
-    postNumber: 0,
-    totalComment: 0,
-    userId: "",
-    _id: "",
-  };
-  const [comment, setComment] = useState<commentType>(data);
-  const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
-  const imageInput = useRef<HTMLInputElement>(null);
   const [imageName, setImageName] = useState("파일찾기");
-  const [deleteImg, setDeleteImg] = useState(0);
+  const [deleteImg, setDeleteImg] = useState(0); // 파일 삭제 위한 것
   const [value, setValue] = useState("");
+  const [comment, setComment] = useState<commentType>(data);
+
+  const imageInput = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate();
+
   useEffect(() => {
     const Image = async (comment: commentType, date: string) => {
       try {
@@ -56,7 +61,6 @@ export default function UpdateComment() {
         Image(response.data, date[0]);
         setValue(response.data.comment);
         setComment(response.data);
-        setLoading(false);
         console.log(response.data);
       } catch (error) {
         console.log(error);
@@ -65,9 +69,9 @@ export default function UpdateComment() {
     Update();
   }, []);
 
+  // 파일 업로드 핸들러
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files ? e.target.files[0] : null;
-
     if (file) {
       setImageName(file.name);
       const reader = new FileReader();
@@ -77,13 +81,13 @@ export default function UpdateComment() {
           setImage(e.target.result as string);
         }
       };
-
       reader.readAsDataURL(file);
     }
   };
+
+  // onSubmit
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
     try {
       const response = await fetch("/api/editComment", {
         method: "put",
@@ -96,6 +100,7 @@ export default function UpdateComment() {
       console.error("에러 발생:", error);
     }
   };
+
   return (
     <div className={styles.update}>
       <form

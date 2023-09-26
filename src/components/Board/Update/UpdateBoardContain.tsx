@@ -1,8 +1,11 @@
 import { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { BoardType } from "../../../types/board";
+
 import styles from "../../../style/Board/Update/UpdateBoard.module.css";
 import { BsCardImage } from "react-icons/bs";
-import { useNavigate } from "react-router-dom";
-import { BoardType } from "../../../types/board";
+
 export default function UpdateBoardContain({
   board,
   image,
@@ -10,14 +13,16 @@ export default function UpdateBoardContain({
   board: BoardType;
   image: string;
 }) {
+  const navigate = useNavigate();
+
   const [title, setTitle] = useState(board.title);
   const [content, setContent] = useState(board.content);
   const [imageUrl, setImageUrl] = useState(image);
-  const imageInput = useRef<HTMLInputElement>(null);
-  const navigate = useNavigate();
   const [imageName, setImageName] = useState("파일찾기");
   const [deleteImg, setDeleteImg] = useState(0);
-  console.log(imageUrl);
+  const imageInput = useRef<HTMLInputElement>(null);
+
+  // 이미지 업로드 핸들러
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files ? e.target.files[0] : null;
     if (file) {
@@ -33,6 +38,8 @@ export default function UpdateBoardContain({
       reader.readAsDataURL(file);
     }
   };
+
+  // onSubmit
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -48,6 +55,7 @@ export default function UpdateBoardContain({
       console.error("에러 발생:", error);
     }
   };
+
   return (
     <div className={styles.update}>
       {/* 수정 input */}

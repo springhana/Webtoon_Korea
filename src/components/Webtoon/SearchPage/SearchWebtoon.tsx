@@ -1,24 +1,24 @@
 import { Link } from "react-router-dom";
-import styles from "../../../style/Webtoon/SearchPage/SearchWebtoon.module.css";
+
 import WebtoonImage from "../WebtoonImage";
+
 import { WebtoonsTypes } from "../../../types/webtoon";
+import styles from "../../../style/Webtoon/SearchPage/SearchWebtoon.module.css";
 
 function SearchWebtoon({
   data,
   width,
   height,
   TitleColor,
-  handleImageLoad,
 }: {
   data: WebtoonsTypes;
   width: (service: string) => string;
   height: (service: string) => string;
   TitleColor: (title: string) => string;
-  handleImageLoad: () => void;
 }) {
   return (
     <div className={styles.search}>
-      <Link to={`/webtoon/detail/${data.title + data.author}`}>
+      <Link to={`/webtoon/detail/${data.title + data.author}/${data.service}`}>
         <div className={styles.search_cotainer}>
           <WebtoonImage
             width={parseInt(width(data.service))}
@@ -27,7 +27,6 @@ function SearchWebtoon({
             title={data.title}
             adult={data.additional.adult}
             additional={data.additional}
-            handleImageLoad={handleImageLoad}
           />
           <div className={styles.info}>
             <ul>

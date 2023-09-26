@@ -1,3 +1,5 @@
+import styles from "../style/Footer.module.css";
+
 import {
   AiFillInstagram,
   AiFillFacebook,
@@ -5,12 +7,10 @@ import {
   AiFillTwitterCircle,
 } from "react-icons/ai";
 import { SiWebtoon, SiKakao } from "react-icons/si";
-import styles from "../style/Footer.module.css";
+
 function Footer() {
   return (
     <div className={styles.footer}>
-      
-
       <div className={styles.footer_container}>
         <div className={styles.info_inner}>
           <div className={styles.info}>
@@ -62,6 +62,7 @@ function Footer() {
               <li>JavaScript - React</li>
               <li>HTML, CSS, SCSS</li>
               <li>TypeScript, Ajax</li>
+              <li>Node.js, MongoDB</li>
               <li>Redux - 미숙함</li>
             </ul>
           </div>

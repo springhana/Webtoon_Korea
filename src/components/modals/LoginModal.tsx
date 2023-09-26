@@ -1,32 +1,33 @@
+import { useState } from "react";
+import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+
 import Modal from "../Modal";
-import { useSelector } from "react-redux";
+
 import {
-  onOpen as login_Open,
   onClose as login_Close,
   addId,
   login as logins,
-  removeId,
 } from "../../store/LoginStore";
 import {
   onOpen as register_Open,
   onClose as register_Close,
 } from "../../store/RegisterStore";
-import styles from "../../style/Modal/Modal.module.css";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { AiFillCloseCircle } from "react-icons/ai";
+
 import { ReduxType } from "../../types/redux";
 
+import styles from "../../style/Modal/Modal.module.css";
+import { AiFillCloseCircle } from "react-icons/ai";
+
 export default function LoginModal() {
+  const dispatch = useDispatch();
+
+  const [id, setId] = useState<string>();
+  const [pw, setPw] = useState<string>();
+
   let login = useSelector((state: ReduxType) => {
     return state.login;
   });
-  const navigator = useNavigate();
-  const [id, setId] = useState<string>();
-  const [pw, setPw] = useState<string>();
-  const dispatch = useDispatch();
 
   const handleLogin = async () => {
     try {

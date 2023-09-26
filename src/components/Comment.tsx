@@ -1,11 +1,13 @@
 import axios from "axios";
 import { useState, useEffect, useRef } from "react";
-import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { AiFillLike, AiOutlineLike } from "react-icons/ai";
-import styles from "../style/Comment.module.css";
+import { useSelector } from "react-redux";
+
 import { ReduxType } from "../types/redux";
 import { commentType } from "../types/comment";
+
+import styles from "../style/Comment.module.css";
+import { AiFillLike, AiOutlineLike } from "react-icons/ai";
 
 export default function Comment({
   postNumber,
@@ -16,26 +18,29 @@ export default function Comment({
   _id: string;
   title?: string;
 }) {
+  const navigate = useNavigate();
+
   const [value, setValue] = useState("");
   const [comment, setComment] = useState<commentType[]>([]);
   const [loading, setLoading] = useState(true);
   const [yesNo, setYesNo] = useState(false);
-  const [commentId, setCommentId] = useState("");
-  const navgator = useNavigate();
-  const imageInput = useRef<HTMLInputElement>(null);
-  const login_check = useSelector((state: ReduxType) => {
-    return state;
-  });
   const [image, setImage] = useState<string>("");
   const [imageFile, setImageFile] = useState<string[]>([]);
-  const [chaneg, setChaneg] = useState(0);
-  // 수정을 위한 state
-  const [id, setId] = useState("");
   const [imageName, setImageName] = useState("파일찾기");
   const [deleteImg, setDeleteImg] = useState(0);
+  const [commentId, setCommentId] = useState("");
+  const [id, setId] = useState("");
+  const [chaneg, setChaneg] = useState(0);
+  const imageInput = useRef<HTMLInputElement>(null);
+
   const login = useSelector((state: ReduxType) => {
     return state;
   });
+
+  useEffect(() => {
+    GetComment();
+  }, []);
+
   const Image = async (comment: commentType, date: string) => {
     try {
       const response = await axios.get("/api/images", {
@@ -49,7 +54,6 @@ export default function Comment({
         },
         responseType: "blob",
       });
-
       const imageUrl = URL.createObjectURL(response.data);
       setImageFile((prevImageFile: string[]) => [...prevImageFile, imageUrl]);
     } catch (error) {
@@ -68,10 +72,7 @@ export default function Comment({
           // 비동기로 해야 else로 순서대로 들어감
           await Image(response.data[i], date[0]);
         } else {
-          await setImageFile((prevImageFile: string[]) => [
-            ...prevImageFile,
-            "",
-          ]);
+          setImageFile((prevImageFile: string[]) => [...prevImageFile, ""]);
         }
       }
       setLoading(false);
@@ -81,10 +82,7 @@ export default function Comment({
     }
   };
 
-  useEffect(() => {
-    GetComment();
-  }, []);
-
+  // 이미지 업로드 핸들러
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files ? e.target.files[0] : null;
     if (file) {
@@ -96,11 +94,11 @@ export default function Comment({
           setImage(e.target.result as string);
         }
       };
-
       reader.readAsDataURL(file);
     }
   };
 
+  // 댓글 삭제
   const removeComment = async (id: string) => {
     try {
       const response = await axios.delete("/api/commentDelete", {
@@ -113,6 +111,7 @@ export default function Comment({
     }
   };
 
+  // 좋아요
   const like = async (_id: string) => {
     try {
       const response = await axios.put("/api/like", {
@@ -126,6 +125,7 @@ export default function Comment({
     }
   };
 
+  // onSubmit
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -149,7 +149,7 @@ export default function Comment({
   return (
     <div className={styles.main}>
       <h3 className={styles.logo}>Comments</h3>
-      {login_check.loginCheck.login ? (
+      {login.loginCheck.login ? (
         <div>
           <form
             method="POST"
@@ -284,8 +284,8 @@ export default function Comment({
 
               <div className={styles.webtoon_comment_post_container}>
                 {/* 삭제 */}
-                {login_check.loginCheck.login &&
-                login_check.loginCheck._id === data.userId ? (
+                {login.loginCheck.login &&
+                login.loginCheck._id === data.userId ? (
                   id === data._id && !yesNo ? (
                     <div className={styles.webtoon_comment_post}>
                       <span
@@ -327,13 +327,13 @@ export default function Comment({
                 ) : null}
 
                 {/*  수정 */}
-                {login_check.loginCheck.login &&
-                login_check.loginCheck._id === data.userId ? (
+                {login.loginCheck.login &&
+                login.loginCheck._id === data.userId ? (
                   chaneg === 1 && id === data._id ? null : (
                     <div className={styles.webtoon_comment_update}>
                       <button
                         onClick={() => {
-                          navgator(`/update_Comment/${data.totalComment}`);
+                          navigate(`/update_Comment/${data.totalComment}`);
                         }}
                       >
                         수정

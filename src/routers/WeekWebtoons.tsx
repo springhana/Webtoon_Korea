@@ -1,29 +1,26 @@
-import Category from "../components/Webtoon/Category";
-import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
-import styles from "../style/Webtoon/WeekWebtoons.module.css";
-import { daysOfWeek } from "../API/data/date";
+import { useNavigate, useParams } from "react-router-dom";
+
+import Category from "../components/Webtoon/Category";
 import WeekWebtoon from "../components/Webtoon/WeekWebtoon/WeekWebtoon";
-import Loading from "../components/Loading";
+
+import { daysOfWeek } from "../API/data/date";
+import styles from "../style/Webtoon/WeekWebtoons.module.css";
+
 function WeekWebtoons({
   img,
   Iwidth,
   Iheight,
-  handleImageLoad,
-  removeImageLoad,
-  isImageLoaded,
 }: {
   img: (webtoon: string, size: number) => void;
   Iwidth: number;
   Iheight: number;
-  handleImageLoad: () => void;
-  removeImageLoad: () => void;
-  isImageLoaded: boolean;
 }) {
   const { webtoon, day } = useParams() as { webtoon: string; day: string };
-
   const navigate = useNavigate();
+
   useEffect(() => {
+    // day 파람이 요일이 아니면 404로
     if (
       day === daysOfWeek[0] ||
       day === daysOfWeek[1] ||
@@ -34,12 +31,12 @@ function WeekWebtoons({
       day === daysOfWeek[6] ||
       day === "finished"
     ) {
-      removeImageLoad();
       img(webtoon, day === "finished" ? 0.7 : 0.7);
     } else {
       navigate("/not-found");
     }
   }, [day, webtoon]);
+
   return (
     <div className={styles.weekWebtoon_outter}>
       <Category />
@@ -49,14 +46,9 @@ function WeekWebtoons({
           webtoon={webtoon}
           Iwidth={Iwidth}
           Iheight={Iheight}
-          handleImageLoad={handleImageLoad}
         />
       </div>
-      {isImageLoaded ? null : (
-        <div className="Loading">
-          <Loading />
-        </div>
-      )}
+
       <div style={{ clear: "both" }}></div>
     </div>
   );

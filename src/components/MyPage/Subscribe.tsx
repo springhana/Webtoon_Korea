@@ -1,10 +1,13 @@
 import axios from "axios";
-import useWebtoonSearch from "../../Hook/useWebtoonSearch";
-import WebtoonImage from "../Webtoon/WebtoonImage";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import styles from "../../style/MyPage/Subscribe.module.css";
+
+import useWebtoonSearch from "../../Hook/useWebtoonSearch";
+
+import WebtoonImage from "../Webtoon/WebtoonImage";
+
 import { WebtoonsTypes } from "../../types/webtoon";
+import styles from "../../style/MyPage/Subscribe.module.css";
 
 export default function Subscribe({
   webtoon,
@@ -16,7 +19,9 @@ export default function Subscribe({
   Iheight: (service: string) => string;
 }) {
   const { webtoons, hasMore, loading, error } = useWebtoonSearch(webtoon);
-  const [구취, set구취] = useState(false);
+  const [subscribe, setSubscribe] = useState(false);
+
+  // 구독 취소
   const remove = async (title: string) => {
     try {
       const response = await axios.post("/api/remove_subscribe", {
@@ -26,6 +31,7 @@ export default function Subscribe({
       console.log(error);
     }
   };
+  // 구독
   const add = async (title: string) => {
     try {
       const response = await axios.post("/api/subscribe", {
@@ -70,12 +76,12 @@ export default function Subscribe({
                       </div>
                     </Link>
 
-                    {구취 ? (
+                    {subscribe ? (
                       <div
                         style={{ cursor: "pointer" }}
                         onClick={() => {
                           add(data.searchKeyword);
-                          set구취(false);
+                          setSubscribe(false);
                         }}
                         className={styles.subscribe}
                       >
@@ -86,7 +92,7 @@ export default function Subscribe({
                         style={{ cursor: "pointer" }}
                         onClick={() => {
                           remove(data.searchKeyword);
-                          set구취(true);
+                          setSubscribe(true);
                         }}
                         className={styles.subscribe}
                       >

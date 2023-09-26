@@ -1,15 +1,21 @@
-import { useDispatch, useSelector } from "react-redux";
-import styles from "../../../style/Board/DetailBoard.module.css";
-import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
+import Comment from "../../../components/Comment";
+
 import { No, onClose, onOpen } from "../../../store/YesNo";
 import { onOpen as loginOpen } from "../../../store/LoginStore";
-import Comment from "../../../components/Comment";
-import { BoardType } from "../../../types/board";
+import { onUrl, onOpen as ImageOpen } from "../../../store/ImageStore";
+
 import { ReduxType } from "../../../types/redux";
+
+import { BoardType } from "../../../types/board";
+import styles from "../../../style/Board/DetailBoard.module.css";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { BsFillChatDotsFill } from "react-icons/bs";
-import { useEffect, useState } from "react";
+
 export default function DetailBoardContain({
   postNumber,
   detail,
@@ -26,14 +32,13 @@ export default function DetailBoardContain({
   });
   const navgator = useNavigate();
   const dispatch = useDispatch();
-  const login_check = useSelector((state: ReduxType) => {
-    return state;
-  });
+
   const [totalComment, setTotalComment] = useState(0);
   const [userImage, setUserImage] = useState<string>("");
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    // 채팅 갯수
     const commentLength = async () => {
       try {
         const response = await axios.get("/api/comment/length", {
@@ -44,9 +49,7 @@ export default function DetailBoardContain({
         console.log(error);
       }
     };
-    commentLength();
-  }, []);
-  useEffect(() => {
+
     const Image = async (board: any) => {
       try {
         const response = await axios.get("/api/images", {
@@ -81,8 +84,10 @@ export default function DetailBoardContain({
       }
     };
     User_fetch();
+    commentLength();
   }, []);
 
+  // 게시판 삭제
   const Delete = async () => {
     try {
       const response = await axios.delete("/api/delete", {
@@ -93,7 +98,7 @@ export default function DetailBoardContain({
     }
   };
 
-  if (login_check.yesNo.yes) {
+  if (login.yesNo.yes) {
     Delete();
     navgator(-1);
     dispatch(No());
@@ -104,7 +109,7 @@ export default function DetailBoardContain({
     <div className={styles.detail_board_outter}>
       <div className={styles.detail_btn}>
         {/* 글 쓴 회원이면 삭제, 수정 */}
-        {login_check.loginCheck._id === detail.userId ? (
+        {login.loginCheck._id === detail.userId ? (
           <div>
             <button
               className={styles.board_btn}
@@ -193,7 +198,15 @@ export default function DetailBoardContain({
 
         <div className={styles.detail_content}>
           <div className={styles.user_content}>{detail.content}</div>
-          <img src={`${image}`} alt={image} style={{ width: "100%" }} />
+          <img
+            src={image}
+            alt={image}
+            style={{ width: "100%" }}
+            onClick={() => {
+              dispatch(onUrl(image));
+              dispatch(ImageOpen());
+            }}
+          />
         </div>
       </div>
       {/* 댓글 */}

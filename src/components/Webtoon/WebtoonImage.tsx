@@ -1,7 +1,9 @@
-import Additional from "./Additional";
 import LazyLoad from "react-lazy-load";
-import styles from "../../style/Webtoon/WebtoonImage.module.css";
+
+import Additional from "./Additional";
+
 import { AdditionalType } from "../../types/webtoon";
+import styles from "../../style/Webtoon/WebtoonImage.module.css";
 function WebtoonImage({
   width,
   height,

@@ -2,9 +2,9 @@
   position: absolute;
   top: 0;
   left: 0;
-  transform: translateX(0px);
+  transform: translateX(-60px);
   padding: 20px 30px;
-  transition: 0.3s all;
+  transition: 0.5s all;
   text-align: center;
   width: 200px;
   height: 60px;

@@ -1,8 +1,10 @@
-import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import { Yes, onClose } from "../../store/YesNo";
-import styles from "../../style/Modal/YesNo.module.css";
+
 import { ReduxType } from "../../types/redux";
+
+import styles from "../../style/Modal/YesNo.module.css";
 
 export default function YesNo() {
   const YesNo = useSelector((state: ReduxType) => {

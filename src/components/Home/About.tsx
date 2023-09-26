@@ -1,5 +1,7 @@
-import { AiFillGithub } from "react-icons/ai";
 import styles from "../../style/Home/About.module.css";
+
+import { AiFillGithub } from "react-icons/ai";
+
 function About() {
   return (
     <div className={styles.about}>
@@ -11,6 +13,11 @@ function About() {
             <br />
             네이버, 카카오, 카카오페이지 총 3개의 사이트에서 가져온 웹툰
             정보입니다.
+            <br />
+            <span>
+              Node.js서버를 이용하고 mongoDB를 사용한 게시판을 이용해봐주세요.
+              좋아요. 와 웹툰 구독도 한번 해주세요.
+            </span>
           </span>
           <br />
           <p className={styles.update}>

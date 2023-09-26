@@ -1,6 +1,8 @@
 import { Link, useLocation, useParams } from "react-router-dom";
-import styles from "../../style/Webtoon/Category.module.css";
+
 import { days, daysOfWeek } from "../../API/data/date";
+import styles from "../../style/Webtoon/Category.module.css";
+
 function Category() {
   const location = useLocation();
   const { webtoon, day } = useParams();
@@ -13,6 +15,7 @@ function Category() {
         return "none";
     }
   }
+
   return (
     <div className={styles.Category}>
       <ul>

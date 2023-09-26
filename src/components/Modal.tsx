@@ -1,3 +1,7 @@
+import { useDispatch } from "react-redux";
+
+import { onClose, onUrl } from "../store/ImageStore";
+
 import styles from "../style/Modal/Modal.module.css";
 
 export default function Modal({
@@ -9,7 +13,9 @@ export default function Modal({
   fileCheck,
   imageFile,
   form,
+  type,
 }: any) {
+  const dispatch = useDispatch();
   if (!isOpen.isOpen) {
     return null;
   }
@@ -24,10 +30,30 @@ export default function Modal({
           background: "black",
           opacity: "0.7",
         }}
+        onClick={() => {
+          dispatch(onUrl(""));
+          dispatch(onClose());
+        }}
       ></div>
 
-      <div className={styles.modal_container}>
-        <div className={styles.modal_inner}>
+      <div
+        className={styles.modal_container}
+        style={
+          type === "image" ? { background: "none" } : { background: "#4db9ff" }
+        }
+      >
+        <div
+          className={styles.modal_inner}
+          style={
+            type === "image"
+              ? {
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }
+              : { display: "block" }
+          }
+        >
           {title ? title : null}
           {input ? input : null}
           {fileCheck ? fileCheck : null}

@@ -1,29 +1,48 @@
-import styles from "../../style/Nav/Nav.module.css";
-import { Link, useLocation } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import SearchBar from "./SearchBar";
-import Logo from "./Logo";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  addId,
-  login,
-  onOpen as login_Open,
-  removeId,
-} from "../../store/LoginStore";
-import { useEffect, useState, useRef } from "react";
-import { logout, login as login_check } from "../../store/LoginStore";
 import axios from "axios";
+import styles from "../../style/Nav/Nav.module.css";
+import { useEffect, useState, useRef } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
+import Logo from "./Logo";
+import SearchBar from "./SearchBar";
 import MenuBar from "./MenuBar";
+import UserStatus from "./UserStatus";
+
+import { UserType } from "../../types/user";
+import { ReduxType } from "../../types/redux";
+
+import { addId, onOpen as login_Open, removeId } from "../../store/LoginStore";
+import { login as login_check } from "../../store/LoginStore";
+
+const init = {
+  _id: "",
+  id: "",
+  pw: "",
+  name: "",
+  email: "",
+  image: "",
+  totalBoard: 0,
+  totalComment: 0,
+};
 function Nav() {
   const dispatch = useDispatch();
-  const [id, setId] = useState<any>(null);
-
-  const location = useLocation();
   const navigate = useNavigate();
+
+  const [image, setImage] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState(init);
+  const location = useLocation();
+  const [toggle, setToggle] = useState(false);
   const menubar = useRef<HTMLUListElement>(null);
-  let loginCheck = useSelector((state: any) => {
+
+  let loginCheck = useSelector((state: ReduxType) => {
     return state.loginCheck;
   });
+
+  const ToggleButton = () => {
+    setToggle(false);
+  };
 
   function NowLoaction(url: string) {
     if (url === location.pathname.split("/")[3]) {
@@ -36,26 +55,50 @@ function Nav() {
       return null;
     }
   }
-  const Logout = async () => {
-    try {
-      const response = await axios.get("/api/logout");
-      dispatch(logout());
-      dispatch(removeId());
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   useEffect(() => {
+    const Image = async (board: UserType) => {
+      try {
+        const response = await axios.get("/api/images", {
+          params: {
+            id: board.id,
+            image: board.image,
+            file: "user",
+          },
+          responseType: "blob",
+        });
+        const imageUrl = URL.createObjectURL(response.data);
+        setImage(imageUrl);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    const User_fetch = async (_id: string) => {
+      try {
+        const response = await axios.get("/api/profile", {
+          params: { _id: _id },
+        });
+        if (response.data.image === "default.jpg") {
+          setImage("/img/blank-profile-picture-ge4ff853e7_1280.png");
+          setLoading(false);
+        } else {
+          Image(response.data);
+        }
+        setData(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
     const LoginCheck = async () => {
       try {
-        const response: any = await axios.get("/api/loginCheck");
+        const response = await axios.get("/api/loginCheck");
         if (response.data.login) {
-          setId(response.data._id);
+          await User_fetch(response.data._id);
           dispatch(login_check());
           dispatch(addId(response.data._id));
         } else {
-          setId(null);
           dispatch(removeId());
         }
       } catch (error) {
@@ -77,14 +120,18 @@ function Nav() {
         <div className={styles.nav_login_search}>
           <SearchBar />
           {loginCheck.login ? (
-            <button
-              className={styles.login_btn}
-              onClick={() => {
-                Logout();
-              }}
-            >
-              로그아웃
-            </button>
+            <>
+              {loading ? null : (
+                <div
+                  className={styles.user_img_pic}
+                  onClick={() => {
+                    setToggle(true);
+                  }}
+                >
+                  <img src={image} alt={image}></img>
+                </div>
+              )}
+            </>
           ) : (
             <button
               className={styles.login_btn}
@@ -95,6 +142,10 @@ function Nav() {
               로그인
             </button>
           )}
+          {/* 유저 상태창 */}
+          {loginCheck._id !== "0" && toggle ? (
+            <UserStatus data={data} image={image} ToggleButton={ToggleButton} />
+          ) : null}
         </div>
       </div>
 

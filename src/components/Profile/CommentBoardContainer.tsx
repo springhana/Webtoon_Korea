@@ -2,9 +2,25 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import BoardContain from "../Board/BoardContain";
 
-export default function CommentBoardContainer({ data }: any) {
-  const [board, setBoard] = useState<any>([]);
+import { commentType } from "../../types/comment";
+import { BoardType } from "../../types/board";
+
+const init = {
+  author: "",
+  content: "",
+  date: "",
+  image: "",
+  likedIds: [],
+  postNumber: 0,
+  title: "",
+  userId: "",
+  _id: "",
+};
+
+export default function CommentBoardContainer({ data }: { data: commentType }) {
+  const [board, setBoard] = useState<BoardType>(init);
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     const fetch = async () => {
       try {
@@ -18,7 +34,8 @@ export default function CommentBoardContainer({ data }: any) {
       }
     };
     fetch();
-  });
+  }, []);
+
   return (
     <div>
       {loading ? null : (

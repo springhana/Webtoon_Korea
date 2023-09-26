@@ -1,4 +1,5 @@
 import styles from "../../style/Webtoon/Additional.module.css";
+
 function Additional({ additional }: any) {
   return (
     <>

@@ -1,10 +1,12 @@
-import { current } from "@reduxjs/toolkit";
-import styles from "../../style/Nav/MenuBar.module.css";
 import { useEffect, useState, useRef } from "react";
+
+import styles from "../../style/Nav/MenuBar.module.css";
+
 export default function ({ menubar }: any) {
-  const [toggle, setToggle] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [toggle, setToggle] = useState(false);
   const toggleRef = useRef<HTMLInputElement>(null);
+
   useEffect(() => {
     function handleResize() {
       setWindowWidth(window.innerWidth);
@@ -22,10 +24,12 @@ export default function ({ menubar }: any) {
     if (menubar.current && toggleRef.current) {
       if (toggle === false) {
         menubar.current.style.transform = "translateX(0px)";
+        toggleRef.current.style.transform = "translateX(0px)";
         toggleRef.current.style.background = "#4db9ff";
         setToggle(true);
       } else {
         menubar.current.style.transform = "translateX(-200px)";
+        toggleRef.current.style.transform = "translateX(-60px)";
         toggleRef.current.style.background = "white";
         setToggle(false);
       }

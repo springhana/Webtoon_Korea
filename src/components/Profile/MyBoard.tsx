@@ -1,16 +1,21 @@
 import { useEffect, useState } from "react";
-import { FaChalkboard } from "react-icons/fa";
-import BoardContain from "../Board/BoardContain";
 import axios from "axios";
-import styles from "../../style/Profile/MyBoard.module.css";
-import { BoardType } from "../../types/board";
+
+import BoardContain from "../Board/BoardContain";
 import Loading from "../Loading";
-export default function MyBoard({ _id }: any) {
+
+import { BoardType } from "../../types/board";
+import styles from "../../style/Profile/MyBoard.module.css";
+
+import { FaChalkboard } from "react-icons/fa";
+
+export default function MyBoard({ _id }: { _id: string }) {
   const [board, setBoard] = useState<BoardType[]>([]);
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
+    // 유저 게시판 글 가져오기
     const Board_fetch = async () => {
-      // 869 서버
       try {
         const response = await axios.get("/api/userBoard", {
           params: { _id: _id },
@@ -23,6 +28,7 @@ export default function MyBoard({ _id }: any) {
     };
     Board_fetch();
   }, []);
+
   return (
     <div>
       <div className={styles.board_inner}>

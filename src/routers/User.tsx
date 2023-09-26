@@ -1,16 +1,32 @@
-import { useState } from "react";
-import styles from "../style/User/User.module.css";
 import axios from "axios";
+import { useState } from "react";
+
 import UserInfo from "../components/User/UserInfo";
+
+import styles from "../style/User/User.module.css";
+import { UserType } from "../types/user";
+
+const data = {
+  email: "",
+  id: "",
+  image: "",
+  name: "",
+  pw: "",
+  totalBoard: 0,
+  totalComment: 0,
+  _id: "",
+};
+
 export default function User() {
   const [loading, setLoading] = useState(false);
   const [pw, setPw] = useState("");
-  const [user, setUser] = useState([]);
+  const [user, setUser] = useState<UserType>(data);
 
+  // 내 정보
   const MyPage = async () => {
     try {
-      const reponse = await axios.get("/api/user", { params: { pw: pw } });
-      setUser(reponse.data);
+      const response = await axios.get("/api/user", { params: { pw: pw } });
+      setUser(response.data);
       setLoading(true);
     } catch (error) {
       console.log(error);

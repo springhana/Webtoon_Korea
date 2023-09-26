@@ -7,7 +7,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 3000;
+  z-index: 30000;
 }
 .modal_container {
   position: absolute;
@@ -15,7 +15,7 @@
   border-radius: 30px;
   color: white;
   width: 1000px;
-  z-index: 5000;
+  z-index: 50000;
 }
 .modal_inner {
   padding: 50px;

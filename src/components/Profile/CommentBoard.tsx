@@ -1,12 +1,17 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import styles from "../../style/Profile/CommentBoard.module.css";
+
 import CommentBoardContainer from "./CommentBoardContainer";
-import { FaComments } from "react-icons/fa";
 import Loading from "../Loading";
-export default function CommentBoard({ _id }: any) {
+
+import styles from "../../style/Profile/CommentBoard.module.css";
+import { FaComments } from "react-icons/fa";
+import { commentType } from "../../types/comment";
+
+export default function CommentBoard({ _id }: { _id: string }) {
   const [comments, setComment] = useState<any>([]);
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     const fetch = async () => {
       try {
@@ -25,6 +30,7 @@ export default function CommentBoard({ _id }: any) {
     };
     fetch();
   }, []);
+
   return (
     <div>
       <div>
@@ -45,8 +51,8 @@ export default function CommentBoard({ _id }: any) {
             <Loading />
           </div>
         ) : (
-          comments.map((data: any) => (
-            <div>
+          comments.map((data: commentType, index: number) => (
+            <div key={index}>
               <CommentBoardContainer data={data} />
             </div>
           ))

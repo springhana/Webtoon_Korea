@@ -1,23 +1,35 @@
-import { useEffect, useState } from "react";
-import styles from "../../style/Profile/User_profile.module.css";
-import { useSelector } from "react-redux";
-import { ReduxType } from "../../types/redux";
 import axios from "axios";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { onOpen as ImageOpen, onUrl } from "../../store/ImageStore";
+import { onOpen as LoginOpen } from "../../store/LoginStore";
+
+import { ReduxType } from "../../types/redux";
+
+import styles from "../../style/Profile/User_profile.module.css";
+
 import { BsFillChatDotsFill } from "react-icons/bs";
 import { FaChalkboard } from "react-icons/fa";
-export default function User_profile({ user }: any) {
+import { UserType } from "../../types/user";
+
+export default function User_profile({ user }: { user: UserType }) {
+  const dispatch = useDispatch();
+
+  const [image, setImage] = useState<string>("");
+  const [loading, setLoading] = useState(false);
+
   const login = useSelector((state: ReduxType) => {
     return state;
   });
-  const [image, setImage] = useState<string>("");
-  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
-    const Image = async (board: any) => {
+    const Image = async (user: any) => {
       try {
         const response = await axios.get("/api/images", {
           params: {
-            id: board.id,
-            image: board.image,
+            id: user.id,
+            image: user.image,
             file: "user",
           },
           responseType: "blob",
@@ -51,7 +63,13 @@ export default function User_profile({ user }: any) {
     <div className={styles.user_info}>
       <div className={styles.user_info_inner}>
         <div className={styles.user}>
-          <div className={styles.user_img}>
+          <div
+            className={styles.user_img}
+            onClick={() => {
+              dispatch(onUrl(image));
+              dispatch(ImageOpen());
+            }}
+          >
             {loading ? null : <img src={image} alt={image} />}
           </div>
           <div>
@@ -77,7 +95,11 @@ export default function User_profile({ user }: any) {
       {login.loginCheck._id === user._id ? null : (
         <button
           onClick={() => {
-            ChatroomFetch(user._id);
+            if (login.loginCheck.login) {
+              ChatroomFetch(user._id);
+            } else {
+              dispatch(LoginOpen());
+            }
           }}
         >
           채팅하기

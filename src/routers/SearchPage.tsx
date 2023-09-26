@@ -1,23 +1,19 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { imgSize } from "../API/data/imgSize";
+
 import SearchWebtoon from "../components/Webtoon/SearchPage/SearchWebtoon";
-import styles from "../style/Webtoon/SearchPage.module.css";
+import Loading from "../components/Loading";
+
 import { WebtoonsTypes } from "../types/webtoon";
+import { imgSize } from "../API/data/imgSize";
 import { fetchDetail_Search } from "../API/webtoon";
-function SearchPage({
-  TitleColor,
-  handleImageLoad,
-  removeImageLoad,
-}: {
-  TitleColor: (title: string) => string;
-  handleImageLoad: () => void;
-  removeImageLoad: () => void;
-}) {
+import styles from "../style/Webtoon/SearchPage.module.css";
+
+function SearchPage({ TitleColor }: { TitleColor: (title: string) => string }) {
   const { title } = useParams() as { title: string };
+  const [item, setItem] = useState<WebtoonsTypes[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const [item, setItem] = useState<WebtoonsTypes[]>([]);
   useEffect(() => {
     const fetch = async () => {
       try {
@@ -29,9 +25,9 @@ function SearchPage({
       }
     };
     fetch();
-    removeImageLoad();
   }, [title]);
-  console.log(item);
+
+  // 이미지 넓이
   function width(service: string) {
     switch (service) {
       case "naver":
@@ -42,6 +38,7 @@ function SearchPage({
         return `${imgSize[2].width}px`;
     }
   }
+  // 이미지 크기
   function height(service: string) {
     switch (service) {
       case "naver":
@@ -52,25 +49,27 @@ function SearchPage({
         return `${imgSize[2].height}px`;
     }
   }
+
   return (
     <div className={styles.search}>
       {loading ? (
-        <div className={styles.search_null}>원하시는 검색어가 없습니다.</div>
+        <div>
+          <Loading />
+        </div>
+      ) : item.length !== 0 ? (
+        <div className={styles.search_cotainer}>
+          {item.map((data: WebtoonsTypes) => (
+            <SearchWebtoon
+              data={data}
+              width={width as (service: string) => string}
+              height={height as (service: string) => string}
+              key={data._id}
+              TitleColor={TitleColor}
+            />
+          ))}
+        </div>
       ) : (
-        item && (
-          <div className={styles.search_cotainer}>
-            {item.map((data: WebtoonsTypes) => (
-              <SearchWebtoon
-                data={data}
-                width={width as (service: string) => string}
-                height={height as (service: string) => string}
-                key={data._id}
-                TitleColor={TitleColor}
-                handleImageLoad={handleImageLoad}
-              />
-            ))}
-          </div>
-        )
+        <div className={styles.search_null}>원하시는 검색어가 없습니다.</div>
       )}
     </div>
   );

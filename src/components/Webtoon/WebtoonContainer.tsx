@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
-import { WebtoonsTypes } from "../../types/webtoon";
+
 import WebtoonImage from "./WebtoonImage";
+
+import { WebtoonsTypes } from "../../types/webtoon";
 import styles from "../../style/Webtoon/WebtoonContainer.module.css";
+
 export default function WebtoonContainer({
   data,
   Iwidth,
@@ -12,7 +15,7 @@ export default function WebtoonContainer({
   Iwidth: number;
   Iheight: number;
   data: WebtoonsTypes;
-  handleImageLoad: () => void;
+  handleImageLoad?: () => void;
   lastBookElementRef?: any;
 }) {
   return (
@@ -22,7 +25,9 @@ export default function WebtoonContainer({
       ref={lastBookElementRef}
     >
       <>
-        <Link to={`/webtoon/detail/${data.title + data.author}`}>
+        <Link
+          to={`/webtoon/detail/${data.title + data.author}/${data.service}`}
+        >
           <WebtoonImage
             width={Iwidth}
             height={Iheight}

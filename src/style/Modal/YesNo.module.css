@@ -9,6 +9,7 @@
   justify-content: center;
   align-items: center;
   z-index: 3000;
+  color: white;
 }
 
 .YesNo_Modal_outter {

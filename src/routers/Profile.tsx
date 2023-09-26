@@ -1,28 +1,35 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import styles from "../style/Profile/Profile.module.css";
-import { BoardType } from "../types/board";
-import Loading from "../components/Loading";
-import BoardContain from "../components/Board/BoardContain";
+
 import User_profile from "../components/Profile/User_profile";
-import MyComment from "../components/Profile/MyComment";
 import CommentBoard from "../components/Profile/CommentBoard";
 import BoardLiked from "../components/Profile/BoardLiked";
+import MyComment from "../components/Profile/MyComment";
 import MyBoard from "../components/Profile/MyBoard";
+
+import styles from "../style/Profile/Profile.module.css";
+import { UserType } from "../types/user";
+
+const btn_type = ["작성글", "작성 댓글", "댓글단 글", "좋아요한 글"];
+const data = {
+  email: "",
+  id: "",
+  name: "",
+  pw: "",
+  _id: "",
+  image: "",
+  totalComment: 0,
+  totalBoard: 0,
+};
+
 export default function Profile() {
   const { _id } = useParams() as { _id: string };
-  const data = {
-    email: "",
-    id: "",
-    name: "",
-    pw: "",
-    _id: "",
-  };
-  const [user, setUser] = useState<UserType>(data);
 
-  const [toggle, setToggole] = useState(0);
+  const [user, setUser] = useState<UserType>(data);
   const [loading, setLoading] = useState(true);
+  const [toggle, setToggole] = useState(0);
+
   useEffect(() => {
     const User_fetch = async () => {
       try {
@@ -37,7 +44,7 @@ export default function Profile() {
     };
     User_fetch();
   }, []);
-  const btn_type = ["작성글", "작성 댓글", "댓글단 글", "좋아요한 글"];
+
   return (
     <div className={styles.header}>
       <div>
@@ -47,7 +54,7 @@ export default function Profile() {
 
           <div className={styles.toggle}>
             <ul>
-              {btn_type.map((data: any, index: number) => (
+              {btn_type.map((data: string, index: number) => (
                 <li
                   onClick={() => {
                     setToggole(index);

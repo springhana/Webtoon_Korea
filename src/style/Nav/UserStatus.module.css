@@ -1,0 +1,99 @@
+.header {
+  width: 500px;
+  height: 300px;
+  position: absolute;
+  right: 0;
+  top: 60px;
+  padding: 20px;
+  background-color: #eaeef5;
+  z-index: 200;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: -4px 4px 10px rgba(0, 0, 0, 0.2),
+    -4px -4px 10px rgba(255, 255, 255, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.header::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  border-radius: 50%;
+  width: 10px;
+  height: 100%;
+  box-shadow: 10px 0 10px rgba(0, 0, 0, 0.2); /* 왼쪽 그림자 설정 */
+}
+.header p {
+  font-weight: bold;
+}
+.header .img_pic {
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  border-radius: 50%;
+  border: 3px solid white;
+  margin: auto;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.header div img {
+  width: 100%;
+  scale: 1.2;
+}
+.close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 30px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin: 20px;
+}
+.btn {
+  border-radius: 15px;
+  width: 50%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  overflow: hidden;
+  background-color: white;
+  margin: auto;
+}
+.btn button {
+  width: 100%;
+  height: 100%;
+  border: none;
+  cursor: pointer;
+  background: none;
+  padding: 5px;
+}
+.btn button:nth-child(1) {
+  border-right: 2px solid #eaeef5;
+}
+.btn button:nth-child(2) {
+  border-left: 2px solid #eaeef5;
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    top: 110px;
+    width: 100%;
+  }
+  .btn {
+    flex-direction: column;
+  }
+  .btn button:nth-child(1) {
+    border: none;
+    border-bottom: 1px solid #eaeef5;
+  }
+  .btn button:nth-child(2) {
+    border: none;
+    border-top: 1px solid #eaeef5;
+  }
+}

@@ -1,30 +1,34 @@
-import useBoard from "../Hook/useBoard";
-import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+
+import useBoard from "../Hook/useBoard";
+
 import BoardContain from "../components/Board/BoardContain";
-import styles from "../style/Board/Board.module.css";
-import { BsSearch } from "react-icons/bs";
-import { FaPencilAlt } from "react-icons/fa";
+
 import { BoardType } from "../types/board";
 import { ReduxType } from "../types/redux";
-import { onOpen } from "../store/LoginStore";
+import { onOpen as LoginOpen } from "../store/LoginStore";
+import styles from "../style/Board/Board.module.css";
+
+import { BsSearch } from "react-icons/bs";
+import { FaPencilAlt } from "react-icons/fa";
+
 export default function Board() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const { page } = useParams() as { page: string };
   const { loading, error, board, hasMore } = useBoard(parseInt(page));
+  const [searchKeyWord, setSearchKeyWord] = useState<string>("");
   const [pages, setPages] = useState<number[]>([]); // 페이지를 보여줄 배열 [1,2,3,4,5]
   const [firstPage, setFirstPage] = useState<number>(1); // 처음 페이지 (초기값 1)
-  //   console.log(loading, error, board, hasMore);
-  const navigator = useNavigate();
-  const dispatch = useDispatch();
-  const [searchKeyWord, setSearchKeyWord] = useState<string>("");
 
   const loginCheck = useSelector((state: ReduxType) => {
     return state.loginCheck;
   });
 
   useEffect(() => {
-    console.log(board);
     // 처음 페이지 (5 => 1 이 되어야함 7 => 6)
     const firstPage = Math.floor((board.currentPage - 1) / 5) * 5 + 1;
     let pagesArr = []; // 페이지를 담을 배열
@@ -36,13 +40,12 @@ export default function Board() {
         pagesArr.push(firstPage + i);
       }
     }
-    console.log(pagesArr);
     setFirstPage(firstPage);
     setPages(pagesArr);
   }, [board.currentPage, board.totalPages]);
 
   const Search = async () => {
-    navigator(`/search/${searchKeyWord}`);
+    navigate(`/search/${searchKeyWord}`);
   };
 
   return (
@@ -54,10 +57,10 @@ export default function Board() {
           className={styles.write}
           onClick={() => {
             if (loginCheck.login) {
-              navigator("/board/write");
+              navigate("/board/write");
             } else {
               // navigator("/board/write");
-              dispatch(onOpen());
+              dispatch(LoginOpen());
             }
           }}
         >
@@ -99,7 +102,7 @@ export default function Board() {
             <div
               onClick={() => {
                 if (parseInt(page) !== 1) {
-                  navigator(`/board/${parseInt(page) - 1}`);
+                  navigate(`/board/${parseInt(page) - 1}`);
                 }
               }}
             >
@@ -112,7 +115,7 @@ export default function Board() {
               <li key={date}>
                 <div
                   onClick={() => {
-                    navigator(`/board/${date}`);
+                    navigate(`/board/${date}`);
                   }}
                   className={date === parseInt(page) ? styles.nowPage : null}
                 >
@@ -134,7 +137,7 @@ export default function Board() {
             <div
               onClick={() => {
                 if (board.totalPages !== parseInt(page)) {
-                  navigator(`/board/${parseInt(page) + 1}`);
+                  navigate(`/board/${parseInt(page) + 1}`);
                 }
               }}
             >

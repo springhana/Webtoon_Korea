@@ -1,46 +1,44 @@
-import { days, daysOfWeek } from "../../../API/data/date";
-import styles from "../../../style/Webtoon/Detail/DetailPage.module.css";
-import { useEffect } from "react";
-import { AiFillStar } from "react-icons/ai";
-import { FiSearch } from "react-icons/fi";
-import { WebtoonsTypes } from "../../../types/webtoon";
-import { useState } from "react";
 import axios from "axios";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import WebtoonComment from "./WebtoonComment";
 
+import { onOpen as ImageOpen, onUrl } from "../../../store/ImageStore";
+import { onOpen as LoginOpen } from "../../../store/LoginStore";
+
+import { ReduxType } from "../../../types/redux";
+
+import { days, daysOfWeek } from "../../../API/data/date";
+import { WebtoonsTypes } from "../../../types/webtoon";
+import styles from "../../../style/Webtoon/Detail/DetailPage.module.css";
+
+import { AiFillStar } from "react-icons/ai";
 import { FcLike, FcLikePlaceholder } from "react-icons/fc";
+import { FiSearch } from "react-icons/fi";
+
 function DetailPage({
   data,
-  page,
-  length,
-  PagePlus,
-  PageMinus,
-  AddCheck,
   width,
   height,
   img,
-  handleImageLoad,
   TitleColor,
 }: {
   data: WebtoonsTypes;
-  page: number;
-  length: number;
-  PagePlus: () => void;
-  PageMinus: () => void;
-  AddCheck: (url: string, title: string, service: string) => void;
   width: number;
   height: number;
   img: (url: string) => void;
-  handleImageLoad: () => void;
   TitleColor: (title: string) => string;
 }) {
+  const dispatch = useDispatch();
+
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [imgSize, setImgSize] = useState(1);
-  const login = useSelector((state: any) => {
+  const [webtoons, setWebtoons] = useState<boolean>(false); // 구독 했는지
+
+  const login = useSelector((state: ReduxType) => {
     return state.loginCheck;
   });
-  const dispatch = useDispatch();
 
   useEffect(() => {
     img(data.service);
@@ -54,9 +52,7 @@ function DetailPage({
     } else {
       setImgSize(1);
     }
-  }, []);
 
-  useEffect(() => {
     function handleResize() {
       setWindowWidth(window.innerWidth);
       if (window.innerWidth <= 768) {
@@ -77,15 +73,13 @@ function DetailPage({
 
   //
 
-  const [webtoons, setWebtoons] = useState<boolean>(false);
   useEffect(() => {
     const subscribe = async () => {
       try {
         const response = await axios.get("/api/subscribeAll");
         if (response.data) {
-          const a = response.data.title.includes(data.searchKeyword);
-          console.log(a);
-          setWebtoons(a);
+          const sub = response.data.title.includes(data.searchKeyword);
+          setWebtoons(sub);
         }
       } catch (error) {
         console.log(error);
@@ -95,6 +89,7 @@ function DetailPage({
     subscribe();
   }, []);
 
+  // 구독 취소
   const remove = async (title: string) => {
     try {
       const response = await axios.post("/api/remove_subscribe", {
@@ -104,6 +99,8 @@ function DetailPage({
       console.log(error);
     }
   };
+
+  // 구독
   const add = async (title: string) => {
     try {
       const response = await axios.post("/api/subscribe", {
@@ -113,18 +110,27 @@ function DetailPage({
       console.log(errro);
     }
   };
+
   return (
     <div style={{ margin: "auto" }}>
       <div className={styles.detail}>
         <div
-          onClick={() => AddCheck(data.img, data.title, data.service)}
           style={{
             width: `${width * imgSize * 1.5}px`,
             height: `${height * imgSize * 1.5}px`,
           }}
           className={styles.img_pic}
         >
-          <img src={data.img} alt={data.title} onLoad={handleImageLoad} />
+          {data.img ? (
+            <img
+              src={data.img}
+              alt={data.title}
+              onClick={() => {
+                dispatch(onUrl(data.img));
+                dispatch(ImageOpen());
+              }}
+            />
+          ) : null}
           <div className={styles.icon_container}>
             <div className={styles.icon_copy}></div>
             <div className={styles.icon}>
@@ -214,8 +220,12 @@ function DetailPage({
           <div
             style={{ cursor: "pointer" }}
             onClick={() => {
-              add(data.searchKeyword);
-              setWebtoons(true);
+              if (login.login) {
+                add(data.searchKeyword);
+                setWebtoons(true);
+              } else {
+                dispatch(LoginOpen());
+              }
             }}
             className={styles.next}
           >

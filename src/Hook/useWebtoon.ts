@@ -13,6 +13,7 @@ export default function useWebtoon(
   const [hasMore, setHasMore] = useState(false); // 사용자의 상태?
 
   useEffect(() => {
+    setHasMore(false);
     setWebtoons([]);
   }, [service, updateDay]);
 

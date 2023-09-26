@@ -1,48 +1,35 @@
 import React, { useState, useRef } from "react";
-import Modal from "../Modal";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+
+import Modal from "../Modal";
+
 import {
   onOpen as login_Open,
   onClose as login_Close,
 } from "../../store/LoginStore";
-import {
-  onOpen as register_Open,
-  onClose as register_Close,
-} from "../../store/RegisterStore";
-import styles from "../../style/Modal/Modal.module.css";
-import axios from "axios";
-import { AiFillCloseCircle } from "react-icons/ai";
+import { onClose as register_Close } from "../../store/RegisterStore";
+
 import { ReduxType } from "../../types/redux";
+
+import styles from "../../style/Modal/Modal.module.css";
+import { AiFillCloseCircle } from "react-icons/ai";
 import { BsCardImage } from "react-icons/bs";
-import { useNavigate } from "react-router-dom";
 
 export default function RegisterModal() {
-  let register = useSelector((state: ReduxType) => {
-    return state.register;
-  });
   const dispatch = useDispatch();
-  const [id, setId] = useState();
-  const [name, setName] = useState();
-  const [pw, setPw] = useState();
-  const [email, setEmail] = useState();
+  const navigate = useNavigate();
 
   const imageInput = useRef<HTMLInputElement>(null);
   const [imageName, setImageName] = useState("파일찾기");
   const [image, setImage] = useState<string>("");
   const [deleteImg, setDeleteImg] = useState(0);
-  const navigator = useNavigate();
-  // const handleRegister = async () => {
-  //   try {
-  //     const response = await axios.post("/api/register", {
-  //       id: id,
-  //       pw: pw,
-  //       name: name,
-  //       email: email,
-  //     });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+
+  let register = useSelector((state: ReduxType) => {
+    return state.register;
+  });
+
+  // 이미지 업로드 핸들러
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files ? e.target.files[0] : null;
     if (file) {
@@ -58,6 +45,8 @@ export default function RegisterModal() {
       reader.readAsDataURL(file);
     }
   };
+
+  // onSubmit
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -67,9 +56,7 @@ export default function RegisterModal() {
         body: new FormData(event.currentTarget), // 폼 데이터를 직접 전송
       });
       if (response.ok) {
-        navigator(0);
-        // dispatch(register_Close());
-        // dispatch(login_Open());
+        navigate(0);
       }
     } catch (error) {
       console.error("에러 발생:", error);
@@ -86,43 +73,19 @@ export default function RegisterModal() {
       >
         <div className={styles.id}>
           <label>아이디</label>
-          <input
-            type="text"
-            name="id"
-            onChange={(e: any) => {
-              setId(e.target.value);
-            }}
-          />
+          <input type="text" name="id" />
         </div>
         <div className={styles.pw}>
           <label>비밀번호</label>
-          <input
-            type="password"
-            name="pw"
-            onChange={(e: any) => {
-              setPw(e.target.value);
-            }}
-          />
+          <input type="password" name="pw" />
         </div>
         <div className={styles.name}>
           <label>이름</label>
-          <input
-            type="text"
-            name="name"
-            onChange={(e: any) => {
-              setName(e.target.value);
-            }}
-          />
+          <input type="text" name="name" />
         </div>
         <div className={styles.email}>
           <label>이메일</label>
-          <input
-            type="email"
-            name="email"
-            onChange={(e: any) => {
-              setEmail(e.target.value);
-            }}
-          />
+          <input type="email" name="email" />
         </div>
         {image ? (
           <div className={styles.image_pick}>

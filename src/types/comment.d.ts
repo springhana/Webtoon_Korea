@@ -9,4 +9,5 @@ export interface commentType {
   totalComment: number;
   userId: string;
   _id: string;
+  title: string;
 }

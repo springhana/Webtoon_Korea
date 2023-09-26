@@ -1,26 +1,35 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { AiFillLike, AiOutlineLike } from "react-icons/ai";
-import styles from "../../../style/Webtoon/Detail/WebtoonComment.module.css";
+import { useSelector } from "react-redux";
+
 import { commentType } from "../../../types/comment";
 import { ReduxType } from "../../../types/redux";
+import styles from "../../../style/Webtoon/Detail/WebtoonComment.module.css";
+
+import { AiFillLike, AiOutlineLike } from "react-icons/ai";
+
 export default function WebtoonComment({ webtoonID }: { webtoonID: string }) {
+  const navigate = useNavigate();
+
   const [comment, setComment] = useState("");
   const [commentAll, setCommentAll] = useState<commentType[]>([]);
   const [loading, setLoading] = useState(true);
   const [value, setValue] = useState("");
+  const [commentId, setCommentId] = useState("");
+  const [chaneg, setChaneg] = useState(0);
+  const [yesNo, setYesNo] = useState(false);
+
+  const [id, setId] = useState(""); // 수정을 위한 state
+
   const login = useSelector((state: ReduxType) => {
     return state;
   });
-  const [yesNo, setYesNo] = useState(false);
-  const [commentId, setCommentId] = useState("");
-  const [chaneg, setChaneg] = useState(0);
-  const navgator = useNavigate();
 
-  // 수정을 위한 state
-  const [id, setId] = useState("");
+  useEffect(() => {
+    GetComment();
+  }, [yesNo]);
+
   const GetComment = async () => {
     try {
       const response = await axios.get("/api/webtoon/commentAll", {
@@ -32,9 +41,8 @@ export default function WebtoonComment({ webtoonID }: { webtoonID: string }) {
       console.log(error);
     }
   };
-  useEffect(() => {
-    GetComment();
-  }, [yesNo]);
+
+  // 좋아요 수정
   const like = async (_id: string) => {
     try {
       const response = await axios.put("/api/webtoon/like", {
@@ -48,6 +56,7 @@ export default function WebtoonComment({ webtoonID }: { webtoonID: string }) {
     }
   };
 
+  // 댓글 쓰기
   const PostComment = async () => {
     try {
       const response = await axios.post("/api/webtoon/comment", {
@@ -60,6 +69,7 @@ export default function WebtoonComment({ webtoonID }: { webtoonID: string }) {
       console.log(error);
     }
   };
+  // 댓글 삭제
   const removeComment = async (id: string) => {
     try {
       const response = await axios.delete("/api/webtoon/delete", {
@@ -69,6 +79,8 @@ export default function WebtoonComment({ webtoonID }: { webtoonID: string }) {
       console.log(error);
     }
   };
+
+  // 이미지 업로디 핸들러
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     try {
       const response = await fetch("/api/webtoon/update", {
@@ -76,12 +88,13 @@ export default function WebtoonComment({ webtoonID }: { webtoonID: string }) {
         body: new FormData(event.currentTarget), // 폼 데이터를 직접 전송
       });
       if (response.ok) {
-        navgator(0);
+        navigate(0);
       }
     } catch (error) {
       console.error("에러 발생:", error);
     }
   };
+
   return (
     <div className={styles.webtoon_comment}>
       <h3 className={styles.webtoon_comment_logo}>Comments</h3>

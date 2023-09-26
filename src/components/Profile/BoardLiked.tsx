@@ -1,13 +1,18 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+
 import BoardContain from "../Board/BoardContain";
+import Loading from "../Loading";
+
 import { BoardType } from "../../types/board";
+
 import styles from "../../style/Profile/BoardLiked.module.css";
 import { AiTwotoneHeart } from "react-icons/ai";
-import Loading from "../Loading";
-export default function BoardLiked({ _id }: any) {
+
+export default function BoardLiked({ _id }: { _id: string }) {
   const [board, setBoard] = useState<BoardType[]>([]);
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     const fetch = async () => {
       try {
@@ -24,6 +29,7 @@ export default function BoardLiked({ _id }: any) {
     };
     fetch();
   }, []);
+
   return (
     <div>
       <div>
@@ -45,8 +51,8 @@ export default function BoardLiked({ _id }: any) {
               <Loading />
             </div>
           ) : (
-            board.map((data: any) => (
-              <div>
+            board.map((data: BoardType, index: number) => (
+              <div key={index}>
                 <BoardContain data={data} />
               </div>
             ))

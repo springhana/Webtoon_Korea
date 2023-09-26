@@ -1,20 +1,24 @@
 import { useState, useRef } from "react";
-import { useSelector } from "react-redux";
-import styles from "../style/Board/Write.module.css";
-import { BsCardImage } from "react-icons/bs";
-import { ReduxType } from "../types/redux";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { useSelector } from "react-redux";
+import { ReduxType } from "../types/redux";
+
+import { BsCardImage } from "react-icons/bs";
+import styles from "../style/Board/Write.module.css";
+
 export default function Write() {
   const [image, setImage] = useState<string>("");
-  const imageInput = useRef<HTMLInputElement>(null);
   const [imageName, setImageName] = useState("파일찾기");
-  const [deleteImg, setDeleteImg] = useState(0);
-  const navigator = useNavigate();
+  const [deleteImg, setDeleteImg] = useState(0); // 이미지 제거를 위한 것
+
+  const imageInput = useRef<HTMLInputElement>(null);
+
+  const navigate = useNavigate();
   const loginCheck = useSelector((state: ReduxType) => {
     return state.loginCheck;
   });
 
+  // 파일 업로드 핸들러
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files ? e.target.files[0] : null;
     if (file) {
@@ -31,25 +35,26 @@ export default function Write() {
     }
   };
 
-  if (!loginCheck.login) {
-    navigator("/");
-  }
-
+  // onSubmit
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
     try {
       const response = await fetch("/api/write", {
         method: "POST",
         body: new FormData(event.currentTarget), // 폼 데이터를 직접 전송
       });
       if (response.ok) {
-        navigator(-1);
+        navigate(-1);
       }
     } catch (error) {
       console.error("에러 발생:", error);
     }
   };
+
+  if (!loginCheck.login) {
+    navigate("/");
+  }
+
   return (
     <div className={styles.write}>
       <form

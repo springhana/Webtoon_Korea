@@ -1,15 +1,20 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import styles from "../style/Board/SearchBoard.module.css";
+
 import BoardContain from "../components/Board/BoardContain";
-import { BsSearch } from "react-icons/bs";
+
 import { BoardType } from "../types/board";
+import styles from "../style/Board/SearchBoard.module.css";
+
+import { BsSearch } from "react-icons/bs";
+
 export default function SearchBoard() {
   const { value } = useParams() as { value: string };
   const [board, setBoard] = useState<BoardType[]>([]);
   const [searchKeyWord, setSearchKeyWord] = useState<string>("");
-  const navigator = useNavigate();
+  const navigate = useNavigate();
+
   useEffect(() => {
     const Search = async () => {
       try {
@@ -24,7 +29,7 @@ export default function SearchBoard() {
   }, [value]);
 
   const Search = async () => {
-    navigator(`/search/${searchKeyWord}`);
+    navigate(`/search/${searchKeyWord}`);
   };
 
   return (

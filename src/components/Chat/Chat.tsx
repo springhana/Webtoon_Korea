@@ -1,31 +1,34 @@
 import axios from "axios";
-import styles from "../../style/Chat/Chat.module.css";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ReduxType } from "../../types/redux";
+
 import Message from "./Message";
 import ChatIcon from "./ChatIcon";
 import StateIcon from "./StateIcon";
 import ChatUser from "./ChatUser";
+
+import { ReduxType } from "../../types/redux";
+
 import { onOpen } from "../../store/LoginStore";
+
+import styles from "../../style/Chat/Chat.module.css";
+
 export default function Chat() {
-  const login = useSelector((state: ReduxType) => {
-    return state;
-  });
   const dispatch = useDispatch();
+
   const [chat, setChat] = useState([]);
   const [userIndex, setUserIndex] = useState<any>([]);
   const [loading, setLoading] = useState(true);
-
   const [chatRoomId, setChatRoomId] = useState<any>("");
   const [init, setInit] = useState(false);
   const [toggle, setToggle] = useState(0);
-
-  // const [messages, setMessages] = useState<any>([]);
-
   const [iconToggle, setIconToggle] = useState(false);
-  const [notification, setNotification] = useState();
 
+  const login = useSelector((state: ReduxType) => {
+    return state;
+  });
+
+  // 채팅방에서 상대 이름 찾기
   const userName = async (data: any) => {
     let findIndex: any = [];
     data.map((data: any) => {
@@ -39,6 +42,7 @@ export default function Chat() {
     setLoading(false);
   };
 
+  // 채팅방 가져오기
   const ChatFetch = async () => {
     try {
       const response = await axios.get("/api/chat");
@@ -51,25 +55,16 @@ export default function Chat() {
       console.log(error);
     }
   };
+
   useEffect(() => {
+    // 로그아웃 후 로그인시 초기화
     setChat([]);
     setInit(false);
   }, [init]);
+
   useEffect(() => {
     ChatFetch();
   }, [login.loginCheck._id, init]);
-
-  const Notification = async (userId: any) => {
-    try {
-      const date = new Date();
-      const response = await axios.post("/api/notification", {
-        userId: userId,
-        date: date,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   return (
     <div className={styles.nav}>
@@ -90,24 +85,25 @@ export default function Chat() {
                     >
                       <StateIcon />
                     </div>
-                    {chat.map((data: any, index: number) => (
-                      <div
-                        key={index}
-                        className={styles.user}
-                        onClick={async () => {
-                          setChatRoomId(data._id);
-                          setInit(true);
-                          setToggle((prev) => (prev = 1));
-                        }}
-                      >
-                        <ChatUser
-                          data={data}
-                          userIndex={userIndex}
-                          index={index}
-                          no={notification}
-                        />
-                      </div>
-                    ))}
+                    <div className={styles.userOutter}>
+                      {chat.map((data: any, index: number) => (
+                        <div
+                          key={index}
+                          className={styles.user}
+                          onClick={async () => {
+                            setChatRoomId(data._id);
+                            setInit(true);
+                            setToggle((prev) => (prev = 1));
+                          }}
+                        >
+                          <ChatUser
+                            data={data}
+                            userIndex={userIndex}
+                            index={index}
+                          />
+                        </div>
+                      ))}
+                    </div>
                   </>
                 )}
               </div>
@@ -122,11 +118,7 @@ export default function Chat() {
                   <StateIcon />
                 </div>
                 <div className={styles.chatInfo}>
-                  <Message
-                    chatRoomId={chatRoomId}
-                    init={init}
-                    Notification={Notification}
-                  />
+                  <Message chatRoomId={chatRoomId} init={init} />
                 </div>
               </div>
             )}

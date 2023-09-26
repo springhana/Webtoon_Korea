@@ -1,30 +1,28 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { days, daysOfWeek } from "../../../API/data/date";
-import styles from "../../../style/Webtoon/Webtoon/DayWebtoon.module.css";
 import { useNavigate } from "react-router-dom";
-import services from "../../../API/data/service";
-import { WebtoonType, WebtoonsTypes } from "../../../types/webtoon";
+
 import useWebtoon from "../../../Hook/useWebtoon";
+
 import WebtoonContainer from "../WebtoonContainer";
+
+import { days, daysOfWeek } from "../../../API/data/date";
+import { WebtoonsTypes } from "../../../types/webtoon";
+import services from "../../../API/data/service";
+import styles from "../../../style/Webtoon/Webtoon/DayWebtoon.module.css";
+
 function DayWebtoon({
-  day,
-  load,
   title,
   index,
   Iwidth,
   Iheight,
-  perPage,
-  size,
+  webtoon,
   handleImageLoad,
 }: {
-  day: string;
-  load: (day: string, title: string, perPage: number, page: number) => void;
   title: string;
   index: number;
   Iwidth: number;
   Iheight: number;
-  perPage: number;
-  size: (size: WebtoonType) => void;
+  webtoon: string;
   handleImageLoad: () => void;
 }) {
   const navigate = useNavigate();
@@ -35,24 +33,6 @@ function DayWebtoon({
     pageNumber,
     title,
     daysOfWeek[index]
-  );
-
-  const observer: any = useRef();
-  const lastBookElementRef = useCallback(
-    (node: any) => {
-      if (loading) return;
-      if (observer.current) observer.current.disconnect(); // 관찰자의 현재점 끊기
-      observer.current = new IntersectionObserver(
-        (entries) => {
-          if (entries[0].isIntersecting && hasMore) {
-            setPageNumber((prevPageNumber: any) => prevPageNumber + 1);
-          }
-        },
-        { threshold: 1.0 }
-      );
-      if (node) observer.current.observe(node);
-    },
-    [loading, hasMore]
   );
 
   useEffect(() => {
@@ -94,6 +74,25 @@ function DayWebtoon({
     };
   }, []);
 
+  // 무한 스크롤
+  const observer: any = useRef();
+  const lastBookElementRef = useCallback(
+    (node: any) => {
+      if (loading) return;
+      if (observer.current) observer.current.disconnect(); // 관찰자의 현재점 끊기
+      observer.current = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting && hasMore) {
+            setPageNumber((prevPageNumber: any) => prevPageNumber + 1);
+          }
+        },
+        { threshold: 1.0 }
+      );
+      if (node) observer.current.observe(node);
+    },
+    [loading, hasMore]
+  );
+
   return (
     <div
       className={styles.dayWebtoon}
@@ -108,8 +107,8 @@ function DayWebtoon({
                 data={data}
                 Iwidth={Iwidth * imgSize}
                 Iheight={Iheight * imgSize}
-                handleImageLoad={handleImageLoad}
                 lastBookElementRef={lastBookElementRef}
+                handleImageLoad={handleImageLoad}
               />
             </div>
           );

@@ -1,13 +1,19 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+
 import Loading from "../Loading";
+
 import styles from "../../style/Profile/MyComment.module.css";
+
 import { BsFillChatDotsFill, BsFillCalendarDateFill } from "react-icons/bs";
 import { FaChalkboard } from "react-icons/fa";
-import { Link } from "react-router-dom";
-export default function MyComment({ _id }: any) {
+import { commentType } from "../../types/comment";
+
+export default function MyComment({ _id }: { _id: string }) {
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     const fetch = async () => {
       try {
@@ -22,6 +28,7 @@ export default function MyComment({ _id }: any) {
     };
     fetch();
   }, []);
+
   return (
     <div>
       <div>
@@ -41,7 +48,7 @@ export default function MyComment({ _id }: any) {
                 <div className={styles.board_comment}>댓글</div>
               </div>
             </div>
-            {comments.map((data: any) => (
+            {comments.map((data: commentType) => (
               <div className={styles.comments}>
                 <Link to={`/detail/${data.postNumber}`}>
                   <div>

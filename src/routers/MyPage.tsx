@@ -1,25 +1,28 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { onOpen } from "../store/LoginStore";
-import Subscribe from "../components/MyPage/Subscribe";
-import { imgSize } from "../API/data/imgSize";
 import { useNavigate } from "react-router-dom";
-import styles from "../style/MyPage/Subscribe.module.css";
+import { useDispatch, useSelector } from "react-redux";
+
+import Subscribe from "../components/MyPage/Subscribe";
+
+import { imgSize } from "../API/data/imgSize";
+import { onOpen as loginOpen } from "../store/LoginStore";
 import { ReduxType } from "../types/redux";
-import { SubscribeType } from "../types/board";
+import styles from "../style/MyPage/Subscribe.module.css";
 
 export default function MyPage() {
   const dispatch = useDispatch();
-  const [webtoons, setWebtoons] = useState<string[]>([]);
+  const navigate = useNavigate();
+
+  const [webtoons, setWebtoons] = useState<string[]>([]); // 구독 목록
   const [user, setUser] = useState("");
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
   const [toggle, setToggle] = useState(0);
 
   const loginCheck = useSelector((state: ReduxType) => {
     return state.loginCheck;
   });
+
   useEffect(() => {
     const Login = async () => {
       try {
@@ -28,7 +31,7 @@ export default function MyPage() {
           setUser(response.data.name);
           console.log(response.data.name);
         } else {
-          dispatch(onOpen());
+          dispatch(loginOpen());
         }
       } catch (error) {
         console.log(error);

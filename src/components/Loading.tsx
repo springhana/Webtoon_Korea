@@ -8,7 +8,7 @@ export default function Loading() {
         <div className={styles.circle}></div>
         <div className={styles.square}></div>
         <div className={styles.triangle}></div>
-        <div className={styles.logo}>Pixmy</div>
+        <div className={styles.logo}>Webtoon</div>
         <div className={styles.shadow}></div>
       </div>
     </div>

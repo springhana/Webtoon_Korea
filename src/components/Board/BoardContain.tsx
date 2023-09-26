@@ -1,16 +1,23 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { BsImageAlt } from "react-icons/bs";
-import styles from "../../style/Board/BoardContain.module.css";
-import axios from "axios";
-import { BoardType } from "../../types/board";
 
-export default function BoardContain({ data }: { data: BoardType }) {
+import { BoardType } from "../../types/board";
+import { commentType } from "../../types/comment";
+
+import styles from "../../style/Board/BoardContain.module.css";
+import { BsImageAlt } from "react-icons/bs";
+
+export default function BoardContain({
+  data,
+}: {
+  data: BoardType | commentType;
+}) {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [commentLength, setCommentLength] = useState(0);
   const [image, setImage] = useState("");
   const [loading, setLoading] = useState(true);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const navigator = useNavigate();
+
   useEffect(() => {
     function handleResize() {
       setWindowWidth(window.innerWidth);
@@ -22,6 +29,7 @@ export default function BoardContain({ data }: { data: BoardType }) {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
   useEffect(() => {
     const Image = async (board: any, date: string) => {
       try {
@@ -45,7 +53,9 @@ export default function BoardContain({ data }: { data: BoardType }) {
     const date = data.date.split(":");
     Image(data, date[0]);
   }, []);
+
   useEffect(() => {
+    // 채팅 갯수 가져오기
     const commentLength = async () => {
       try {
         const respnse = await axios.get("/api/comment/length", {
@@ -58,6 +68,7 @@ export default function BoardContain({ data }: { data: BoardType }) {
     };
     commentLength();
   }, []);
+
   return (
     <div className={styles.board}>
       <div className={styles.inner}>

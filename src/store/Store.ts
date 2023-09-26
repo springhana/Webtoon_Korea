@@ -2,6 +2,7 @@ import { configureStore, createSlice } from "@reduxjs/toolkit";
 import { LoginStore, LoginCheckStore } from "./LoginStore";
 import { RegisterStore } from "./RegisterStore";
 import { YesNoStore } from "./YesNo";
+import { ImageStore } from "./ImageStore";
 const Detail_Search = createSlice({
   name: "detail_Search",
   initialState: { data: null },
@@ -20,5 +21,6 @@ export default configureStore({
     register: RegisterStore.reducer,
     loginCheck: LoginCheckStore.reducer,
     yesNo: YesNoStore.reducer,
+    image: ImageStore.reducer,
   },
 });

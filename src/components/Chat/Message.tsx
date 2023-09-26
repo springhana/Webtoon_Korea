@@ -1,17 +1,28 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import io from "socket.io-client";
-import styles from "../../style/Chat/Message.module.css";
-import ChatRoom from "./ChatRoom";
 import { useSelector } from "react-redux";
+
+import ChatRoom from "./ChatRoom";
+
 import { ReduxType } from "../../types/redux";
-export default function Message({ chatRoomId, init, Notification }: any) {
+import io from "socket.io-client";
+
+import styles from "../../style/Chat/Message.module.css";
+
+export default function Message({
+  chatRoomId,
+  init,
+}: {
+  chatRoomId: string;
+  init: boolean;
+}) {
   let socket = io(
     `https://port-0-webtoon-korea-server-30yyr422almfl7fw9.sel5.cloudtype.app/`
   );
   const [messages, setMessages] = useState<any>([]);
   const [newMessage, setNewMessage] = useState<any>("");
   const [userId, setUserId] = useState([]);
+
   const login = useSelector((state: ReduxType) => {
     return state;
   });
@@ -39,6 +50,7 @@ export default function Message({ chatRoomId, init, Notification }: any) {
     }
   }, [init]);
 
+  // 소켓으로 채팅 보내기
   const sendMessage = (id: any, ids: any) => {
     try {
       if (newMessage.trim() !== "") {
@@ -56,6 +68,7 @@ export default function Message({ chatRoomId, init, Notification }: any) {
     }
   };
 
+  // 소켓으로 보내는 동시에 DB저장
   const MessagePost = async () => {
     try {
       const response = await axios.post("/api/message", {
@@ -90,7 +103,7 @@ export default function Message({ chatRoomId, init, Notification }: any) {
     };
     fetch();
   }, []);
-  console.log(messages);
+
   return (
     <div style={{ height: "100%" }}>
       <ChatRoom chatRoomId={chatRoomId} message_socket={messages} />

@@ -1,30 +1,32 @@
 import { useEffect, useRef, useState } from "react";
-import styles from "../../style/Home/webtoons.module.css";
 import { Link } from "react-router-dom";
-import { KdaysOfWeek } from "../../API/data/date";
+
+import WebtoonImage from "../Webtoon/WebtoonImage";
 import ArrowBtn from "../ArrowBtn";
 
-import { MdKeyboardArrowRight } from "react-icons/md";
-import WebtoonImage from "../Webtoon/WebtoonImage";
 import today from "../../API/data/day";
+import { KdaysOfWeek } from "../../API/data/date";
 import { WebtoonsTypes } from "../../types/webtoon";
+
+import styles from "../../style/Home/webtoons.module.css";
+import { MdKeyboardArrowRight } from "react-icons/md";
+
 function Webtoons({
   title,
   load,
   size,
   TitleColor,
-  handleImageLoad,
 }: {
   title: string;
   load: (today: string, title: string) => void;
   size: { width: number; height: number };
   TitleColor: (title: string) => string;
-  handleImageLoad: () => void;
 }) {
   const [WebtoonSize] = useState(240);
   const [chanal, setCanal] = useState(1);
   const [nextCheck, setNextCheck] = useState(true);
   const [prevCheck, setPrevCheck] = useState(false);
+
   const imgPic: React.RefObject<HTMLDivElement> =
     useRef() as React.RefObject<HTMLDivElement>;
   const prev: React.RefObject<HTMLDivElement> =
@@ -35,6 +37,7 @@ function Webtoons({
   const [item, setItem] = useState<WebtoonsTypes[]>([]);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [imgLength, setImgLength] = useState<number>(5);
+
   useEffect(() => {
     const fetch = async () => {
       const result: any = await load(today, title);
@@ -135,7 +138,11 @@ function Webtoons({
         <div className={styles.webtoons_container} ref={imgPic}>
           {item.map((data: WebtoonsTypes) => (
             <div key={data._id} className={styles.webtoon}>
-              <Link to={`/webtoon/detail/${data.title + data.author}`}>
+              <Link
+                to={`/webtoon/detail/${data.title + data.author}/${
+                  data.service
+                }`}
+              >
                 <WebtoonImage
                   width={size.width}
                   height={size.height}
@@ -143,7 +150,6 @@ function Webtoons({
                   title={data.title}
                   adult={data.additional.adult}
                   additional={data.additional}
-                  handleImageLoad={handleImageLoad}
                 />
                 <h3>
                   {data.title.length > 13

@@ -1,27 +1,32 @@
 import axios from "axios";
-import styles from "../../style/User/User.module.css";
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-export default function UserInfo({ user }: any) {
-  const [disabled, setDisabled] = useState(true);
-  const [sub, setSub] = useState(false);
-  const [pw, setPw] = useState(user.pw);
-  const [id, setId] = useState(user.id);
-  const [email, setEmail] = useState(user.email);
-  const navigator = useNavigate();
-  const [image, setImage] = useState<string>("");
 
-  const imageInput = useRef<HTMLInputElement>(null);
-  const [imageName, setImageName] = useState("파일찾기");
+import { UserType } from "../../types/user";
+
+import styles from "../../style/User/User.module.css";
+
+export default function UserInfo({ user }: { user: UserType }) {
+  const navigate = useNavigate();
+
+  const [disabled, setDisabled] = useState(true); // 정보 변경 toggle
+  const [id, setId] = useState(user.id);
+  const [pw, setPw] = useState(user.pw);
+  const [email, setEmail] = useState(user.email);
+  const [image, setImage] = useState<string>("");
   const [deleteImg, setDeleteImg] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [imageName, setImageName] = useState("파일찾기");
+  const imageInput = useRef<HTMLInputElement>(null);
+
   useEffect(() => {
-    const Image = async (board: any) => {
+    // 유저 사진 가져오기
+    const Image = async (user: UserType) => {
       try {
         const response = await axios.get("/api/images", {
           params: {
-            id: board.id,
-            image: board.image,
+            id: user.id,
+            image: user.image,
             file: "user",
           },
           responseType: "blob",
@@ -41,6 +46,7 @@ export default function UserInfo({ user }: any) {
     }
   }, []);
 
+  // 이미지 업로드 핸들러
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files ? e.target.files[0] : null;
     if (file) {
@@ -56,6 +62,8 @@ export default function UserInfo({ user }: any) {
       reader.readAsDataURL(file);
     }
   };
+
+  // onSubmit
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -65,12 +73,13 @@ export default function UserInfo({ user }: any) {
         body: new FormData(event.currentTarget), // 폼 데이터를 직접 전송
       });
       if (response.ok) {
-        navigator("/");
+        navigate("/");
       }
     } catch (error) {
       console.error("에러 발생:", error);
     }
   };
+
   return (
     <div className={styles.user_info}>
       {loading ? null : (
@@ -99,7 +108,7 @@ export default function UserInfo({ user }: any) {
                 value={id}
                 name="id"
                 disabled={disabled}
-                onChange={(e: any) => {
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                   setId(e.target.value);
                 }}
                 style={
@@ -113,7 +122,7 @@ export default function UserInfo({ user }: any) {
                 value={pw}
                 name="pw"
                 disabled={disabled}
-                onChange={(e: any) => {
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                   setPw(e.target.value);
                 }}
                 style={
@@ -127,7 +136,7 @@ export default function UserInfo({ user }: any) {
                 value={email}
                 name="email"
                 disabled={disabled}
-                onChange={(e: any) => {
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                   setEmail(e.target.value);
                 }}
                 style={
@@ -140,7 +149,7 @@ export default function UserInfo({ user }: any) {
                 className={styles.image_pick}
                 style={
                   disabled
-                    ? { borderBottom: "2px solid #4db9ff" }
+                    ? { border: "2px solid #dddddd" }
                     : { border: "2px solid #4db9ff" }
                 }
               >
@@ -230,7 +239,7 @@ export default function UserInfo({ user }: any) {
               ) : null}
 
               {disabled ? null : (
-                <>
+                <div className={styles.user_info_btn_outter}>
                   <button
                     type="submit"
                     className={styles.user_info_btn}
@@ -247,7 +256,7 @@ export default function UserInfo({ user }: any) {
                   >
                     취소
                   </button>
-                </>
+                </div>
               )}
             </div>
           </form>
