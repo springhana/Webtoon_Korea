@@ -51,7 +51,7 @@ export default function Subscribe({
               <div key={index}>
                 {index === 0 ? (
                   <>
-                    <Link to={`/webtoon/detail/${data.title}`}>
+                    <Link to={`/webtoon/detail/${data.title}/${data.service}`}>
                       <div className={styles.webtoon}>
                         <WebtoonImage
                           width={parseInt(Iwidth(data.service))}
