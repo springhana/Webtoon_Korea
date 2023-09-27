@@ -28,12 +28,13 @@ const init = {
 function Nav() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [image, setImage] = useState("");
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState(init);
-  const location = useLocation();
   const [toggle, setToggle] = useState(false);
+  const [id, setId] = useState("");
   const menubar = useRef<HTMLUListElement>(null);
 
   let loginCheck = useSelector((state: ReduxType) => {
@@ -55,6 +56,24 @@ function Nav() {
       return null;
     }
   }
+
+  useEffect(() => {
+    const LoginCheck = async () => {
+      try {
+        const response = await axios.get("/api/loginCheck");
+        if (response.data.login) {
+          setId(response.data._id);
+          dispatch(login_check());
+          dispatch(addId(response.data._id));
+        } else {
+          dispatch(removeId());
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    LoginCheck();
+  }, [loginCheck.login]);
 
   useEffect(() => {
     const Image = async (board: UserType) => {
@@ -79,34 +98,19 @@ function Nav() {
         const response = await axios.get("/api/profile", {
           params: { _id: _id },
         });
+        setData(response.data);
         if (response.data.image === "default.jpg") {
           setImage("/img/blank-profile-picture-ge4ff853e7_1280.png");
           setLoading(false);
         } else {
           Image(response.data);
         }
-        setData(response.data);
       } catch (error) {
         console.log(error);
       }
     };
-
-    const LoginCheck = async () => {
-      try {
-        const response = await axios.get("/api/loginCheck");
-        if (response.data.login) {
-          await User_fetch(response.data._id);
-          dispatch(login_check());
-          dispatch(addId(response.data._id));
-        } else {
-          dispatch(removeId());
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    LoginCheck();
-  }, [loginCheck.login]);
+    User_fetch(loginCheck._id);
+  }, [id, toggle, loginCheck.login]);
 
   return (
     <div className={styles.nav}>
@@ -120,18 +124,14 @@ function Nav() {
         <div className={styles.nav_login_search}>
           <SearchBar />
           {loginCheck.login ? (
-            <>
-              {loading ? null : (
-                <div
-                  className={styles.user_img_pic}
-                  onClick={() => {
-                    setToggle(true);
-                  }}
-                >
-                  <img src={image} alt={image}></img>
-                </div>
-              )}
-            </>
+            <div
+              className={styles.user_img_pic}
+              onClick={() => {
+                setToggle(true);
+              }}
+            >
+              {loading ? null : <img src={image} alt={image}></img>}
+            </div>
           ) : (
             <button
               className={styles.login_btn}
