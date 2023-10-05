@@ -6,9 +6,8 @@
 <a href="https://picayune-rayon-004.notion.site/8c261a6e03204c6f9896f8e921eb930e">노션에 자세히 정리 되어있습니다!!</a>
 <br/>
 
-<figure class="half">
-  <figcaption>
-      <img src="https://github.com/springhana/Webtoon_Korea/assets/97121074/479f8320-9310-435a-8832-5c59f73ac450" align="center" width="49%"/>
-      <img src="https://github.com/springhana/Webtoon_Korea/assets/97121074/35a18f36-4a6f-457a-88fe-b23de39dfc02" align="center" width="49%"/>
-  </figcaption>
-</figure>
+# 전체 크기
+<img src="https://github.com/springhana/Webtoon_Korea/assets/97121074/479f8320-9310-435a-8832-5c59f73ac450" align="center"/>
+</br>
+# 반응형 웹 ( 768px )
+<img src="https://github.com/springhana/Webtoon_Korea/assets/97121074/35a18f36-4a6f-457a-88fe-b23de39dfc02" align="center"/>
