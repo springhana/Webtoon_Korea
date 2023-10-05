@@ -1,6 +1,8 @@
 
 <a href="https://app.cloudtype.io/@xksxksanfro7/webtoon-korea-server:main/webtoon-korea-server">배포 서버</a>
+
 <a href="https://chipper-starlight-c38bd1.netlify.app">웹툰 또는 글 쓰러 가기</a>
+
 <a href="https://picayune-rayon-004.notion.site/8c261a6e03204c6f9896f8e921eb930e">노션에 자세히 정리 되어있습니다!!</a>
 
 
