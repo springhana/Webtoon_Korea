@@ -4,7 +4,7 @@ https://chipper-starlight-c38bd1.netlify.app
 
 
 
-<img src="https://prod-files-secure.s3.us-west-2.amazonaws.com/4244dcbc-f2f8-401c-ba8d-cde5ce468d2d/e1728aa1-86b9-4bbc-8d7d-75166021af3b/%EB%A9%94%EC%9D%B8.png"/>
+![메인](https://github.com/springhana/Webtoon_Korea/assets/97121074/479f8320-9310-435a-8832-5c59f73ac450)
 
 ### 한국 웹툰 & 게시판
 
