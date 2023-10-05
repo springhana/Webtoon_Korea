@@ -7,6 +7,8 @@
 <br/>
 
 <figure class="half">
-  <img src="https://github.com/springhana/Webtoon_Korea/assets/97121074/479f8320-9310-435a-8832-5c59f73ac450" align="center" width="50%"/>
-  <img src="https://github.com/springhana/Webtoon_Korea/assets/97121074/35a18f36-4a6f-457a-88fe-b23de39dfc02" align="center" width="50%"/>
+  <figcaption>
+      <img src="https://github.com/springhana/Webtoon_Korea/assets/97121074/479f8320-9310-435a-8832-5c59f73ac450" align="center" width="50%"/>
+      <img src="https://github.com/springhana/Webtoon_Korea/assets/97121074/35a18f36-4a6f-457a-88fe-b23de39dfc02" align="center" width="50%"/>
+  </figcaption>
 </figure>
