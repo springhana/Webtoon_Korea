@@ -2,7 +2,7 @@ https://app.cloudtype.io/@xksxksanfro7/webtoon-korea-server:main/webtoon-korea-s
 
 https://chipper-starlight-c38bd1.netlify.app
 
-댓글 || 정리
+
 ![메인.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/4244dcbc-f2f8-401c-ba8d-cde5ce468d2d/e1728aa1-86b9-4bbc-8d7d-75166021af3b/%EB%A9%94%EC%9D%B8.png)
 
 ### 한국 웹툰 & 게시판
