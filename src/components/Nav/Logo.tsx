@@ -4,13 +4,15 @@ function Logo() {
   return (
     <div>
       <h1 className={styles.Logo}>
-        <span>w</span>
-        <span>e</span>
-        <span>b</span>
-        <span>t</span>
+        <span>T</span>
         <span>o</span>
         <span>o</span>
         <span>n</span>
+        <span>B</span>
+        <span>o</span>
+        <span>a</span>
+        <span>r</span>
+        <span>d</span>
       </h1>
     </div>
   );
