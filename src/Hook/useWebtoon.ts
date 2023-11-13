@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axios, { CancelTokenSource } from "axios";
+import { WebtoonType, WebtoonsTypes } from "../types/webtoon";
 
 export default function useWebtoon(
-  pageNumber: any,
-  service: any,
-  updateDay: any,
-  perPage: any = 10
+  pageNumber: number,
+  service: string,
+  updateDay: string,
+  perPage: number = 10
 ) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  const [webtoons, setWebtoons] = useState<any>([]);
+  const [webtoons, setWebtoons] = useState<WebtoonsTypes[]>([]);
   const [hasMore, setHasMore] = useState(false); // 사용자의 상태?
 
   useEffect(() => {
@@ -21,7 +22,10 @@ export default function useWebtoon(
     setLoading(true);
     setError(false);
 
-    let cancel: any;
+    let cancel: CancelTokenSource;
+
+    const source = axios.CancelToken.source();
+    cancel = source;
     axios({
       method: "GET",
       url: "https://korea-webtoon-api.herokuapp.com",
@@ -31,14 +35,14 @@ export default function useWebtoon(
         updateDay: updateDay,
         perPage: perPage,
       },
-      cancelToken: new axios.CancelToken((c) => (cancel = c)), // axios 취소 방법
+      cancelToken: source.token,
     })
       .then((res) => {
-        setWebtoons((prevWebtoon: any) => {
+        setWebtoons((prevWebtoon) => {
           return [
             ...new Set([
               ...prevWebtoon,
-              ...res.data.webtoons.map((webtoon: any) => webtoon),
+              ...res.data.webtoons.map((webtoon: WebtoonType) => webtoon),
             ]),
           ];
         });
@@ -49,7 +53,11 @@ export default function useWebtoon(
         if (axios.isCancel(e)) return;
         setError(true);
       });
-    return () => cancel();
+    return () => {
+      if (cancel) {
+        cancel.cancel("Request canceled");
+      }
+    };
   }, [pageNumber, service, updateDay]);
   return { loading, error, webtoons, hasMore };
 }
