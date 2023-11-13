@@ -8,7 +8,7 @@
 
 # 전체 크기
 </br>
-<img src="https://github.com/springhana/Webtoon_Korea/assets/97121074/479f8320-9310-435a-8832-5c59f73ac450" align="center"/>
+<img src="https://github.com/springhana/toonboard/assets/97121074/479f8320-9310-435a-8832-5c59f73ac450" align="center"/>
 </br>
 
 ## 반응형 웹 ( 768px )
