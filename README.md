@@ -63,6 +63,8 @@ $ npm run dev
   </div>
 </div>
 
+- - -
+
 # 화면 구성 (이미지 클릭하여 이동)
 <p><strong><a href="https://github.com/HyeokjaeLee/korea-webtoon-api">사용 오픈 API</a></strong></p>
 
