@@ -71,7 +71,8 @@ $ npm run dev
 |<a href="https://chipper-starlight-c38bd1.netlify.app/#/"><img src="https://github.com/springhana/toonboard/assets/97121074/2ba55f87-7894-4976-b2d1-f2dcac937c1c" width="100%"/></a>|<a href="https://chipper-starlight-c38bd1.netlify.app/#/webtoon/naver"><img src="https://github.com/springhana/toonboard/assets/97121074/f96e0807-28b4-45be-88dd-afd606ae9ece" width="100%"/></a>|
 |디테일 페이지|게시판|
 |<a href="https://chipper-starlight-c38bd1.netlify.app/#/webtoon/detail/%EC%8B%B8%EC%9B%80%EB%8F%85%ED%95%99%EB%B0%95%ED%83%9C%EC%A4%80%20%EB%A7%8C%ED%99%94%ED%9A%8C%EC%82%AC,%EA%B9%80%EC%A0%95%ED%98%84%20%EC%8A%A4%ED%8A%9C%EB%94%94%EC%98%A4/naver"><img src="https://github.com/springhana/toonboard/assets/97121074/73291de5-b3a2-4932-8268-c032ee3e6304" width="100%"/></a>|<a href="https://chipper-starlight-c38bd1.netlify.app/#/board/1"><img src="https://github.com/springhana/toonboard/assets/97121074/02d694d4-65eb-41fc-a107-8fa8ead4d6e2" width="100%"/></a>|
+|마이페이지|내 글보기|
+|<a href="https://chipper-starlight-c38bd1.netlify.app/#/myPage"><img src="https://github.com/springhana/toonboard/assets/97121074/8989e985-1120-4d6a-800f-ded8c3650dd7" width="100%"/></a>|<a href="https://chipper-starlight-c38bd1.netlify.app/#/profile/6551ee41e75f06814073bf86"><img src="https://github.com/springhana/toonboard/assets/97121074/0806d1a8-3645-4541-8e1b-44a485a57011" width="100%"/></a>|
 
-
-
-
+![image]()
+![image]()
