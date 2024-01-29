@@ -66,13 +66,20 @@ $ npm run dev
 ## 화면 구성 (이미지 클릭하여 이동)
 <p><strong><a href="https://github.com/HyeokjaeLee/korea-webtoon-api">사용 오픈 API</a></strong></p>
 
-|메인 페이지|요일 웹툰|
+> **계정** <br/>
+> **아이디**: 123 <br/>
+> **비밀번호**: 123 <br/>
+
+|메인|요일 웹툰|
 |:---:|:---:|
 |<a href="https://chipper-starlight-c38bd1.netlify.app/#/"><img src="https://github.com/springhana/toonboard/assets/97121074/2ba55f87-7894-4976-b2d1-f2dcac937c1c" width="100%"/></a>|<a href="https://chipper-starlight-c38bd1.netlify.app/#/webtoon/naver"><img src="https://github.com/springhana/toonboard/assets/97121074/f96e0807-28b4-45be-88dd-afd606ae9ece" width="100%"/></a>|
-|디테일 페이지|게시판|
+|웹툰 디테일|게시판|
 |<a href="https://chipper-starlight-c38bd1.netlify.app/#/webtoon/detail/%EC%8B%B8%EC%9B%80%EB%8F%85%ED%95%99%EB%B0%95%ED%83%9C%EC%A4%80%20%EB%A7%8C%ED%99%94%ED%9A%8C%EC%82%AC,%EA%B9%80%EC%A0%95%ED%98%84%20%EC%8A%A4%ED%8A%9C%EB%94%94%EC%98%A4/naver"><img src="https://github.com/springhana/toonboard/assets/97121074/73291de5-b3a2-4932-8268-c032ee3e6304" width="100%"/></a>|<a href="https://chipper-starlight-c38bd1.netlify.app/#/board/1"><img src="https://github.com/springhana/toonboard/assets/97121074/02d694d4-65eb-41fc-a107-8fa8ead4d6e2" width="100%"/></a>|
 |마이페이지|내 글보기|
 |<a href="https://chipper-starlight-c38bd1.netlify.app/#/myPage"><img src="https://github.com/springhana/toonboard/assets/97121074/8989e985-1120-4d6a-800f-ded8c3650dd7" width="100%"/></a>|<a href="https://chipper-starlight-c38bd1.netlify.app/#/profile/6551ee41e75f06814073bf86"><img src="https://github.com/springhana/toonboard/assets/97121074/0806d1a8-3645-4541-8e1b-44a485a57011" width="100%"/></a>|
+|채팅|게시글 디테일|
+|<img src="https://github.com/springhana/toonboard/assets/97121074/ba5db1e9-8bf2-4979-a118-396b11a71b48" width="50%"/>|<a href="https://chipper-starlight-c38bd1.netlify.app/#/detail/4"><img src="https://github.com/springhana/toonboard/assets/97121074/4bdbbecf-85e5-4ccb-97e0-b353d7626127" width="100%"/></a>|
+|검색|
+|<a href="https://chipper-starlight-c38bd1.netlify.app/#/webtoon/search/%EC%8B%B8%EC%9B%80"><img src="https://github.com/springhana/toonboard/assets/97121074/6edd814b-c9e2-4c2b-8023-0ff21f82da9b" width="100%"/></a>|<a href="https://chipper-starlight-c38bd1.netlify.app/#/update/4"><img src="https://github.com/springhana/toonboard/assets/97121074/441e1ea9-0d60-4a57-a951-4a62380419f5" width="100%"/></a>|
 
-![image]()
-![image]()
+
