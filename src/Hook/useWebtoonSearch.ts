@@ -23,10 +23,7 @@ export default function useWebtoonSearch(keyword: string) {
 
     axios({
       method: "GET",
-      url: "https://korea-webtoon-api-cc7dda2f0d77.herokuapp.com/webtoons",
-      params: {
-        keyword: keyword,
-      },
+      url: `https://korea-webtoon-api-cc7dda2f0d77.herokuapp.com/webtoons?keyword=${keyword}`,
       cancelToken: source.token,
     })
       .then((res) => {
