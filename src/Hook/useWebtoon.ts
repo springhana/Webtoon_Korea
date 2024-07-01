@@ -28,7 +28,7 @@ export default function useWebtoon(
     cancel = source;
     axios({
       method: "GET",
-      url: "https://korea-webtoon-api.herokuapp.com",
+      url:"https://korea-webtoon-api-cc7dda2f0d7.herokuapp.com",
       params: {
         page: pageNumber,
         service: service,
