@@ -11,25 +11,23 @@ export interface WebtoonType {
 }
 
 export interface WebtoonsTypes {
-  _id: string;
+  id: string;
   title: string;
-  author: string;
+  provider: string;
+  updateDays: [];
   url: string;
-  img: string;
-  service: string;
-  updateDays: string[];
-  fanCount: number;
-  searchKeyword: string;
-  additional: AdditionalType;
-  length: number;
+  thumbnail: string[];
+  isEnd: boolean;
+  isFree: boolean;
+  isUpdated: boolean;
+  ageGrade: number;
+  freeWaitHour: number;
+  authors: string[];
 }
 
 export interface AdditionalType {
-  new: boolean;
   adult: boolean;
-  rest: boolean;
-  up: boolean;
-  singularityList: string[];
+  isUpdated: boolean;
 }
 
 export interface WebtoonImageType {
