@@ -102,3 +102,20 @@ input {
 ::-webkit-scrollbar-thumb:hover {
   background-color: #555; /* 스크롤바 썸네일 호버 배경색 */
 }
+
+.authorsText {
+  max-width: 150px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  white-space: nowrap;
+  text-overflow: clip;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 1024px) {
+  .authorsText {
+    display: none;
+  }
+}
