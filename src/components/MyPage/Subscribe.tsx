@@ -51,15 +51,18 @@ export default function Subscribe({
               <div key={index}>
                 {index === 0 ? (
                   <>
-                    <Link to={`/webtoon/detail/${data.title}/${data.service}`}>
+                    <Link to={`/webtoon/detail/${data.title}/${data.provider}`}>
                       <div className={styles.webtoon}>
                         <WebtoonImage
-                          width={parseInt(Iwidth(data.service))}
-                          height={parseInt(Iheight(data.service))}
-                          img={data.img}
+                          width={parseInt(Iwidth(data.provider))}
+                          height={parseInt(Iheight(data.provider))}
+                          img={data.thumbnail[0]}
                           title={data.title}
-                          adult={data.additional.adult}
-                          additional={data.additional}
+                          adult={data.ageGrade}
+                          additional={{
+                            adult: data.ageGrade > 18,
+                            isUpdated: data.isUpdated,
+                          }}
                         />
                         <div className={styles.webtoon_service}>
                           <div>
@@ -67,11 +70,11 @@ export default function Subscribe({
                               ? `${data.title.slice(0, 10)}...`
                               : data.title}
                           </div>
-                          <div>
-                            {data.author.length > 10
-                              ? `${data.author.slice(0, 10)}...`
-                              : data.author}
-                          </div>
+                          {data.authors.map((i) => (
+                            <div>
+                              {i.length > 13 ? `${i.slice(0, 12)}...` : i}
+                            </div>
+                          ))}
                         </div>
                       </div>
                     </Link>
@@ -80,7 +83,7 @@ export default function Subscribe({
                       <div
                         style={{ cursor: "pointer" }}
                         onClick={() => {
-                          add(data.searchKeyword);
+                          add(data.title);
                           setSubscribe(false);
                         }}
                         className={styles.subscribe}
@@ -91,7 +94,7 @@ export default function Subscribe({
                       <div
                         style={{ cursor: "pointer" }}
                         onClick={() => {
-                          remove(data.searchKeyword);
+                          remove(data.title);
                           setSubscribe(true);
                         }}
                         className={styles.subscribe}

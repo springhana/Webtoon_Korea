@@ -17,7 +17,7 @@ function WebtoonImage({
   height: number;
   img: string;
   title: string;
-  adult: boolean;
+  adult: number;
   additional: AdditionalType;
   handleImageLoad?: () => void;
 }) {

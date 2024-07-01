@@ -20,33 +20,34 @@ export default function WebtoonContainer({
 }) {
   return (
     <div
-      key={data._id}
+      key={data.id}
       className={styles.dayWebtoon_Webtoon}
       ref={lastBookElementRef}
     >
       <>
-        <Link
-          to={`/webtoon/detail/${data.title + data.author}/${data.service}`}
-        >
+        <Link to={`/webtoon/detail/${data.title}/${data.provider}`}>
           <WebtoonImage
             width={Iwidth}
             height={Iheight}
-            img={data.img}
+            img={data.thumbnail[0]}
             title={data.title}
-            adult={data.additional.adult}
-            additional={data.additional}
+            adult={data.ageGrade}
+            additional={{
+              adult: data.ageGrade > 18,
+              isUpdated: data.isUpdated,
+            }}
             handleImageLoad={handleImageLoad}
           />
-          <h3>
+          <h3 className="authorsText">
             {data.title.length > 8
               ? `${data.title.slice(0, 8)}...`
               : data.title}
           </h3>
-          <h3>
-            {data.author.length > 8
-              ? `${data.author.slice(0, 8)}...`
-              : data.author}
-          </h3>
+          <div className="authorsText">
+            {data.authors.map((i) => (
+              <h4>{i}</h4>
+            ))}
+          </div>
         </Link>
       </>
     </div>

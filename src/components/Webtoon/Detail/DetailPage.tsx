@@ -41,8 +41,8 @@ function DetailPage({
   });
 
   useEffect(() => {
-    img(data.service);
-  }, [data.service]);
+    img(data.provider);
+  }, [data.provider]);
 
   useEffect(() => {
     if (windowWidth <= 768) {
@@ -78,7 +78,7 @@ function DetailPage({
       try {
         const response = await axios.get("/api/subscribeAll");
         if (response.data) {
-          const sub = response.data.title.includes(data.searchKeyword);
+          const sub = response.data.title.includes(data.title);
           setWebtoons(sub);
         }
       } catch (error) {
@@ -121,16 +121,18 @@ function DetailPage({
           }}
           className={styles.img_pic}
         >
-          {data.img ? (
-            <img
-              src={data.img}
-              alt={data.title}
-              onClick={() => {
-                dispatch(onUrl(data.img));
-                dispatch(ImageOpen());
-              }}
-            />
-          ) : null}
+          {data.thumbnail
+            ? data.thumbnail.map((i) => (
+                <img
+                  src={i}
+                  alt={data.title}
+                  onClick={() => {
+                    dispatch(onUrl(i));
+                    dispatch(ImageOpen());
+                  }}
+                />
+              ))
+            : null}
           <div className={styles.icon_container}>
             <div className={styles.icon_copy}></div>
             <div className={styles.icon}>
@@ -143,16 +145,18 @@ function DetailPage({
           <h2 className={styles.title}>{data.title}</h2>
           <h3 className={styles.author}>
             <span>작가</span>
-            {data.author}
+            {data.authors.map((i) => (
+              <div>{i}</div>
+            ))}
           </h3>
           <h3 className={styles.service}>
-            <span style={{ color: TitleColor(data.service) }}>
-              {data.service}
+            <span style={{ color: TitleColor(data.provider) }}>
+              {data.provider}
             </span>
             에서 연재중
           </h3>
           <h3 className={styles.searchKeyword}>
-            <span>검색 키워드</span>#{data.searchKeyword}
+            <span>검색 키워드</span>#{data.title}
           </h3>
           <div className={styles.updateDay}>
             {data.updateDays.map((day: string, index: number) => (
@@ -166,14 +170,6 @@ function DetailPage({
           </div>
 
           <div className={styles.additional}>
-            <div className={styles.fanCount}>
-              {data.fanCount ? (
-                <>
-                  <AiFillStar />({data.fanCount}명)
-                </>
-              ) : null}
-            </div>
-
             {/* 좋아요 */}
             <div>
               {webtoons ? (
@@ -187,20 +183,9 @@ function DetailPage({
             </div>
 
             <div className={styles.additional_cotainer}>
-              {data.additional.new ? <div>New</div> : null}
-              {data.additional.adult ? <div>19</div> : null}
-              {data.additional.rest ? <div>휴재</div> : null}
-              {data.additional.up ? <div>UP</div> : null}
+              {data.ageGrade > 18 ? <div>19</div> : null}
+              {data.isUpdated ? <div>UP</div> : null}
             </div>
-            {data.additional.singularityList ? (
-              <div>
-                {data.additional.singularityList.map(
-                  (datas: string, index: number) => (
-                    <li key={index}>{datas}</li>
-                  )
-                )}
-              </div>
-            ) : null}
           </div>
         </div>
       </div>
@@ -209,7 +194,7 @@ function DetailPage({
           <div
             style={{ cursor: "pointer" }}
             onClick={() => {
-              remove(data.searchKeyword);
+              remove(data.title);
               setWebtoons(false);
             }}
             className={styles.next}
@@ -221,7 +206,7 @@ function DetailPage({
             style={{ cursor: "pointer" }}
             onClick={() => {
               if (login.login) {
-                add(data.searchKeyword);
+                add(data.title);
                 setWebtoons(true);
               } else {
                 dispatch(LoginOpen());
@@ -244,7 +229,7 @@ function DetailPage({
 
       {/* 댓글 */}
       <div>
-        <WebtoonComment webtoonID={data._id} />
+        <WebtoonComment webtoonID={data.id} />
       </div>
     </div>
   );

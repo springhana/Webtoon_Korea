@@ -63,7 +63,7 @@ function SearchPage({ TitleColor }: { TitleColor: (title: string) => string }) {
               data={data}
               width={width as (service: string) => string}
               height={height as (service: string) => string}
-              key={data._id}
+              key={data.id}
               TitleColor={TitleColor}
             />
           ))}

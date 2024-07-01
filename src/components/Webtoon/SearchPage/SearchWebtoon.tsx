@@ -18,25 +18,32 @@ function SearchWebtoon({
 }) {
   return (
     <div className={styles.search}>
-      <Link to={`/webtoon/detail/${data.title + data.author}/${data.service}`}>
+      <Link
+        to={`/webtoon/detail/${data.title + data.authors[0]}/${data.provider}`}
+      >
         <div className={styles.search_cotainer}>
           <WebtoonImage
-            width={parseInt(width(data.service))}
-            height={parseInt(height(data.service))}
-            img={data.img}
+            width={parseInt(width(data.provider))}
+            height={parseInt(height(data.provider))}
+            img={data.thumbnail[0]}
             title={data.title}
-            adult={data.additional.adult}
-            additional={data.additional}
+            adult={data.ageGrade}
+            additional={{
+              adult: data.ageGrade > 18,
+              isUpdated: data.isUpdated,
+            }}
           />
           <div className={styles.info}>
             <ul>
               <li className={styles.title}>{data.title}</li>
-              <li className={styles.author}>{data.author}</li>
+              {data.authors.map((i) => (
+                <li className={styles.author}>{i}</li>
+              ))}
               <li
                 className={styles.service}
-                style={{ color: TitleColor(data.service) }}
+                style={{ color: TitleColor(data.provider) }}
               >
-                {data.service}
+                {data.provider}
               </li>
             </ul>
           </div>

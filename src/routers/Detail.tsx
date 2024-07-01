@@ -45,7 +45,7 @@ function Detail({
     >
       {item.map((data: WebtoonsTypes, index: number) => (
         <div key={index} className={styles.detailPage}>
-          {data.service === service ? (
+          {data.provider === service.toUpperCase() ? (
             <DetailPage
               data={data}
               width={width}

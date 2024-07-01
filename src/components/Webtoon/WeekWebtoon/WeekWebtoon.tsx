@@ -83,7 +83,7 @@ function WeekWebtoon({
           if (webtoons.length === index + 1) {
             return (
               <div
-                key={data._id}
+                key={data.id}
                 className={styles.WeekWebtoon_Webtoon}
                 style={{ width: `${Iwidth * imgSize}px` }}
               >
@@ -98,7 +98,7 @@ function WeekWebtoon({
           } else {
             return (
               <div
-                key={data._id}
+                key={data.id}
                 className={styles.WeekWebtoon_Webtoon}
                 style={{ width: `${Iwidth * imgSize}px` }}
               >

@@ -60,7 +60,7 @@ function App() {
         setIwidth(Math.round(imgSize[1].width * size));
         setIheight(Math.round(imgSize[1].height * size));
         break;
-      case "kakaoPage":
+      case "kakao_Page":
         setIwidth(Math.round(imgSize[2].width * size));
         setIheight(Math.round(imgSize[2].height * size));
         break;
@@ -73,7 +73,7 @@ function App() {
         return "#00B500";
       case "kakao":
         return "#F8C600";
-      case "kakaoPage":
+      case "kakao_Page":
         return "#F7B600";
       default:
         return "black";

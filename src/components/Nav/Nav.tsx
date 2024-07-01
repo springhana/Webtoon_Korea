@@ -168,8 +168,8 @@ function Nav() {
             <Link to={"/webtoon/kakao"}>
               <li className={NowLoaction("kakao")}>카카오</li>
             </Link>
-            <Link to={"/webtoon/kakaoPage"}>
-              <li className={NowLoaction("kakaoPage")}>카카오 페이지</li>
+            <Link to={"/webtoon/kakao_Page"}>
+              <li className={NowLoaction("kakao_Page")}>카카오 페이지</li>
             </Link>
           </div>
           {/* 마이페이지 */}
