@@ -42,7 +42,6 @@ function Webtoons({
     const fetch = async () => {
       const result: any = await load(today, title);
       if (result) {
-        console.log(result);
         setItem(result);
       }
     };
@@ -137,30 +136,30 @@ function Webtoons({
       <div className={styles.webtoons_inner}>
         <div className={styles.webtoons_container} ref={imgPic}>
           {item.map((data: WebtoonsTypes) => (
-            <div key={data._id} className={styles.webtoon}>
-              <Link
-                to={`/webtoon/detail/${data.title + data.author}/${
-                  data.service
-                }`}
-              >
+            <div key={data.id} className={styles.webtoon}>
+              <Link to={`/webtoon/detail/${data.title}/${data.provider}`}>
                 <WebtoonImage
                   width={size.width}
                   height={size.height}
-                  img={data.img}
+                  img={data.thumbnail[0]}
                   title={data.title}
-                  adult={data.additional.adult}
-                  additional={data.additional}
+                  adult={data.ageGrade}
+                  additional={{
+                    adult: data.ageGrade > 18,
+                    isUpdated: data.isUpdated,
+                  }}
                 />
                 <h3>
                   {data.title.length > 13
                     ? `${data.title.slice(0, 12)}...`
                     : data.title}
                 </h3>
-                <h4>
-                  {data.author.length > 13
-                    ? `${data.author.slice(0, 12)}...`
-                    : data.author}
-                </h4>
+
+                <div className="authorsText">
+                  {data.authors.map((i) => (
+                    <h4>{i}</h4>
+                  ))}
+                </div>
               </Link>
             </div>
           ))}
